@@ -1,2 +1,6 @@
 /*.sdf
 /*.suo
+Release/
+Debug/
+bin/
+obj/
