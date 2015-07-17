@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+	<Product Id="*" Name="Carambola Chat" Language="1033" Version="2.0.0.0" Manufacturer="Carambola Chat" UpgradeCode="39a5bfb4-95c9-4f36-ba44-9448553a2325">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade AllowSameVersionUpgrades="yes" DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+
+    <MediaTemplate EmbedCab="yes" />
+
+		<Feature Id="Complete" Title="Carambola Chat" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+
+    <Icon Id="carambola.ico" SourceFile="..\CarambolaChat\Resources\Icons\carambola.ico"/>
+
+    <!-- Sets the Add/Remove Programs icon -->
+    <Property Id="ARPPRODUCTICON" Value="carambola.ico" />
+    
+  </Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLDIR" Name="Carambola Chat">
+          <Directory Id="Resources" Name="Resources">
+            <Directory Id="Icons" Name="Icons" />
+            <Directory Id="SourceSansPro" Name="SourceSansPro" />
+          </Directory>
+        </Directory>
+			</Directory>
+      <Directory Id="ProgramMenuFolder" Name="Programs" />
+      <Directory Id="DesktopFolder" Name="Desktop" />
+      <!--<Directory Id="LocalAppDataFolder">
+        <Directory Id="Carambola ChatAppData" Name="Carambola Chat">
+          <Directory Id="AppPackages" Name="AppPackages">
+          </Directory>
+        </Directory>
+      </Directory>-->
+    </Directory>
+  </Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents">
+      <Component Id="PerUser" Guid="D2DDA9E2-E26D-4158-B898-71A5D5E5CEA8" Directory="ProgramMenuFolder">
+        <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' KeyPath='yes' Value='' Type="string" />
+      </Component>
+        
+      <!--<Component Id="ShellExtensions">
+        <ProgId Id='AcmeFoobar.xyzfile' Description='Acme Foobar data file'>
+          <Extension Id='xyz' ContentType='application/xyz'>
+            <Verb Id='open' Command='Open' TargetFile='FileId' Argument='"%1"' />
+          </Extension>
+        </ProgId>
+      </Component>-->
+      <Component Id="ProductComponent" Guid="FBD24824-B254-459C-9673-5AA0F4DBF56F" Directory="INSTALLDIR">
+        <File Id='CarambolaChatEXE' Name='CarambolaChat.exe' DiskId='1' Source='..\Release\CarambolaChat.exe' KeyPath='yes'>
+          <Shortcut Id="startmenuCarambolaChat" Directory="ProgramMenuFolder" Name="Carambola Chat" WorkingDirectory='INSTALLDIR' Icon="carambola.ico" IconIndex="0" Advertise="yes" />
+          <Shortcut Id="autostart.lnk" Directory="INSTALLDIR" Name="autostart.lnk" WorkingDirectory='INSTALLDIR' Icon="carambola.ico" IconIndex="0" Advertise="yes" Arguments="-autostart">
+            <ShortcutProperty Key="System.AppUserModel.ID" Value="Carambola Chat.Carambola Chat" />
+          </Shortcut>
+        </File>
+      </Component>
+      <Component Id='InstallDateComponent' Guid="49208F66-3323-41D1-B3E4-74BCC953C3F0" Directory="INSTALLDIR">
+        <RegistryValue Root="HKLM" Key="Software\[Manufacturer]\[ProductName]" KeyPath='yes' Name="InstallDateTime" Value='[Date]-[Time]' Type="string" />
+      </Component>
+      <Component Id="Resources" Guid="68EDAF71-B0E2-4C97-8AA4-4F8EB8D4D312" Directory="Resources">
+        <File Name="beep.wav" Source="..\CarambolaChat\Resources\beep.wav" />
+      </Component>
+      <Component Id="ResourcesIcons" Guid="F409C5B9-AD1E-4E6C-8B46-264A1290DCDE" Directory="Icons">
+        <File Name="carambola.ico" Source="..\CarambolaChat\Resources\Icons\carambola.ico" />
+        <File Name="carambola-16.png" Source="..\CarambolaChat\Resources\Icons\carambola-16.png" />
+        <File Name="carambola-24.png" Source="..\CarambolaChat\Resources\Icons\carambola-24.png" />
+        <File Name="carambola-32.png" Source="..\CarambolaChat\Resources\Icons\carambola-32.png" />
+        <File Name="carambola-48.png" Source="..\CarambolaChat\Resources\Icons\carambola-48.png" />
+        <File Name="carambola-256.png" Source="..\CarambolaChat\Resources\Icons\carambola-256.png" />
+        <File Name="chat_black_text.png" Source="..\CarambolaChat\Resources\Icons\chat_black_text.png" />
+        <File Name="chat_icon_action.png" Source="..\CarambolaChat\Resources\Icons\chat_icon_action.png" />
+        <File Name="chat_icon_error.png" Source="..\CarambolaChat\Resources\Icons\chat_icon_error.png" />
+        <File Name="chat_icon_notice.png" Source="..\CarambolaChat\Resources\Icons\chat_icon_notice.png" />
+        <File Name="chat_icon_topic.png" Source="..\CarambolaChat\Resources\Icons\chat_icon_topic.png" />
+        <File Name="cross-small.png" Source="..\CarambolaChat\Resources\Icons\cross-small.png" />
+        <File Name="cross-small-empty.png" Source="..\CarambolaChat\Resources\Icons\cross-small-empty.png" />
+        <File Name="cross-small-hot.png" Source="..\CarambolaChat\Resources\Icons\cross-small-hot.png" />
+        <File Name="highlight-any.png" Source="..\CarambolaChat\Resources\Icons\highlight-any.png" />
+        <File Name="highlight-channel.png" Source="..\CarambolaChat\Resources\Icons\highlight-channel.png" />
+        <File Name="highlight-private.png" Source="..\CarambolaChat\Resources\Icons\highlight-private.png" />
+        <File Name="icon-add.png" Source="..\CarambolaChat\Resources\Icons\icon-add.png" />
+        <File Name="icon-advanced.png" Source="..\CarambolaChat\Resources\Icons\icon-advanced.png" />
+        <File Name="icon-content.png" Source="..\CarambolaChat\Resources\Icons\icon-content.png" />
+        <File Name="icon-delete.png" Source="..\CarambolaChat\Resources\Icons\icon-delete.png" />
+        <File Name="icon-general.png" Source="..\CarambolaChat\Resources\Icons\icon-general.png" />
+        <File Name="icon-modify.png" Source="..\CarambolaChat\Resources\Icons\icon-modify.png" />
+        <File Name="icon-networks.png" Source="..\CarambolaChat\Resources\Icons\icon-networks.png" />
+        <File Name="icon-picture.png" Source="..\CarambolaChat\Resources\Icons\icon-picture.png" />
+        <File Name="icon-scripts.png" Source="..\CarambolaChat\Resources\Icons\icon-scripts.png" />
+        <File Name="icon-tabs.png" Source="..\CarambolaChat\Resources\Icons\icon-tabs.png" />
+        <File Name="readme.txt" Source="..\CarambolaChat\Resources\Icons\readme.txt" />
+        <File Name="status_away.png" Source="..\CarambolaChat\Resources\Icons\status_away.png" />
+        <File Name="status_away32.png" Source="..\CarambolaChat\Resources\Icons\status_away32.png" />
+        <File Name="status_chat.png" Source="..\CarambolaChat\Resources\Icons\status_chat.png" />
+        <File Name="status_chat32.png" Source="..\CarambolaChat\Resources\Icons\status_chat32.png" />
+        <File Name="status_dnd.png" Source="..\CarambolaChat\Resources\Icons\status_dnd.png" />
+        <File Name="status_dnd32.png" Source="..\CarambolaChat\Resources\Icons\status_dnd32.png" />
+        <File Name="status_extended_away.png" Source="..\CarambolaChat\Resources\Icons\status_extended_away.png" />
+        <File Name="status_extended_away32.png" Source="..\CarambolaChat\Resources\Icons\status_extended_away32.png" />
+        <File Name="status_offline.png" Source="..\CarambolaChat\Resources\Icons\status_offline.png" />
+        <File Name="status_offline32.png" Source="..\CarambolaChat\Resources\Icons\status_offline32.png" />
+        <File Name="status_online32.png" Source="..\CarambolaChat\Resources\Icons\status_online32.png" />
+        <File Name="Tango-feet.png" Source="..\CarambolaChat\Resources\Icons\Tango-feet.png" />
+        <File Name="taskbar_highlight_icon.png" Source="..\CarambolaChat\Resources\Icons\taskbar_highlight_icon.png" />
+        <File Name="user.png" Source="..\CarambolaChat\Resources\Icons\user.png" />
+        <File Name="user_operator.png" Source="..\CarambolaChat\Resources\Icons\user_operator.png" />
+        <File Name="user_voice.png" Source="..\CarambolaChat\Resources\Icons\user_voice.png" />
+      </Component>
+      <Component Id="ResourcesSourceSansPro" Guid="22EDFDED-6351-40EF-BC92-4596D918D1A6" Directory="SourceSansPro">
+        <File Name="OFL.txt" Source="..\CarambolaChat\Resources\SourceSansPro\OFL.txt" />
+        <File Name="SourceSansPro-Black.ttf" Source="..\CarambolaChat\Resources\SourceSansPro\SourceSansPro-Black.ttf" />
+        <File Name="SourceSansPro-BlackItalic.ttf" Source="..\CarambolaChat\Resources\SourceSansPro\SourceSansPro-BlackItalic.ttf" />
+        <File Name="SourceSansPro-Bold.ttf" Source="..\CarambolaChat\Resources\SourceSansPro\SourceSansPro-Bold.ttf" />
+        <File Name="SourceSansPro-BoldItalic.ttf" Source="..\CarambolaChat\Resources\SourceSansPro\SourceSansPro-BoldItalic.ttf" />
+        <File Name="SourceSansPro-ExtraLight.ttf" Source="..\CarambolaChat\Resources\SourceSansPro\SourceSansPro-ExtraLight.ttf" />
+        <File Name="SourceSansPro-ExtraLightItalic.ttf" Source="..\CarambolaChat\Resources\SourceSansPro\SourceSansPro-ExtraLightItalic.ttf" />
+        <File Name="SourceSansPro-Italic.ttf" Source="..\CarambolaChat\Resources\SourceSansPro\SourceSansPro-Italic.ttf" />
+        <File Name="SourceSansPro-Light.ttf" Source="..\CarambolaChat\Resources\SourceSansPro\SourceSansPro-Light.ttf" />
+        <File Name="SourceSansPro-LightItalic.ttf" Source="..\CarambolaChat\Resources\SourceSansPro\SourceSansPro-LightItalic.ttf" />
+        <File Name="SourceSansPro-Regular.ttf" Source="..\CarambolaChat\Resources\SourceSansPro\SourceSansPro-Regular.ttf" />
+        <File Name="SourceSansPro-Semibold.ttf" Source="..\CarambolaChat\Resources\SourceSansPro\SourceSansPro-Semibold.ttf" />
+        <File Name="SourceSansPro-SemiboldItalic.ttf" Source="..\CarambolaChat\Resources\SourceSansPro\SourceSansPro-SemiboldItalic.ttf" />
+      </Component>
+    </ComponentGroup>
+	</Fragment>
+</Wix>
