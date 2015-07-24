@@ -43,11 +43,13 @@ ConnectionsViewController::ConnectionsViewController()
 		slots.connect(item->edit_button->sig_pointer_release(), [=](PointerEvent &) { edit_clicked(connection); });
 		slots.connect(item->remove_button->sig_pointer_release(), [=](PointerEvent &) { remove_clicked(connection); });
 	}
+
+	networks->add_button->func_clicked() = [this]() { add_clicked(); };
 }
 
 void ConnectionsViewController::add_clicked()
 {
-	view->present_modal("Add Connection", edit_connection->view);
+	view->present_modal<EditConnectionController>("Add Connection");
 }
 
 void ConnectionsViewController::connect_clicked(XMLSettings connection)
@@ -57,7 +59,7 @@ void ConnectionsViewController::connect_clicked(XMLSettings connection)
 
 void ConnectionsViewController::edit_clicked(XMLSettings connection)
 {
-	view->present_modal("Edit Connection", edit_connection->view);
+	view->present_modal<EditConnectionController>("Edit Connection");
 }
 
 void ConnectionsViewController::remove_clicked(XMLSettings connection)

@@ -16,7 +16,7 @@ NetworkListView::NetworkListView()
 	items_view->style()->set("border-bottom: 1px solid rgb(204,204,204)");
 	add_subview(items_view);
 
-	auto add_button = std::make_shared<ButtonView>();
+	add_button = std::make_shared<ButtonView>();
 	add_button->label()->set_text("Add Network");
 	add_button->label()->style()->set("font: 13px/16px 'Source Sans Pro'");
 	add_button->label()->style()->set("color: rgb(0,0,128)");

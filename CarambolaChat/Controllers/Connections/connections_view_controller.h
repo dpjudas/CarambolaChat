@@ -30,5 +30,4 @@ private:
 	void on_session_connect_status_changed(IRCSession::ConnectStatus status, IRCSession *session);
 
 	std::shared_ptr<NetworkListView> networks;
-	std::shared_ptr<EditConnectionController> edit_connection = std::make_shared<EditConnectionController>();
 };

@@ -13,5 +13,6 @@ public:
 	bool exit = false;
 	clan::Slot exit_slot;
 	AppModel app_model;
-	std::shared_ptr<ChatWindowViewController> chat_window;
+	std::shared_ptr<clan::Window> window;
+	std::shared_ptr<ChatWindowViewController> chat_window_controller;
 };

@@ -79,9 +79,20 @@ Program::Program()
 
 	ui_thread = UIThread(resources);
 
-	chat_window = std::make_shared<ChatWindowViewController>();
+	chat_window_controller = std::make_shared<ChatWindowViewController>();
 
-	exit_slot = chat_window->window_view()->sig_close().connect([&](CloseEvent &e) { exit = true; });
+	exit_slot = chat_window_controller->view->sig_close().connect([&](CloseEvent &e) { exit = true; });
+
+	DisplayWindowDescription desc;
+	desc.set_title("Carambola Chat");
+	desc.set_allow_resize(true);
+	desc.set_size(Size(1536, 864), false);
+
+	window = std::make_shared<Window>(desc);
+	window->set_view_controller(chat_window_controller);
+	window->get_display_window().set_large_icon(ImageProviderFactory::load("Resources/Icons/carambola-256.png"));
+	window->get_display_window().set_small_icon(ImageProviderFactory::load("Resources/Icons/carambola-32.png"));
+	window->show(WindowShowType::show_default);
 
 	Application::use_timeout_timing(250);
 }

@@ -11,16 +11,7 @@ using namespace clan;
 
 ChatWindowViewController::ChatWindowViewController()
 {
-	DisplayWindowDescription desc;
-	desc.set_title("Carambola Chat");
-	desc.set_allow_resize(true);
-	desc.set_size(Size(1536, 864), false);
-
-	view = std::make_shared<WindowView>(desc);
 	view->style()->set("flex-direction: column");
-
-	window_view()->get_display_window().set_large_icon(ImageProviderFactory::load("Resources/Icons/carambola-256.png"));
-	window_view()->get_display_window().set_small_icon(ImageProviderFactory::load("Resources/Icons/carambola-32.png"));
 
 	workspace = std::make_shared<WorkspaceViewController>();
 	add_child_controller(workspace);
@@ -28,8 +19,6 @@ ChatWindowViewController::ChatWindowViewController()
 	slots.connect(AppModel::instance()->cb_irc_session_created, this, &ChatWindowViewController::irc_session_created);
 
 	workspace->add_page("Connection", std::make_shared<ConnectionsViewController>(), true);
-
-	window_view()->show(WindowShowType::show_default);
 }
 
 void ChatWindowViewController::irc_session_created(IRCSession *session)

@@ -384,9 +384,7 @@ void ChatView::copy_to_clipboard()
 	}
 	if (!text.empty())
 	{
-		WindowView *window_view = dynamic_cast<WindowView*>(root_view());
-		if (window_view)
-			window_view->get_display_window().set_clipboard_text(text);
+		view_tree()->get_display_window().set_clipboard_text(text);
 	}
 }
 

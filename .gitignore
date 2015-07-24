@@ -4,3 +4,4 @@ Release/
 Debug/
 bin/
 obj/
+ipch/
