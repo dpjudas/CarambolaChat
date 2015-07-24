@@ -27,7 +27,7 @@ public:
 class EditConnectionTextView : public clan::RowView
 {
 public:
-	EditConnectionTextView(const std::string &label_text = std::string(), const std::string &placeholder = std::string(), float width = 0.0f)
+	EditConnectionTextView(const std::string &label_text = std::string(), const std::string &placeholder = std::string(), int size = 0)
 	{
 		label = add_subview<clan::LabelView>();
 		value = add_subview<clan::TextFieldView>();
@@ -43,9 +43,9 @@ public:
 		value->style()->set("border: 1px solid #ccc");
 
 		value->set_placeholder(placeholder);
-
-		if (width > 0.0f)
-			value->style()->set("width: %1px", width);
+		
+		if (size != 0)
+			value->set_preferred_size(size);
 		else
 			value->style()->set("flex: auto");
 	}
@@ -92,10 +92,10 @@ public:
 	EditConnectionView()
 	{
 		connection_name = add_subview<EditConnectionTextView>("Connection name", "Some IRC Network");
-		server = add_subview<EditConnectionTextView>("Server", "irc.server.net");
-		port = add_subview<EditConnectionTextView>("Port", "6667", 50.0f);
-		nick = add_subview<EditConnectionTextView>("Nick", "name", 120.0f);
-		alt_nick = add_subview<EditConnectionTextView>("Alternative nick", "alternative name", 120.0f);
+		server = add_subview<EditConnectionTextView>("Server", "irc.server.net", 30);
+		port = add_subview<EditConnectionTextView>("Port", "6667", 6);
+		nick = add_subview<EditConnectionTextView>("Nick", "name", 20);
+		alt_nick = add_subview<EditConnectionTextView>("Alternative nick", "alternative name", 20);
 		auto_connect = add_subview<EditConnectionCheckView>("Auto connect on startup");
 		add_subview<clan::SpacerView>();
 		button_bar = add_subview<EditConnectionButtonBarView>();

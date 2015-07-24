@@ -8,7 +8,6 @@ EditConnectionController::EditConnectionController()
 {
 	edit_view = view->add_subview<EditConnectionView>();
 
-	view->style()->set("width: 360px");
 	view->style()->set("background: rgb(240,240,240)");
 	view->style()->set("flex-direction: column");
 
