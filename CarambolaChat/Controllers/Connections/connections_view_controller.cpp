@@ -49,7 +49,30 @@ ConnectionsViewController::ConnectionsViewController()
 
 void ConnectionsViewController::add_clicked()
 {
-	view->present_modal<EditConnectionController>("Add Connection");
+	view->present_modal<EditConnectionController>("Add Connection", [this](EditConnectionController *edit)
+	{
+		XMLSettingsList connections = AppModel::instance()->settings.xml_settings.get_list("connections");
+
+		XMLSettings connection = connections.add();
+		std::string name = edit->connection_name();
+
+		connection.set_string("connectionname", name);
+		connection.set_string("server", edit->server());
+		//connection.set_string("port", edit->port());
+		connection.set_string("comment", "");
+		connection.set_string("nick", edit->nick());
+		connection.set_string("altnick", edit->alt_nick());
+		connection.set_string("username", "carambola");
+		connection.set_string("name", "Anonymous Carambola User");
+		connection.set_bool("autoconnect", edit->auto_connect());
+		XMLSettingsList performlist = connection.get_list("performlist");
+
+		auto item = networks->add_item(name);
+
+		slots.connect(item->connect_button->sig_pointer_release(), [=](PointerEvent &) { connect_clicked(connection); });
+		slots.connect(item->edit_button->sig_pointer_release(), [=](PointerEvent &) { edit_clicked(connection); });
+		slots.connect(item->remove_button->sig_pointer_release(), [=](PointerEvent &) { remove_clicked(connection); });
+	});
 }
 
 void ConnectionsViewController::connect_clicked(XMLSettings connection)
@@ -57,9 +80,27 @@ void ConnectionsViewController::connect_clicked(XMLSettings connection)
 	AppModel::instance()->connect_to_server(connection);
 }
 
-void ConnectionsViewController::edit_clicked(XMLSettings connection)
+void ConnectionsViewController::edit_clicked(XMLSettings const_connection)
 {
-	view->present_modal<EditConnectionController>("Edit Connection");
+	auto dialog = std::make_shared<EditConnectionController>([=](EditConnectionController *edit)
+	{
+		XMLSettings connection = const_connection;
+		connection.set_string("connectioname", edit->connection_name());
+		connection.set_string("server", edit->server());
+		//connection.set_string("port", edit->port());
+		connection.set_string("nick", edit->nick());
+		connection.set_string("altnick", edit->alt_nick());
+		connection.set_bool("autoconnect", edit->auto_connect());
+	});
+
+	dialog->set_connection_name(const_connection.get_string("connectionname"));
+	dialog->set_server(const_connection.get_string("server"));
+	//dialog->set_port(const_connection.get_string("port"));
+	dialog->set_nick(const_connection.get_string("nick"));
+	dialog->set_alt_nick(const_connection.get_string("altnick"));
+	dialog->set_auto_connect(const_connection.get_bool("autoconnect"));
+
+	view->present_modal("Edit Connection", dialog);
 }
 
 void ConnectionsViewController::remove_clicked(XMLSettings connection)

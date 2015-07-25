@@ -20,7 +20,7 @@ Settings::Settings()
 		connection1.set_string("nick", "CTalk2011");
 		connection1.set_string("altnick", "_CTalk2011");
 		connection1.set_string("username", "carambola");
-		connection1.set_string("name", "Anonymous ClanLib Carambola User");
+		connection1.set_string("name", "Anonymous Carambola User");
 		connection1.set_bool("autoconnect", false);
 		XMLSettingsList performlist1 = connection1.get_list("performlist");
 
@@ -31,7 +31,7 @@ Settings::Settings()
 		connection2.set_string("nick", "CTalk2011");
 		connection2.set_string("altnick", "_CTalk2011");
 		connection2.set_string("username", "carambola");
-		connection2.set_string("name", "Anonymous ClanLib Carambola User");
+		connection2.set_string("name", "Anonymous Carambola User");
 		connection2.set_bool("autoconnect", false);
 		XMLSettingsList performlist2 = connection2.get_list("performlist");
 
