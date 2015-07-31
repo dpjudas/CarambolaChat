@@ -72,7 +72,11 @@ Program::Program()
 	DetectHang detect_hang;
 	#endif
 	*/
+#ifdef WIN32
+	D3DTarget::enable();
+#else
 	OpenGLTarget::enable();
+#endif
 
 	ResourceManager resources;
 	DisplayCache::set(resources, std::make_shared<DisplayResources>());

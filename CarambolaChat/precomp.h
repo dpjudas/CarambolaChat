@@ -4,7 +4,11 @@
 #include <ClanLib/core.h>
 #include <ClanLib/application.h>
 #include <ClanLib/display.h>
+#ifdef WIN32
+#include <ClanLib/d3d.h>
+#else
 #include <ClanLib/gl.h>
+#endif
 #include <ClanLib/ui.h>
 #include <ClanLib/sound.h>
 #include <ClanLib/network.h>
