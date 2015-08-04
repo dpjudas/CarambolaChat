@@ -92,8 +92,8 @@ Program::Program()
 	desc.set_allow_resize(true);
 	desc.set_size(Size(1536, 864), false);
 
-	window = std::make_shared<Window>(desc);
-	window->set_view_controller(chat_window_controller);
+	window = std::make_shared<TopLevelWindow>(desc);
+	window->set_root_view(chat_window_controller->view);
 	window->get_display_window().set_large_icon(ImageProviderFactory::load("Resources/Icons/carambola-256.png"));
 	window->get_display_window().set_small_icon(ImageProviderFactory::load("Resources/Icons/carambola-32.png"));
 	window->show(WindowShowType::show_default);

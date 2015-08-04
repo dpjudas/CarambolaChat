@@ -30,4 +30,7 @@ private:
 	void on_session_connect_status_changed(IRCSession::ConnectStatus status, IRCSession *session);
 
 	std::shared_ptr<NetworkListView> networks;
+
+	clan::WindowManager windows;
+	clan::SlotContainer slots;
 };

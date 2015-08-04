@@ -14,7 +14,7 @@ ChatWindowViewController::ChatWindowViewController()
 	view->style()->set("flex-direction: column");
 
 	workspace = std::make_shared<WorkspaceViewController>();
-	add_child_controller(workspace);
+	view->add_subview(workspace->view);
 
 	slots.connect(AppModel::instance()->cb_irc_session_created, this, &ChatWindowViewController::irc_session_created);
 

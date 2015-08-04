@@ -3,10 +3,10 @@
 
 #include "Views/EditConnection/edit_connection_view.h"
 
-class EditConnectionController : public clan::ViewController
+class EditConnectionController : public clan::WindowController
 {
 public:
-	EditConnectionController(std::function<void(EditConnectionController *)> ok_clicked);
+	EditConnectionController(const std::string &title, std::function<void(EditConnectionController *)> ok_clicked);
 
 	std::string connection_name() const { return edit_view->connection_name->value->text(); }
 	std::string server() const { return edit_view->server->value->text(); }

@@ -3,10 +3,12 @@
 
 class WorkspaceViewController;
 
-class WorkspacePageViewController : public clan::ViewController
+class WorkspacePageViewController
 {
 public:
 	WorkspacePageViewController();
+
+	std::shared_ptr<clan::View> view = std::make_shared<clan::View>();
 
 	const std::string &get_page_id() const { return page_id; }
 

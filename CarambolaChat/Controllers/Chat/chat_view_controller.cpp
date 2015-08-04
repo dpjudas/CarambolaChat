@@ -235,7 +235,7 @@ void ChatViewController::irc_session_destroyed(IRCSession *destroyed_session)
 {
 	if (session == destroyed_session)
 	{
-		remove_from_parent_controller();
+		//remove_from_parent_controller();
 	}
 }
 
@@ -243,7 +243,7 @@ void ChatViewController::irc_channel_parted(const IRCChannel &channel)
 {
 	if (channel == filter)
 	{
-		remove_from_parent_controller();
+		//remove_from_parent_controller();
 	}
 }
 

@@ -82,6 +82,8 @@ private:
 	int next_chat_url_id = 1;
 	std::regex regexp_url1 = std::regex("(https?://.*?)([ \\r\\n\\t\"'>)]|$)");
 
+	clan::SlotContainer slots;
+
 /*
 	static std::string get_view_caption(IRCSession *session, const IRCEntity &filter);
 

@@ -49,7 +49,7 @@ ConnectionsViewController::ConnectionsViewController()
 
 void ConnectionsViewController::add_clicked()
 {
-	view->present_modal<EditConnectionController>("Add Connection", [this](EditConnectionController *edit)
+	windows.present_modal<EditConnectionController>(view.get(), "Add Connection", [this](EditConnectionController *edit)
 	{
 		XMLSettingsList connections = AppModel::instance()->settings.xml_settings.get_list("connections");
 
@@ -82,7 +82,7 @@ void ConnectionsViewController::connect_clicked(XMLSettings connection)
 
 void ConnectionsViewController::edit_clicked(XMLSettings const_connection)
 {
-	auto dialog = std::make_shared<EditConnectionController>([=](EditConnectionController *edit)
+	auto dialog = std::make_shared<EditConnectionController>("Edit Connection", [=](EditConnectionController *edit)
 	{
 		XMLSettings connection = const_connection;
 		connection.set_string("connectioname", edit->connection_name());
@@ -100,7 +100,7 @@ void ConnectionsViewController::edit_clicked(XMLSettings const_connection)
 	dialog->set_alt_nick(const_connection.get_string("altnick"));
 	dialog->set_auto_connect(const_connection.get_bool("autoconnect"));
 
-	view->present_modal("Edit Connection", dialog);
+	windows.present_modal(view.get(), dialog);
 }
 
 void ConnectionsViewController::remove_clicked(XMLSettings connection)
