@@ -1,6 +1,6 @@
 
 #include "precomp.h"
-#include "connections_view_controller.h"
+#include "connections_controller.h"
 #include "Views/Connections/network_list_view.h"
 #include "Views/Connections/network_list_item_view.h"
 #include "Models/XMLSettings/xml_settings_list.h"
@@ -8,7 +8,7 @@
 
 using namespace clan;
 
-ConnectionsViewController::ConnectionsViewController()
+ConnectionsController::ConnectionsController()
 {
 	view->style()->set("flex: auto");
 	view->style()->set("flex-direction: column");
@@ -22,12 +22,12 @@ ConnectionsViewController::ConnectionsViewController()
 	networks = std::make_shared<NetworkListView>();
 	view->add_subview(networks);
 
-	slots.connect(AppModel::instance()->cb_irc_session_created, this, &ConnectionsViewController::on_irc_session_created);
-	slots.connect(AppModel::instance()->cb_irc_session_destroyed, this, &ConnectionsViewController::on_irc_session_destroyed);
+	slots.connect(AppModel::instance()->cb_irc_session_created, this, &ConnectionsController::on_irc_session_created);
+	slots.connect(AppModel::instance()->cb_irc_session_destroyed, this, &ConnectionsController::on_irc_session_destroyed);
 
 #if defined(XMPP_SUPPORT)
-	slots.connect(AppModel::instance()->cb_xmpp_session_created, this, &ConnectionsViewController::on_xmpp_session_created);
-	slots.connect(AppModel::instance()->cb_xmpp_session_destroyed, this, &ConnectionsViewController::on_xmpp_session_destroyed);
+	slots.connect(AppModel::instance()->cb_xmpp_session_created, this, &ConnectionsController::on_xmpp_session_created);
+	slots.connect(AppModel::instance()->cb_xmpp_session_destroyed, this, &ConnectionsController::on_xmpp_session_destroyed);
 #endif
 
 	XMLSettingsList connections = AppModel::instance()->settings.xml_settings.get_list("connections");
@@ -47,7 +47,7 @@ ConnectionsViewController::ConnectionsViewController()
 	networks->add_button->func_clicked() = [this]() { add_clicked(); };
 }
 
-void ConnectionsViewController::add_clicked()
+void ConnectionsController::add_clicked()
 {
 	windows.present_modal<EditConnectionController>(view.get(), "Add Connection", [this](EditConnectionController *edit)
 	{
@@ -75,12 +75,12 @@ void ConnectionsViewController::add_clicked()
 	});
 }
 
-void ConnectionsViewController::connect_clicked(XMLSettings connection)
+void ConnectionsController::connect_clicked(XMLSettings connection)
 {
 	AppModel::instance()->connect_to_server(connection);
 }
 
-void ConnectionsViewController::edit_clicked(XMLSettings const_connection)
+void ConnectionsController::edit_clicked(XMLSettings const_connection)
 {
 	auto dialog = std::make_shared<EditConnectionController>("Edit Connection", [=](EditConnectionController *edit)
 	{
@@ -103,16 +103,16 @@ void ConnectionsViewController::edit_clicked(XMLSettings const_connection)
 	windows.present_modal(view.get(), dialog);
 }
 
-void ConnectionsViewController::remove_clicked(XMLSettings connection)
+void ConnectionsController::remove_clicked(XMLSettings connection)
 {
 }
 
-void ConnectionsViewController::on_irc_session_created(IRCSession *session)
+void ConnectionsController::on_irc_session_created(IRCSession *session)
 {
 	slots.connect(session->cb_connect_status_changed, [=](IRCSession::ConnectStatus status) { on_session_connect_status_changed(status, session); });
 }
 
-void ConnectionsViewController::on_irc_session_destroyed(IRCSession *session)
+void ConnectionsController::on_irc_session_destroyed(IRCSession *session)
 {
 	auto item = networks->get_item(session->get_connection_name());
 	if (item)
@@ -122,17 +122,17 @@ void ConnectionsViewController::on_irc_session_destroyed(IRCSession *session)
 }
 
 #if defined(XMPP_SUPPORT)
-void ConnectionsViewController::on_xmpp_session_created(XMPPSession *session)
+void ConnectionsController::on_xmpp_session_created(XMPPSession *session)
 {
 	slots.connect(session->cb_error_text, this, &ServerListView::on_xmpp_session_error_text, session);
 	slots.connect(session->cb_roster_updated, this, &ServerListView::on_xmpp_session_roster_updated, session);
 }
 
-void ConnectionsViewController::on_xmpp_session_destroyed(XMPPSession *session)
+void ConnectionsController::on_xmpp_session_destroyed(XMPPSession *session)
 {
 }
 
-void ConnectionsViewController::on_xmpp_session_error_text(const CL_String &text, XMPPSession *session)
+void ConnectionsController::on_xmpp_session_error_text(const CL_String &text, XMPPSession *session)
 {
 	int count = friends_view->get_item_count(index_group_networks);
 	for (int i = 0; i < count; i++)
@@ -145,7 +145,7 @@ void ConnectionsViewController::on_xmpp_session_error_text(const CL_String &text
 	}
 }
 
-void ConnectionsViewController::on_xmpp_session_roster_updated(XMPPSession *session)
+void ConnectionsController::on_xmpp_session_roster_updated(XMPPSession *session)
 {
 	if (index_group_friends == -1)
 		index_group_friends = friends_view->add_group("Friends");
@@ -170,7 +170,7 @@ void ConnectionsViewController::on_xmpp_session_roster_updated(XMPPSession *sess
 }
 #endif
 
-void ConnectionsViewController::on_session_connect_status_changed(IRCSession::ConnectStatus status, IRCSession *session)
+void ConnectionsController::on_session_connect_status_changed(IRCSession::ConnectStatus status, IRCSession *session)
 {
 	auto item = networks->get_item(session->get_connection_name());
 	if (item)

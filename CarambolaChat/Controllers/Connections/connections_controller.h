@@ -1,17 +1,17 @@
 
 #pragma once
 
-#include "Controllers/Workspace/workspace_page_view_controller.h"
+#include "Controllers/Workspace/workspace_page_controller.h"
 #include "Controllers/EditConnection/edit_connection_controller.h"
 #include "Models/IRCSession/irc_session.h"
 
 class XMLSettings;
 class NetworkListView;
 
-class ConnectionsViewController : public WorkspacePageViewController
+class ConnectionsController : public WorkspacePageController
 {
 public:
-	ConnectionsViewController();
+	ConnectionsController();
 
 private:
 	void add_clicked();

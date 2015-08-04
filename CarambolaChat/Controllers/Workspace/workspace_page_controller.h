@@ -1,12 +1,12 @@
 
 #pragma once
 
-class WorkspaceViewController;
+class WorkspaceController;
 
-class WorkspacePageViewController
+class WorkspacePageController
 {
 public:
-	WorkspacePageViewController();
+	WorkspacePageController();
 
 	std::shared_ptr<clan::View> view = std::make_shared<clan::View>();
 
@@ -19,10 +19,10 @@ private:
 	static std::string generate_page_id() { int id = next_page_id++; return clan::StringHelp::int_to_text(id); }
 	static int next_page_id;
 
-	WorkspaceViewController *workspace = nullptr;
+	WorkspaceController *workspace = nullptr;
 	std::string page_id = generate_page_id();
 
 	int message_count = 0;
 
-	friend class WorkspaceViewController;
+	friend class WorkspaceController;
 };

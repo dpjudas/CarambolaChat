@@ -1,6 +1,6 @@
 
 #include "precomp.h"
-#include "chat_view_controller.h"
+#include "chat_controller.h"
 #include "Views/Chat/chat_view.h"
 #include "Views/Chat/chat_line.h"
 #include "Views/UserList/user_list_view.h"
@@ -12,13 +12,13 @@
 
 using namespace clan;
 
-ChatViewController::ChatViewController(IRCSession *session, const IRCEntity &filter) : session(session), filter(filter)
+ChatController::ChatController(IRCSession *session, const IRCEntity &filter) : session(session), filter(filter)
 {
 	create_layout();
 
-	slots.connect(AppModel::instance()->cb_irc_session_destroyed, this, &ChatViewController::irc_session_destroyed);
+	slots.connect(AppModel::instance()->cb_irc_session_destroyed, this, &ChatController::irc_session_destroyed);
 	if (session)
-		slots.connect(session->cb_parted, this, &ChatViewController::irc_channel_parted);
+		slots.connect(session->cb_parted, this, &ChatController::irc_channel_parted);
 
 	// Only show userlist for channels:
 	if (!get_filter().is_channel())
@@ -27,25 +27,25 @@ ChatViewController::ChatViewController(IRCSession *session, const IRCEntity &fil
 		user_list->set_hidden();
 	}
 
-	slots.connect(session->cb_channel_topic_updated, this, &ChatViewController::on_channel_topic_updated);
-	slots.connect(session->cb_channel_names_updated, this, &ChatViewController::on_channel_names_updated);
-	slots.connect(session->cb_nick_changed, this, &ChatViewController::on_nick_changed);
-	slots.connect(session->cb_parted, this, &ChatViewController::on_parted);
-	slots.connect(session->cb_user_joined, this, &ChatViewController::on_user_joined);
-	slots.connect(session->cb_user_parted, this, &ChatViewController::on_user_parted);
-	slots.connect(session->cb_user_kicked, this, &ChatViewController::on_user_kicked);
-	slots.connect(session->cb_user_quit, this, &ChatViewController::on_user_quit);
+	slots.connect(session->cb_channel_topic_updated, this, &ChatController::on_channel_topic_updated);
+	slots.connect(session->cb_channel_names_updated, this, &ChatController::on_channel_names_updated);
+	slots.connect(session->cb_nick_changed, this, &ChatController::on_nick_changed);
+	slots.connect(session->cb_parted, this, &ChatController::on_parted);
+	slots.connect(session->cb_user_joined, this, &ChatController::on_user_joined);
+	slots.connect(session->cb_user_parted, this, &ChatController::on_user_parted);
+	slots.connect(session->cb_user_kicked, this, &ChatController::on_user_kicked);
+	slots.connect(session->cb_user_quit, this, &ChatController::on_user_quit);
 
-	slots.connect(session->cb_text, this, &ChatViewController::on_text);
-	slots.connect(session->cb_notice, this, &ChatViewController::on_notice);
-	slots.connect(session->cb_action, this, &ChatViewController::on_action);
-	slots.connect(session->cb_system_text, this, &ChatViewController::on_system_text);
-	slots.connect(session->cb_error_text, this, &ChatViewController::on_error_text);
-	slots.connect(session->cb_channel_mode_change, this, &ChatViewController::on_channel_mode_change);
-	slots.connect(session->cb_nick_mode_change, this, &ChatViewController::on_nick_mode_change);
+	slots.connect(session->cb_text, this, &ChatController::on_text);
+	slots.connect(session->cb_notice, this, &ChatController::on_notice);
+	slots.connect(session->cb_action, this, &ChatController::on_action);
+	slots.connect(session->cb_system_text, this, &ChatController::on_system_text);
+	slots.connect(session->cb_error_text, this, &ChatController::on_error_text);
+	slots.connect(session->cb_channel_mode_change, this, &ChatController::on_channel_mode_change);
+	slots.connect(session->cb_nick_mode_change, this, &ChatController::on_nick_mode_change);
 
-	slots.connect(chat_log->cb_url_clicked, this, &ChatViewController::on_url_clicked);
-	slots.connect(input_text->sig_enter_pressed(), this, &ChatViewController::on_inputbox_return_pressed);
+	slots.connect(chat_log->cb_url_clicked, this, &ChatController::on_url_clicked);
+	slots.connect(input_text->sig_enter_pressed(), this, &ChatController::on_inputbox_return_pressed);
 
 	/*
 	icon_action = CL_Image(gc, "Resources/Icons/chat_icon_action.png");
@@ -65,21 +65,21 @@ ChatViewController::ChatViewController(IRCSession *session, const IRCEntity &fil
 		get_toolbar()->insert_item(CL_Sprite(get_gc(), "Resources/Icons/icon-picture.png"), 0, "Moderate", id_moderate);
 	}
 	get_toolbar()->insert_item(CL_Sprite(get_gc(), "Resources/Icons/icon-add.png"), 0, "Join channel", id_set_topic);
-	get_toolbar()->func_item_clicked().set(this, &ChatViewController::on_toolbar_item_clicked);
+	get_toolbar()->func_item_clicked().set(this, &ChatController::on_toolbar_item_clicked);
 
-	func_visibility_change().set(this, &ChatViewController::on_visibility_change);
-	inputbox->func_filter_message().set(this, &ChatViewController::on_inputbox_filter_message);
+	func_visibility_change().set(this, &ChatController::on_visibility_change);
+	inputbox->func_filter_message().set(this, &ChatController::on_inputbox_filter_message);
 
-	userlist->func_key_pressed().set(this, &ChatViewController::on_userlist_key_pressed);
-	userlist->func_mouse_right_up().set(this, &ChatViewController::on_userlist_contextmenu);
+	userlist->func_key_pressed().set(this, &ChatController::on_userlist_key_pressed);
+	userlist->func_mouse_right_up().set(this, &ChatController::on_userlist_contextmenu);
 	*/
 }
 
-ChatViewController::~ChatViewController()
+ChatController::~ChatController()
 {
 }
 
-void ChatViewController::create_layout()
+void ChatController::create_layout()
 {
 	auto chat_users_group = std::make_shared<View>();
 	chat_users_group->style()->set("flex-direction: row");
@@ -117,7 +117,7 @@ void ChatViewController::create_layout()
 	view->add_subview(input_bar);
 }
 
-bool ChatViewController::is_active_view()
+bool ChatController::is_active_view()
 {
 	/*
 	View *view = get_mainframe()->get_active_view();
@@ -127,7 +127,7 @@ bool ChatViewController::is_active_view()
 	}
 	else // Redirect to Status view (empty filter) if user is viewing another network
 	{
-		ChatViewController *chatview = dynamic_cast<ChatViewController*>(view);
+		ChatController *chatview = dynamic_cast<ChatController*>(view);
 		if (chatview && chatview->get_session() != get_session() && filter.empty())
 			return true;
 		else
@@ -137,7 +137,7 @@ bool ChatViewController::is_active_view()
 	return true;
 }
 
-void ChatViewController::add_action_line(const IRCNick &nick, const IRCText &text)
+void ChatController::add_action_line(const IRCNick &nick, const IRCText &text)
 {
 	//get_mainframe()->flag_activity(this, nick.get_name(), text.get_text(), false);
 	ChatLine line;
@@ -146,7 +146,7 @@ void ChatViewController::add_action_line(const IRCNick &nick, const IRCText &tex
 	chat_log->add_line(line);
 }
 
-void ChatViewController::add_notice_line(const IRCNick &nick, const IRCText &text)
+void ChatController::add_notice_line(const IRCNick &nick, const IRCText &text)
 {
 	//get_mainframe()->flag_activity(this, nick.get_name(), text.get_text(), false);
 	ChatLine line(nick.get_name(), chat_log->get_color_nick_others());
@@ -155,7 +155,7 @@ void ChatViewController::add_notice_line(const IRCNick &nick, const IRCText &tex
 	chat_log->add_line(line);
 }
 
-void ChatViewController::add_error_line(const IRCText &text)
+void ChatController::add_error_line(const IRCText &text)
 {
 	//get_mainframe()->flag_activity(this, std::string(), text.get_text(), false);
 	ChatLine line;
@@ -164,7 +164,7 @@ void ChatViewController::add_error_line(const IRCText &text)
 	chat_log->add_line(line);
 }
 
-void ChatViewController::add_line(const IRCText &text, const Colorf &text_color, bool unimportant)
+void ChatController::add_line(const IRCText &text, const Colorf &text_color, bool unimportant)
 {
 	//get_mainframe()->flag_activity(this, std::string(), text.get_text(), unimportant);
 	ChatLine line;
@@ -172,7 +172,7 @@ void ChatViewController::add_line(const IRCText &text, const Colorf &text_color,
 	chat_log->add_line(line);
 }
 
-void ChatViewController::add_line(const IRCNick &sender, const IRCText &text, const Colorf &text_color, const Colorf &nick_color)
+void ChatController::add_line(const IRCNick &sender, const IRCText &text, const Colorf &text_color, const Colorf &nick_color)
 {
 	//get_mainframe()->flag_activity(this, sender.get_name(), text.get_text(), false);
 	ChatLine line(sender.get_name(), nick_color);
@@ -180,7 +180,7 @@ void ChatViewController::add_line(const IRCNick &sender, const IRCText &text, co
 	chat_log->add_line(line);
 }
 
-void ChatViewController::add_line_text(ChatLine &line, const std::string &text, const Colorf &color)
+void ChatController::add_line_text(ChatLine &line, const std::string &text, const Colorf &color)
 {
 	auto urls_begin = std::sregex_iterator(text.begin(), text.end(), regexp_url1);
 	auto urls_end = std::sregex_iterator();
@@ -216,7 +216,7 @@ void ChatViewController::add_line_text(ChatLine &line, const std::string &text, 
 		line.add_text(style, text.substr(pos));
 }
 
-void ChatViewController::add_topic_text()
+void ChatController::add_topic_text()
 {
 	IRCJoinedChannel status = session->get_channel_status(get_filter());
 
@@ -231,7 +231,7 @@ void ChatViewController::add_topic_text()
 	//get_mainframe()->flag_activity(this, status.topic_author.get_name(), status.topic.get_text(), false);
 }
 
-void ChatViewController::irc_session_destroyed(IRCSession *destroyed_session)
+void ChatController::irc_session_destroyed(IRCSession *destroyed_session)
 {
 	if (session == destroyed_session)
 	{
@@ -239,7 +239,7 @@ void ChatViewController::irc_session_destroyed(IRCSession *destroyed_session)
 	}
 }
 
-void ChatViewController::irc_channel_parted(const IRCChannel &channel)
+void ChatController::irc_channel_parted(const IRCChannel &channel)
 {
 	if (channel == filter)
 	{
@@ -247,7 +247,7 @@ void ChatViewController::irc_channel_parted(const IRCChannel &channel)
 	}
 }
 
-void ChatViewController::on_text(const IRCChannel &room, const IRCNick &nick, const IRCText &text)
+void ChatController::on_text(const IRCChannel &room, const IRCNick &nick, const IRCText &text)
 {
 	if (get_filter() == room)
 	{
@@ -256,7 +256,7 @@ void ChatViewController::on_text(const IRCChannel &room, const IRCNick &nick, co
 	}
 }
 
-void ChatViewController::on_notice(const IRCChannel &room, const IRCNick &nick, const IRCText &text)
+void ChatController::on_notice(const IRCChannel &room, const IRCNick &nick, const IRCText &text)
 {
 	if ((room.is_channel() && get_filter() == room) ||
 		(!room.is_channel() && is_active_view()))
@@ -266,7 +266,7 @@ void ChatViewController::on_notice(const IRCChannel &room, const IRCNick &nick, 
 	}
 }
 
-void ChatViewController::on_action(const IRCChannel &room, const IRCNick &nick, const IRCText &text)
+void ChatController::on_action(const IRCChannel &room, const IRCNick &nick, const IRCText &text)
 {
 	if (get_filter() == room)
 	{
@@ -275,7 +275,7 @@ void ChatViewController::on_action(const IRCChannel &room, const IRCNick &nick, 
 	}
 }
 
-void ChatViewController::on_error_text(const IRCText &text)
+void ChatController::on_error_text(const IRCText &text)
 {
 	if (is_active_view())
 	{
@@ -283,7 +283,7 @@ void ChatViewController::on_error_text(const IRCText &text)
 	}
 }
 
-void ChatViewController::on_system_text(const IRCText &text)
+void ChatController::on_system_text(const IRCText &text)
 {
 	if (get_filter().empty())
 	{
@@ -291,7 +291,7 @@ void ChatViewController::on_system_text(const IRCText &text)
 	}
 }
 
-void ChatViewController::on_channel_topic_updated(const IRCChannel &channel)
+void ChatController::on_channel_topic_updated(const IRCChannel &channel)
 {
 	if (get_filter() == channel)
 	{
@@ -299,7 +299,7 @@ void ChatViewController::on_channel_topic_updated(const IRCChannel &channel)
 	}
 }
 
-void ChatViewController::on_channel_names_updated(const IRCChannel &channel)
+void ChatController::on_channel_names_updated(const IRCChannel &channel)
 {
 	if (get_filter() == channel)
 	{
@@ -331,7 +331,7 @@ void ChatViewController::on_channel_names_updated(const IRCChannel &channel)
 	}
 }
 
-void ChatViewController::on_nick_changed(const IRCNick &old_nick, const IRCNick &new_nick)
+void ChatController::on_nick_changed(const IRCNick &old_nick, const IRCNick &new_nick)
 {
 	if (user_list->has_user(old_nick.get_name()))
 	{
@@ -342,7 +342,7 @@ void ChatViewController::on_nick_changed(const IRCNick &old_nick, const IRCNick 
 	}
 }
 
-void ChatViewController::on_parted(const IRCChannel &channel)
+void ChatController::on_parted(const IRCChannel &channel)
 {
 	if (get_filter() == channel)
 	{
@@ -350,7 +350,7 @@ void ChatViewController::on_parted(const IRCChannel &channel)
 	}
 }
 
-void ChatViewController::on_user_joined(const IRCChannel &channel, const IRCNick &nick)
+void ChatController::on_user_joined(const IRCChannel &channel, const IRCNick &nick)
 {
 	if (get_filter() == channel)
 	{
@@ -374,7 +374,7 @@ void ChatViewController::on_user_joined(const IRCChannel &channel, const IRCNick
 	}
 }
 
-void ChatViewController::on_user_parted(const IRCChannel &channel, const IRCNick &nick, const IRCText &text)
+void ChatController::on_user_parted(const IRCChannel &channel, const IRCNick &nick, const IRCText &text)
 {
 	if (get_filter() == channel)
 	{
@@ -387,7 +387,7 @@ void ChatViewController::on_user_parted(const IRCChannel &channel, const IRCNick
 	}
 }
 
-void ChatViewController::on_user_kicked(const IRCNick &nick, const IRCChannel &channel, const IRCNick &target, const IRCText &text)
+void ChatController::on_user_kicked(const IRCNick &nick, const IRCChannel &channel, const IRCNick &target, const IRCText &text)
 {
 	if (get_filter() == channel)
 	{
@@ -400,7 +400,7 @@ void ChatViewController::on_user_kicked(const IRCNick &nick, const IRCChannel &c
 	}
 }
 
-void ChatViewController::on_user_quit(const IRCNick &nick, const IRCText &text)
+void ChatController::on_user_quit(const IRCNick &nick, const IRCText &text)
 {
 	if (user_list->has_user(nick.get_name()))
 	{
@@ -413,7 +413,7 @@ void ChatViewController::on_user_quit(const IRCNick &nick, const IRCText &text)
 	}
 }
 
-void ChatViewController::on_channel_mode_change(const IRCNick &executing_nick, const IRCChannel &channel, const std::vector<IRCRawString> &command)
+void ChatController::on_channel_mode_change(const IRCNick &executing_nick, const IRCChannel &channel, const std::vector<IRCRawString> &command)
 {
 	if (get_filter() == channel)
 	{
@@ -448,7 +448,7 @@ void ChatViewController::on_channel_mode_change(const IRCNick &executing_nick, c
 	}
 }
 
-void ChatViewController::on_nick_mode_change(const IRCNick &executing_nick, const IRCNick &target_nick, const std::vector<IRCRawString> &command)
+void ChatController::on_nick_mode_change(const IRCNick &executing_nick, const IRCNick &target_nick, const std::vector<IRCRawString> &command)
 {
 	if (is_active_view())
 	{
@@ -463,7 +463,7 @@ void ChatViewController::on_nick_mode_change(const IRCNick &executing_nick, cons
 	}
 }
 
-void ChatViewController::on_url_clicked(int object_id)
+void ChatController::on_url_clicked(int object_id)
 {
 	for (size_t i = 0; i < chat_urls.size(); ++i)
 	{
@@ -476,7 +476,7 @@ void ChatViewController::on_url_clicked(int object_id)
 	}
 }
 
-void ChatViewController::on_inputbox_return_pressed()
+void ChatController::on_inputbox_return_pressed()
 {
 	std::string chat_line = input_text->text();
 	if (!chat_line.empty())
@@ -513,7 +513,7 @@ void ChatViewController::on_inputbox_return_pressed()
 	}
 }
 
-std::vector<std::string> ChatViewController::split_input_text(const std::string &text)
+std::vector<std::string> ChatController::split_input_text(const std::string &text)
 {
 	std::vector<std::string> lines;
 	std::string::size_type pos = 0;
@@ -537,7 +537,7 @@ std::vector<std::string> ChatViewController::split_input_text(const std::string 
 }
 
 /*
-std::string ChatViewController::get_view_caption(IRCSession *session, const IRCEntity &filter)
+std::string ChatController::get_view_caption(IRCSession *session, const IRCEntity &filter)
 {
 	if (filter.empty())
 		return session->get_connection_name();// "Status";
@@ -547,7 +547,7 @@ std::string ChatViewController::get_view_caption(IRCSession *session, const IRCE
 		return filter.get_name();
 }
 
-ChatViewController::~ChatViewController()
+ChatController::~ChatController()
 {
 	if (filter.is_channel())
 	{
@@ -560,7 +560,7 @@ ChatViewController::~ChatViewController()
 	}
 }
 
-void ChatViewController::on_inputbox_filter_message(CL_GUIMessage &message)
+void ChatController::on_inputbox_filter_message(CL_GUIMessage &message)
 {
 	if (message.get_type() == CL_GUIMessage_Input::get_type_name())
 	{
@@ -611,7 +611,7 @@ void ChatViewController::on_inputbox_filter_message(CL_GUIMessage &message)
 	}
 }
 
-void ChatViewController::on_inputbox_up_pressed()
+void ChatController::on_inputbox_up_pressed()
 {
 	if(chat_input_history_index > 0)
 	{
@@ -620,7 +620,7 @@ void ChatViewController::on_inputbox_up_pressed()
 	}
 }
 
-void ChatViewController::on_inputbox_down_pressed()
+void ChatController::on_inputbox_down_pressed()
 {
 	if( chat_input_history.size() > 0 && chat_input_history_index < chat_input_history.size() - 1)
 	{
@@ -633,7 +633,7 @@ void ChatViewController::on_inputbox_down_pressed()
 	}
 }
 
-void ChatViewController::on_inputbox_tab_pressed()
+void ChatController::on_inputbox_tab_pressed()
 {
 	if (get_filter().is_channel())
 	{
@@ -669,7 +669,7 @@ void ChatViewController::on_inputbox_tab_pressed()
 	}
 }
 
-void ChatViewController::on_userlist_key_pressed(CL_InputEvent event)
+void ChatController::on_userlist_key_pressed(CL_InputEvent event)
 {
 	if (event.id == CL_KEY_APPS)
 	{
@@ -677,45 +677,45 @@ void ChatViewController::on_userlist_key_pressed(CL_InputEvent event)
 	}
 }
 
-void ChatViewController::on_userlist_contextmenu(CL_Point pos)
+void ChatController::on_userlist_contextmenu(CL_Point pos)
 {
 	userlist_popup_menu = CL_PopupMenu();
-	userlist_popup_menu.insert_item("Slap!").func_clicked().set(this, &ChatViewController::on_userlist_slap);
-	userlist_popup_menu.insert_item("Open Conversation").func_clicked().set(this, &ChatViewController::on_userlist_open_conversation);
-	userlist_popup_menu.insert_item("Open DCC Conversation").func_clicked().set(this, &ChatViewController::on_userlist_open_dcc_conversation);
-    userlist_popup_menu.insert_item("Whois").func_clicked().set(this, &ChatViewController::on_userlist_whois);
+	userlist_popup_menu.insert_item("Slap!").func_clicked().set(this, &ChatController::on_userlist_slap);
+	userlist_popup_menu.insert_item("Open Conversation").func_clicked().set(this, &ChatController::on_userlist_open_conversation);
+	userlist_popup_menu.insert_item("Open DCC Conversation").func_clicked().set(this, &ChatController::on_userlist_open_dcc_conversation);
+    userlist_popup_menu.insert_item("Whois").func_clicked().set(this, &ChatController::on_userlist_whois);
 	userlist_popup_menu.start(userlist, userlist->component_to_screen_coords(pos));
 }
 
-void ChatViewController::on_userlist_slap()
+void ChatController::on_userlist_slap()
 {
 	CL_ListViewItem selected_item = userlist->get_selected_item();
 	if (!selected_item.is_null())
 		Command::execute(session, filter, string_format("/me slaps %1 around a bit with a large carambola fruit!", selected_item.get_column("nick").get_text()));
 }
 
-void ChatViewController::on_userlist_open_conversation()
+void ChatController::on_userlist_open_conversation()
 {
 	CL_ListViewItem selected_item = userlist->get_selected_item();
 	if (!selected_item.is_null())
 		get_mainframe()->open_conversation(IRCNick::from_text(selected_item.get_column("nick").get_text()), session);
 }
 
-void ChatViewController::on_userlist_open_dcc_conversation()
+void ChatController::on_userlist_open_dcc_conversation()
 {
 	CL_ListViewItem selected_item = userlist->get_selected_item();
 	if (!selected_item.is_null())
 		get_mainframe()->open_dcc_conversation(IRCNick::from_text(selected_item.get_column("nick").get_text()), session);
 }
 
-void ChatViewController::on_userlist_whois()
+void ChatController::on_userlist_whois()
 {
     CL_ListViewItem selected_item = userlist->get_selected_item();
     if (!selected_item.is_null())
         Command::execute(session, filter, string_format("/whois %1", selected_item.get_column("nick").get_text()));
 }
 
-void ChatViewController::add_private_text(const IRCNick &nick, const IRCText &text)
+void ChatController::add_private_text(const IRCNick &nick, const IRCText &text)
 {
 	if (get_filter() == nick)
 	{
@@ -723,13 +723,13 @@ void ChatViewController::add_private_text(const IRCNick &nick, const IRCText &te
 	}
 }
 
-void ChatViewController::on_visibility_change(bool new_visibility)
+void ChatController::on_visibility_change(bool new_visibility)
 {
 	if (new_visibility)
 		inputbox->set_focus();
 }
 
-void ChatViewController::on_toolbar_item_clicked(CL_ToolBarItem item)
+void ChatController::on_toolbar_item_clicked(CL_ToolBarItem item)
 {
 	switch (item.get_id())
 	{
@@ -753,28 +753,28 @@ void ChatViewController::on_toolbar_item_clicked(CL_ToolBarItem item)
 	}
 }
 
-void ChatViewController::on_toolbar_set_topic_clicked()
+void ChatController::on_toolbar_set_topic_clicked()
 {
 	DlgTopic dlg(this);
 	dlg.exec();
 }
 
-void ChatViewController::on_toolbar_disconnect_clicked()
+void ChatController::on_toolbar_disconnect_clicked()
 {
 	session->execute_command(filter, "/quit");
 }
 
-void ChatViewController::on_toolbar_leave_clicked()
+void ChatController::on_toolbar_leave_clicked()
 {
 
 }
 
-void ChatViewController::on_toolbar_moderate_clicked()
+void ChatController::on_toolbar_moderate_clicked()
 {
 
 }
 
-void ChatViewController::on_toolbar_join_clicked()
+void ChatController::on_toolbar_join_clicked()
 {
 
 }

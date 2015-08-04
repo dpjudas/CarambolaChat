@@ -1,13 +1,13 @@
 
 #pragma once
 
-#include "Controllers/Workspace/workspace_page_view_controller.h"
+#include "Controllers/Workspace/workspace_page_controller.h"
 #include "Models/IRCSession/irc_entity.h"
 #include "Models/IRCSession/irc_text.h"
 #include "Views/Chat/chat_view.h"
 #include <regex>
 
-class WorkspaceViewController;
+class WorkspaceController;
 class IRCSession;
 class IRCEntity;
 class ChatUrl;
@@ -15,11 +15,11 @@ class ChatView;
 class ChatLine;
 class UserListView;
 
-class ChatViewController : public WorkspacePageViewController
+class ChatController : public WorkspacePageController
 {
 public:
-	ChatViewController(IRCSession *session, const IRCEntity &filter);
-	~ChatViewController();
+	ChatController(IRCSession *session, const IRCEntity &filter);
+	~ChatController();
 
 	const IRCEntity &get_filter() const { return filter; }
 	IRCSession *get_session() const { return session; }

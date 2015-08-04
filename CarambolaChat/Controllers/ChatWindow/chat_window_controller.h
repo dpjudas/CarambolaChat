@@ -1,7 +1,7 @@
 
 #pragma once
 
-class WorkspaceViewController;
+class WorkspaceController;
 class IRCSession;
 class IRCEntity;
 class DCCChatConnection;
@@ -12,7 +12,7 @@ public:
 	ChatWindowViewController();
 
 	std::shared_ptr<clan::View> view = std::make_shared<clan::View>();
-	std::shared_ptr<WorkspaceViewController> workspace;
+	std::shared_ptr<WorkspaceController> workspace;
 
 private:
 	void irc_session_created(IRCSession *session);

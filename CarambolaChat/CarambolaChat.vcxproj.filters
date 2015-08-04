@@ -60,20 +60,11 @@
     <ClCompile Include="Views\Chat\chat_view.cpp">
       <Filter>Views\Chat</Filter>
     </ClCompile>
-    <ClCompile Include="Controllers\Chat\chat_view_controller.cpp">
-      <Filter>Controllers\Chat</Filter>
-    </ClCompile>
-    <ClCompile Include="Controllers\Workspace\workspace_view_controller.cpp">
-      <Filter>Controllers\Workspace</Filter>
-    </ClCompile>
     <ClCompile Include="Views\UserList\user_list_view.cpp">
       <Filter>Views\UserList</Filter>
     </ClCompile>
     <ClCompile Include="Views\Chat\chat_line.cpp">
       <Filter>Views\Chat</Filter>
-    </ClCompile>
-    <ClCompile Include="Controllers\Connections\connections_view_controller.cpp">
-      <Filter>Controllers\Connections</Filter>
     </ClCompile>
     <ClCompile Include="Views\Connections\network_list_item_view.cpp">
       <Filter>Views\Connections</Filter>
@@ -87,11 +78,20 @@
     <ClCompile Include="Views\Workspace\workspace_tab_view.cpp">
       <Filter>Views\Workspace</Filter>
     </ClCompile>
-    <ClCompile Include="Controllers\Workspace\workspace_page_view_controller.cpp">
-      <Filter>Controllers\Workspace</Filter>
-    </ClCompile>
     <ClCompile Include="Controllers\EditConnection\edit_connection_controller.cpp">
       <Filter>Controllers\EditConnection</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\Connections\connections_controller.cpp">
+      <Filter>Controllers\Connections</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\Workspace\workspace_page_controller.cpp">
+      <Filter>Controllers\Workspace</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\Workspace\workspace_controller.cpp">
+      <Filter>Controllers\Workspace</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\Chat\chat_controller.cpp">
+      <Filter>Controllers\Chat</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -164,20 +164,11 @@
     <ClInclude Include="Views\Chat\chat_view.h">
       <Filter>Views\Chat</Filter>
     </ClInclude>
-    <ClInclude Include="Controllers\Chat\chat_view_controller.h">
-      <Filter>Controllers\Chat</Filter>
-    </ClInclude>
     <ClInclude Include="Controllers\Chat\chat_url.h">
       <Filter>Controllers\Chat</Filter>
     </ClInclude>
-    <ClInclude Include="Controllers\Workspace\workspace_view_controller.h">
-      <Filter>Controllers\Workspace</Filter>
-    </ClInclude>
     <ClInclude Include="Views\UserList\user_list_view.h">
       <Filter>Views\UserList</Filter>
-    </ClInclude>
-    <ClInclude Include="Controllers\Connections\connections_view_controller.h">
-      <Filter>Controllers\Connections</Filter>
     </ClInclude>
     <ClInclude Include="Views\Connections\network_list_item_view.h">
       <Filter>Views\Connections</Filter>
@@ -191,14 +182,23 @@
     <ClInclude Include="Views\Workspace\workspace_tab_view.h">
       <Filter>Views\Workspace</Filter>
     </ClInclude>
-    <ClInclude Include="Controllers\Workspace\workspace_page_view_controller.h">
-      <Filter>Controllers\Workspace</Filter>
-    </ClInclude>
     <ClInclude Include="Controllers\EditConnection\edit_connection_controller.h">
       <Filter>Controllers\EditConnection</Filter>
     </ClInclude>
     <ClInclude Include="Views\EditConnection\edit_connection_view.h">
       <Filter>Views\EditConnection</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\Connections\connections_controller.h">
+      <Filter>Controllers\Connections</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\Workspace\workspace_page_controller.h">
+      <Filter>Controllers\Workspace</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\Workspace\workspace_controller.h">
+      <Filter>Controllers\Workspace</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\Chat\chat_controller.h">
+      <Filter>Controllers\Chat</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

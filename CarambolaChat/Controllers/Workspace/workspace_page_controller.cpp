@@ -1,22 +1,22 @@
 
 #include "precomp.h"
-#include "workspace_page_view_controller.h"
-#include "workspace_view_controller.h"
+#include "workspace_page_controller.h"
+#include "workspace_controller.h"
 
 using namespace clan;
 
-WorkspacePageViewController::WorkspacePageViewController()
+WorkspacePageController::WorkspacePageController()
 {
 	view->style()->set("flex: auto");
 }
 
-void WorkspacePageViewController::set_tab_title(const std::string &text)
+void WorkspacePageController::set_tab_title(const std::string &text)
 {
 	if (workspace)
 		workspace->set_label(page_id, text);
 }
 
-void WorkspacePageViewController::increment_message_count()
+void WorkspacePageController::increment_message_count()
 {
 	if (workspace)
 	{
@@ -27,4 +27,4 @@ void WorkspacePageViewController::increment_message_count()
 	}
 }
 
-int WorkspacePageViewController::next_page_id = 0;
+int WorkspacePageController::next_page_id = 0;
