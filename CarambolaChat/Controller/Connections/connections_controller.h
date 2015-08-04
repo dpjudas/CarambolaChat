@@ -1,9 +1,9 @@
 
 #pragma once
 
-#include "Controllers/Workspace/workspace_page_controller.h"
-#include "Controllers/EditConnection/edit_connection_controller.h"
-#include "Models/IRCSession/irc_session.h"
+#include "Controller/Workspace/workspace_page_controller.h"
+#include "Controller/EditConnection/edit_connection_controller.h"
+#include "Model/IRCSession/irc_session.h"
 
 class XMLSettings;
 class NetworkListView;

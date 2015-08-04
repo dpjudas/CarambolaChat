@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "Views/EditConnection/edit_connection_view.h"
+#include "View/EditConnection/edit_connection_view.h"
 
 class EditConnectionController : public clan::WindowController
 {

@@ -1,7 +1,7 @@
 
 #pragma once
-#include "Controllers/ChatWindow/chat_window_controller.h"
-#include "Models/app_model.h"
+#include "Controller/ChatWindow/chat_window_controller.h"
+#include "Model/app_model.h"
 
 class Program : public clan::Application
 {

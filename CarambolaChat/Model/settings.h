@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "Models/XMLSettings/xml_settings.h"
+#include "Model/XMLSettings/xml_settings.h"
 
 class Settings
 {

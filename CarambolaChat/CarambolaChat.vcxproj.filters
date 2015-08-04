@@ -3,260 +3,260 @@
   <ItemGroup>
     <ClCompile Include="precomp.cpp" />
     <ClCompile Include="program.cpp" />
-    <ClCompile Include="Models\app_model.cpp">
-      <Filter>Models</Filter>
+    <ClCompile Include="Model\app_model.cpp">
+      <Filter>Model</Filter>
     </ClCompile>
-    <ClCompile Include="Models\settings.cpp">
-      <Filter>Models</Filter>
+    <ClCompile Include="Model\settings.cpp">
+      <Filter>Model</Filter>
     </ClCompile>
-    <ClCompile Include="Models\DCCChat\dcc_chat_connection.cpp">
-      <Filter>Models\DCCChat</Filter>
+    <ClCompile Include="Model\DCCChat\dcc_chat_connection.cpp">
+      <Filter>Model\DCCChat</Filter>
     </ClCompile>
-    <ClCompile Include="Models\DCCFileTransfer\dcc_file_transfer_connection.cpp">
-      <Filter>Models\DCCFileTransfer</Filter>
+    <ClCompile Include="Model\DCCFileTransfer\dcc_file_transfer_connection.cpp">
+      <Filter>Model\DCCFileTransfer</Filter>
     </ClCompile>
-    <ClCompile Include="Models\IdentServer\ident_server.cpp">
-      <Filter>Models\IdentServer</Filter>
+    <ClCompile Include="Model\IdentServer\ident_server.cpp">
+      <Filter>Model\IdentServer</Filter>
     </ClCompile>
-    <ClCompile Include="Models\IdentServer\ident_server_connection.cpp">
-      <Filter>Models\IdentServer</Filter>
+    <ClCompile Include="Model\IdentServer\ident_server_connection.cpp">
+      <Filter>Model\IdentServer</Filter>
     </ClCompile>
-    <ClCompile Include="Models\IRCSession\command.cpp">
-      <Filter>Models\IRCSession</Filter>
+    <ClCompile Include="Model\IRCSession\command.cpp">
+      <Filter>Model\IRCSession</Filter>
     </ClCompile>
-    <ClCompile Include="Models\IRCSession\irc_connection.cpp">
-      <Filter>Models\IRCSession</Filter>
+    <ClCompile Include="Model\IRCSession\irc_connection.cpp">
+      <Filter>Model\IRCSession</Filter>
     </ClCompile>
-    <ClCompile Include="Models\IRCSession\irc_connection_queues.cpp">
-      <Filter>Models\IRCSession</Filter>
+    <ClCompile Include="Model\IRCSession\irc_connection_queues.cpp">
+      <Filter>Model\IRCSession</Filter>
     </ClCompile>
-    <ClCompile Include="Models\IRCSession\irc_entity.cpp">
-      <Filter>Models\IRCSession</Filter>
+    <ClCompile Include="Model\IRCSession\irc_entity.cpp">
+      <Filter>Model\IRCSession</Filter>
     </ClCompile>
-    <ClCompile Include="Models\IRCSession\irc_message.cpp">
-      <Filter>Models\IRCSession</Filter>
+    <ClCompile Include="Model\IRCSession\irc_message.cpp">
+      <Filter>Model\IRCSession</Filter>
     </ClCompile>
-    <ClCompile Include="Models\IRCSession\irc_session.cpp">
-      <Filter>Models\IRCSession</Filter>
+    <ClCompile Include="Model\IRCSession\irc_session.cpp">
+      <Filter>Model\IRCSession</Filter>
     </ClCompile>
-    <ClCompile Include="Models\IRCSession\irc_text.cpp">
-      <Filter>Models\IRCSession</Filter>
+    <ClCompile Include="Model\IRCSession\irc_text.cpp">
+      <Filter>Model\IRCSession</Filter>
     </ClCompile>
-    <ClCompile Include="Models\XMLSettings\xml_settings.cpp">
-      <Filter>Models\XMLSettings</Filter>
+    <ClCompile Include="Model\XMLSettings\xml_settings.cpp">
+      <Filter>Model\XMLSettings</Filter>
     </ClCompile>
-    <ClCompile Include="Models\XMLSettings\xml_settings_document.cpp">
-      <Filter>Models\XMLSettings</Filter>
+    <ClCompile Include="Model\XMLSettings\xml_settings_document.cpp">
+      <Filter>Model\XMLSettings</Filter>
     </ClCompile>
-    <ClCompile Include="Models\XMLSettings\xml_settings_list.cpp">
-      <Filter>Models\XMLSettings</Filter>
+    <ClCompile Include="Model\XMLSettings\xml_settings_list.cpp">
+      <Filter>Model\XMLSettings</Filter>
     </ClCompile>
-    <ClCompile Include="Models\XMLSettings\xml_settings_map.cpp">
-      <Filter>Models\XMLSettings</Filter>
+    <ClCompile Include="Model\XMLSettings\xml_settings_map.cpp">
+      <Filter>Model\XMLSettings</Filter>
     </ClCompile>
-    <ClCompile Include="Controllers\ChatWindow\chat_window_controller.cpp">
-      <Filter>Controllers\ChatWindow</Filter>
+    <ClCompile Include="Controller\ChatWindow\chat_window_controller.cpp">
+      <Filter>Controller\ChatWindow</Filter>
     </ClCompile>
-    <ClCompile Include="Views\Chat\chat_view.cpp">
-      <Filter>Views\Chat</Filter>
+    <ClCompile Include="View\Chat\chat_view.cpp">
+      <Filter>View\Chat</Filter>
     </ClCompile>
-    <ClCompile Include="Views\UserList\user_list_view.cpp">
-      <Filter>Views\UserList</Filter>
+    <ClCompile Include="View\UserList\user_list_view.cpp">
+      <Filter>View\UserList</Filter>
     </ClCompile>
-    <ClCompile Include="Views\Chat\chat_line.cpp">
-      <Filter>Views\Chat</Filter>
+    <ClCompile Include="View\Chat\chat_line.cpp">
+      <Filter>View\Chat</Filter>
     </ClCompile>
-    <ClCompile Include="Views\Connections\network_list_item_view.cpp">
-      <Filter>Views\Connections</Filter>
+    <ClCompile Include="View\Connections\network_list_item_view.cpp">
+      <Filter>View\Connections</Filter>
     </ClCompile>
-    <ClCompile Include="Views\Connections\network_list_view.cpp">
-      <Filter>Views\Connections</Filter>
+    <ClCompile Include="View\Connections\network_list_view.cpp">
+      <Filter>View\Connections</Filter>
     </ClCompile>
-    <ClCompile Include="Views\Workspace\workspace_view.cpp">
-      <Filter>Views\Workspace</Filter>
+    <ClCompile Include="View\Workspace\workspace_view.cpp">
+      <Filter>View\Workspace</Filter>
     </ClCompile>
-    <ClCompile Include="Views\Workspace\workspace_tab_view.cpp">
-      <Filter>Views\Workspace</Filter>
+    <ClCompile Include="View\Workspace\workspace_tab_view.cpp">
+      <Filter>View\Workspace</Filter>
     </ClCompile>
-    <ClCompile Include="Controllers\EditConnection\edit_connection_controller.cpp">
-      <Filter>Controllers\EditConnection</Filter>
+    <ClCompile Include="Controller\EditConnection\edit_connection_controller.cpp">
+      <Filter>Controller\EditConnection</Filter>
     </ClCompile>
-    <ClCompile Include="Controllers\Connections\connections_controller.cpp">
-      <Filter>Controllers\Connections</Filter>
+    <ClCompile Include="Controller\Connections\connections_controller.cpp">
+      <Filter>Controller\Connections</Filter>
     </ClCompile>
-    <ClCompile Include="Controllers\Workspace\workspace_page_controller.cpp">
-      <Filter>Controllers\Workspace</Filter>
+    <ClCompile Include="Controller\Workspace\workspace_page_controller.cpp">
+      <Filter>Controller\Workspace</Filter>
     </ClCompile>
-    <ClCompile Include="Controllers\Workspace\workspace_controller.cpp">
-      <Filter>Controllers\Workspace</Filter>
+    <ClCompile Include="Controller\Workspace\workspace_controller.cpp">
+      <Filter>Controller\Workspace</Filter>
     </ClCompile>
-    <ClCompile Include="Controllers\Chat\chat_controller.cpp">
-      <Filter>Controllers\Chat</Filter>
+    <ClCompile Include="Controller\Chat\chat_controller.cpp">
+      <Filter>Controller\Chat</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="precomp.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="program.h" />
-    <ClInclude Include="Models\app_model.h">
-      <Filter>Models</Filter>
+    <ClInclude Include="Model\app_model.h">
+      <Filter>Model</Filter>
     </ClInclude>
-    <ClInclude Include="Models\settings.h">
-      <Filter>Models</Filter>
+    <ClInclude Include="Model\settings.h">
+      <Filter>Model</Filter>
     </ClInclude>
-    <ClInclude Include="Models\DCCChat\dcc_chat_connection.h">
-      <Filter>Models\DCCChat</Filter>
+    <ClInclude Include="Model\DCCChat\dcc_chat_connection.h">
+      <Filter>Model\DCCChat</Filter>
     </ClInclude>
-    <ClInclude Include="Models\DCCFileTransfer\dcc_file_transfer_connection.h">
-      <Filter>Models\DCCFileTransfer</Filter>
+    <ClInclude Include="Model\DCCFileTransfer\dcc_file_transfer_connection.h">
+      <Filter>Model\DCCFileTransfer</Filter>
     </ClInclude>
-    <ClInclude Include="Models\IdentServer\ident_server.h">
-      <Filter>Models\IdentServer</Filter>
+    <ClInclude Include="Model\IdentServer\ident_server.h">
+      <Filter>Model\IdentServer</Filter>
     </ClInclude>
-    <ClInclude Include="Models\IdentServer\ident_server_connection.h">
-      <Filter>Models\IdentServer</Filter>
+    <ClInclude Include="Model\IdentServer\ident_server_connection.h">
+      <Filter>Model\IdentServer</Filter>
     </ClInclude>
-    <ClInclude Include="Models\IRCSession\command.h">
-      <Filter>Models\IRCSession</Filter>
+    <ClInclude Include="Model\IRCSession\command.h">
+      <Filter>Model\IRCSession</Filter>
     </ClInclude>
-    <ClInclude Include="Models\IRCSession\irc_connection.h">
-      <Filter>Models\IRCSession</Filter>
+    <ClInclude Include="Model\IRCSession\irc_connection.h">
+      <Filter>Model\IRCSession</Filter>
     </ClInclude>
-    <ClInclude Include="Models\IRCSession\irc_connection_queues.h">
-      <Filter>Models\IRCSession</Filter>
+    <ClInclude Include="Model\IRCSession\irc_connection_queues.h">
+      <Filter>Model\IRCSession</Filter>
     </ClInclude>
-    <ClInclude Include="Models\IRCSession\irc_entity.h">
-      <Filter>Models\IRCSession</Filter>
+    <ClInclude Include="Model\IRCSession\irc_entity.h">
+      <Filter>Model\IRCSession</Filter>
     </ClInclude>
-    <ClInclude Include="Models\IRCSession\irc_message.h">
-      <Filter>Models\IRCSession</Filter>
+    <ClInclude Include="Model\IRCSession\irc_message.h">
+      <Filter>Model\IRCSession</Filter>
     </ClInclude>
-    <ClInclude Include="Models\IRCSession\irc_numerics.h">
-      <Filter>Models\IRCSession</Filter>
+    <ClInclude Include="Model\IRCSession\irc_numerics.h">
+      <Filter>Model\IRCSession</Filter>
     </ClInclude>
-    <ClInclude Include="Models\IRCSession\irc_raw_string.h">
-      <Filter>Models\IRCSession</Filter>
+    <ClInclude Include="Model\IRCSession\irc_raw_string.h">
+      <Filter>Model\IRCSession</Filter>
     </ClInclude>
-    <ClInclude Include="Models\IRCSession\irc_session.h">
-      <Filter>Models\IRCSession</Filter>
+    <ClInclude Include="Model\IRCSession\irc_session.h">
+      <Filter>Model\IRCSession</Filter>
     </ClInclude>
-    <ClInclude Include="Models\IRCSession\irc_text.h">
-      <Filter>Models\IRCSession</Filter>
+    <ClInclude Include="Model\IRCSession\irc_text.h">
+      <Filter>Model\IRCSession</Filter>
     </ClInclude>
-    <ClInclude Include="Models\XMLSettings\xml_settings.h">
-      <Filter>Models\XMLSettings</Filter>
+    <ClInclude Include="Model\XMLSettings\xml_settings.h">
+      <Filter>Model\XMLSettings</Filter>
     </ClInclude>
-    <ClInclude Include="Models\XMLSettings\xml_settings_document.h">
-      <Filter>Models\XMLSettings</Filter>
+    <ClInclude Include="Model\XMLSettings\xml_settings_document.h">
+      <Filter>Model\XMLSettings</Filter>
     </ClInclude>
-    <ClInclude Include="Models\XMLSettings\xml_settings_list.h">
-      <Filter>Models\XMLSettings</Filter>
+    <ClInclude Include="Model\XMLSettings\xml_settings_list.h">
+      <Filter>Model\XMLSettings</Filter>
     </ClInclude>
-    <ClInclude Include="Models\XMLSettings\xml_settings_map.h">
-      <Filter>Models\XMLSettings</Filter>
+    <ClInclude Include="Model\XMLSettings\xml_settings_map.h">
+      <Filter>Model\XMLSettings</Filter>
     </ClInclude>
-    <ClInclude Include="Controllers\ChatWindow\chat_window_controller.h">
-      <Filter>Controllers\ChatWindow</Filter>
+    <ClInclude Include="Controller\ChatWindow\chat_window_controller.h">
+      <Filter>Controller\ChatWindow</Filter>
     </ClInclude>
-    <ClInclude Include="Views\Chat\chat_line.h">
-      <Filter>Views\Chat</Filter>
+    <ClInclude Include="View\Chat\chat_line.h">
+      <Filter>View\Chat</Filter>
     </ClInclude>
-    <ClInclude Include="Views\Chat\chat_view.h">
-      <Filter>Views\Chat</Filter>
+    <ClInclude Include="View\Chat\chat_view.h">
+      <Filter>View\Chat</Filter>
     </ClInclude>
-    <ClInclude Include="Controllers\Chat\chat_url.h">
-      <Filter>Controllers\Chat</Filter>
+    <ClInclude Include="Controller\Chat\chat_url.h">
+      <Filter>Controller\Chat</Filter>
     </ClInclude>
-    <ClInclude Include="Views\UserList\user_list_view.h">
-      <Filter>Views\UserList</Filter>
+    <ClInclude Include="View\UserList\user_list_view.h">
+      <Filter>View\UserList</Filter>
     </ClInclude>
-    <ClInclude Include="Views\Connections\network_list_item_view.h">
-      <Filter>Views\Connections</Filter>
+    <ClInclude Include="View\Connections\network_list_item_view.h">
+      <Filter>View\Connections</Filter>
     </ClInclude>
-    <ClInclude Include="Views\Connections\network_list_view.h">
-      <Filter>Views\Connections</Filter>
+    <ClInclude Include="View\Connections\network_list_view.h">
+      <Filter>View\Connections</Filter>
     </ClInclude>
-    <ClInclude Include="Views\Workspace\workspace_view.h">
-      <Filter>Views\Workspace</Filter>
+    <ClInclude Include="View\Workspace\workspace_view.h">
+      <Filter>View\Workspace</Filter>
     </ClInclude>
-    <ClInclude Include="Views\Workspace\workspace_tab_view.h">
-      <Filter>Views\Workspace</Filter>
+    <ClInclude Include="View\Workspace\workspace_tab_view.h">
+      <Filter>View\Workspace</Filter>
     </ClInclude>
-    <ClInclude Include="Controllers\EditConnection\edit_connection_controller.h">
-      <Filter>Controllers\EditConnection</Filter>
+    <ClInclude Include="Controller\EditConnection\edit_connection_controller.h">
+      <Filter>Controller\EditConnection</Filter>
     </ClInclude>
-    <ClInclude Include="Views\EditConnection\edit_connection_view.h">
-      <Filter>Views\EditConnection</Filter>
+    <ClInclude Include="View\EditConnection\edit_connection_view.h">
+      <Filter>View\EditConnection</Filter>
     </ClInclude>
-    <ClInclude Include="Controllers\Connections\connections_controller.h">
-      <Filter>Controllers\Connections</Filter>
+    <ClInclude Include="Controller\Connections\connections_controller.h">
+      <Filter>Controller\Connections</Filter>
     </ClInclude>
-    <ClInclude Include="Controllers\Workspace\workspace_page_controller.h">
-      <Filter>Controllers\Workspace</Filter>
+    <ClInclude Include="Controller\Workspace\workspace_page_controller.h">
+      <Filter>Controller\Workspace</Filter>
     </ClInclude>
-    <ClInclude Include="Controllers\Workspace\workspace_controller.h">
-      <Filter>Controllers\Workspace</Filter>
+    <ClInclude Include="Controller\Workspace\workspace_controller.h">
+      <Filter>Controller\Workspace</Filter>
     </ClInclude>
-    <ClInclude Include="Controllers\Chat\chat_controller.h">
-      <Filter>Controllers\Chat</Filter>
+    <ClInclude Include="Controller\Chat\chat_controller.h">
+      <Filter>Controller\Chat</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Models">
+    <Filter Include="Model">
       <UniqueIdentifier>{83b8e6f5-4974-4b33-a2a2-7e5f152ac378}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Models\DCCChat">
+    <Filter Include="Model\DCCChat">
       <UniqueIdentifier>{10aa9a25-1fe1-417d-93a5-b287a6692bbd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Models\DCCFileTransfer">
+    <Filter Include="Model\DCCFileTransfer">
       <UniqueIdentifier>{d4623c11-4ce5-42fe-8fe6-42d1da140ac7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Models\IdentServer">
+    <Filter Include="Model\IdentServer">
       <UniqueIdentifier>{5def21bf-2946-43e2-a246-5d4b4deca80a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Models\IRCSession">
+    <Filter Include="Model\IRCSession">
       <UniqueIdentifier>{14fe6c01-e3d4-458e-97e0-74a0db71bb77}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Views">
+    <Filter Include="View">
       <UniqueIdentifier>{d350efb0-850d-44a8-b804-d0dbe8f808ce}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Models\XMLSettings">
+    <Filter Include="Model\XMLSettings">
       <UniqueIdentifier>{9a8c6816-6ae8-4a6d-864f-23933d724e81}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Controllers">
+    <Filter Include="Controller">
       <UniqueIdentifier>{d139cd95-95c7-4fd7-8d8e-48179a0fd6f2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Controllers\ChatWindow">
+    <Filter Include="Controller\ChatWindow">
       <UniqueIdentifier>{c35a840b-292b-43d8-8587-b6efe63ae231}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Views\Chat">
+    <Filter Include="View\Chat">
       <UniqueIdentifier>{1f2f6871-373e-4206-8a39-290b09ef0591}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Controllers\Chat">
+    <Filter Include="Controller\Chat">
       <UniqueIdentifier>{9e3cd0b7-e359-4094-bf45-ad39da5ea38f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Controllers\Workspace">
+    <Filter Include="Controller\Workspace">
       <UniqueIdentifier>{40667ac5-9bd7-47e8-be95-f42948681f3b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Views\UserList">
+    <Filter Include="View\UserList">
       <UniqueIdentifier>{7cf4915a-4466-4559-b55b-421508168569}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Controllers\Connections">
+    <Filter Include="Controller\Connections">
       <UniqueIdentifier>{66704273-fc72-419c-964a-9448a3f4b2d3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Views\Connections">
+    <Filter Include="View\Connections">
       <UniqueIdentifier>{8a055fca-9a03-4d44-95d0-fc8569604b1f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Views\Workspace">
+    <Filter Include="View\Workspace">
       <UniqueIdentifier>{07de6001-a96c-44e9-8b28-5e6c68815ef1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Controllers\EditConnection">
+    <Filter Include="Controller\EditConnection">
       <UniqueIdentifier>{3dcd28b0-1c6c-454a-b9c6-c405c2517a6b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Views\EditConnection">
+    <Filter Include="View\EditConnection">
       <UniqueIdentifier>{8523c622-b0b3-45a9-b448-256de9711b13}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

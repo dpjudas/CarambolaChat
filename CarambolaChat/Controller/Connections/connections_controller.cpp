@@ -1,10 +1,10 @@
 
 #include "precomp.h"
 #include "connections_controller.h"
-#include "Views/Connections/network_list_view.h"
-#include "Views/Connections/network_list_item_view.h"
-#include "Models/XMLSettings/xml_settings_list.h"
-#include "Models/app_model.h"
+#include "View/Connections/network_list_view.h"
+#include "View/Connections/network_list_item_view.h"
+#include "Model/XMLSettings/xml_settings_list.h"
+#include "Model/app_model.h"
 
 using namespace clan;
 

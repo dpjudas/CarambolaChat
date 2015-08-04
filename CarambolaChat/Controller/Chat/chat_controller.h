@@ -1,10 +1,10 @@
 
 #pragma once
 
-#include "Controllers/Workspace/workspace_page_controller.h"
-#include "Models/IRCSession/irc_entity.h"
-#include "Models/IRCSession/irc_text.h"
-#include "Views/Chat/chat_view.h"
+#include "Controller/Workspace/workspace_page_controller.h"
+#include "Model/IRCSession/irc_entity.h"
+#include "Model/IRCSession/irc_text.h"
+#include "View/Chat/chat_view.h"
 #include <regex>
 
 class WorkspaceController;

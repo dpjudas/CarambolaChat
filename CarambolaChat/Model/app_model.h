@@ -1,10 +1,10 @@
 
 #pragma once
 
-#include "Models/XMLSettings/xml_settings.h"
-#include "Models/IRCSession/irc_session.h"
-#include "Models/IdentServer/ident_server.h"
-#include "Models/DCCChat/dcc_chat_connection.h"
+#include "Model/XMLSettings/xml_settings.h"
+#include "Model/IRCSession/irc_session.h"
+#include "Model/IdentServer/ident_server.h"
+#include "Model/DCCChat/dcc_chat_connection.h"
 #include "settings.h"
 #include <vector>
 

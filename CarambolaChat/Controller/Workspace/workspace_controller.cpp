@@ -2,7 +2,7 @@
 #include "precomp.h"
 #include "workspace_controller.h"
 #include "workspace_page_controller.h"
-#include "Views/Workspace/workspace_view.h"
+#include "View/Workspace/workspace_view.h"
 
 using namespace clan;
 

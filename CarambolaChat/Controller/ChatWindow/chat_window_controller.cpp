@@ -1,11 +1,11 @@
 
 #include "precomp.h"
 #include "chat_window_controller.h"
-#include "Controllers/Workspace/workspace_controller.h"
-#include "Controllers/Chat/chat_controller.h"
-#include "Controllers/Connections/connections_controller.h"
-#include "Models/app_model.h"
-#include "Models/IRCSession/irc_session.h"
+#include "Controller/Workspace/workspace_controller.h"
+#include "Controller/Chat/chat_controller.h"
+#include "Controller/Connections/connections_controller.h"
+#include "Model/app_model.h"
+#include "Model/IRCSession/irc_session.h"
 
 using namespace clan;
 

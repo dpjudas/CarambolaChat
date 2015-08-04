@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "Views/Workspace/workspace_view.h"
+#include "View/Workspace/workspace_view.h"
 
 class WorkspacePageController;
 

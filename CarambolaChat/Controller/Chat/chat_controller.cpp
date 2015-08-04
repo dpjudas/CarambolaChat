@@ -1,14 +1,14 @@
 
 #include "precomp.h"
 #include "chat_controller.h"
-#include "Views/Chat/chat_view.h"
-#include "Views/Chat/chat_line.h"
-#include "Views/UserList/user_list_view.h"
+#include "View/Chat/chat_view.h"
+#include "View/Chat/chat_line.h"
+#include "View/UserList/user_list_view.h"
 #include "chat_url.h"
-#include "Models/IRCSession/irc_session.h"
-#include "Models/IRCSession/irc_text.h"
-#include "Models/IRCSession/command.h"
-#include "Models/app_model.h"
+#include "Model/IRCSession/irc_session.h"
+#include "Model/IRCSession/irc_text.h"
+#include "Model/IRCSession/command.h"
+#include "Model/app_model.h"
 
 using namespace clan;
 
