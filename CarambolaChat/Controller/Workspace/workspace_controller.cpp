@@ -8,6 +8,7 @@ using namespace clan;
 
 WorkspaceController::WorkspaceController()
 {
+	taskbar = std::make_unique<TaskbarNotification>(view);
 }
 
 void WorkspaceController::add_page(const std::string &label_text, std::shared_ptr<WorkspacePageController> controller, bool app_page)
@@ -37,4 +38,7 @@ bool WorkspaceController::is_message_count_hidden(const std::string &id) const
 void WorkspaceController::set_message_count(const std::string &id, const std::string &text)
 {
 	view->set_message_count(id, text);
+
+	if (!text.empty())
+		taskbar->notify();
 }

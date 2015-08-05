@@ -2,6 +2,7 @@
 #pragma once
 
 #include "View/Workspace/workspace_view.h"
+#include "taskbar_notification.h"
 
 class WorkspacePageController;
 
@@ -20,6 +21,7 @@ private:
 	bool is_message_count_hidden(const std::string &id) const;
 	void set_message_count(const std::string &id, const std::string &text);
 
+	std::unique_ptr<TaskbarNotification> taskbar;
 	std::vector<std::shared_ptr<WorkspacePageController>> pages;
 
 	friend class WorkspacePageController;

@@ -128,21 +128,8 @@ void ChatController::create_layout()
 
 bool ChatController::is_active_view()
 {
-	/*
-	View *view = get_mainframe()->get_active_view();
-	if (get_mainframe()->get_active_view() == this)
-	{
-		return true;
-	}
-	else // Redirect to Status view (empty filter) if user is viewing another network
-	{
-		ChatController *chatview = dynamic_cast<ChatController*>(view);
-		if (chatview && chatview->get_session() != get_session() && filter.empty())
-			return true;
-		else
-			return false;
-	}
-	*/
+	// To do: track which view on this irc network was last displayed
+	//return !view->hidden();
 	return true;
 }
 

@@ -93,6 +93,9 @@
     <ClCompile Include="Controller\Chat\chat_controller.cpp">
       <Filter>Controller\Chat</Filter>
     </ClCompile>
+    <ClCompile Include="Controller\Workspace\taskbar_notification.cpp">
+      <Filter>Controller\Workspace</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="precomp.h" />
@@ -199,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="Controller\Chat\chat_controller.h">
       <Filter>Controller\Chat</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller\Workspace\taskbar_notification.h">
+      <Filter>Controller\Workspace</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
