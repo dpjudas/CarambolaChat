@@ -47,6 +47,8 @@ ChatController::ChatController(IRCSession *session, const IRCEntity &filter) : s
 	slots.connect(chat_log->cb_url_clicked, this, &ChatController::on_url_clicked);
 	slots.connect(input_text->sig_enter_pressed(), this, &ChatController::on_inputbox_return_pressed);
 
+	slots.connect(view->sig_focus_gained(), [this](FocusChangeEvent &) { input_text->set_focus(); });
+
 	/*
 	icon_action = CL_Image(gc, "Resources/Icons/chat_icon_action.png");
 	icon_notice = CL_Image(gc, "Resources/Icons/chat_icon_notice.png");
@@ -77,6 +79,13 @@ ChatController::ChatController(IRCSession *session, const IRCEntity &filter) : s
 
 ChatController::~ChatController()
 {
+}
+
+void ChatController::close_clicked()
+{
+	if (!filter.empty())
+		session->part(filter);
+	close();
 }
 
 void ChatController::create_layout()
@@ -721,12 +730,6 @@ void ChatController::add_private_text(const IRCNick &nick, const IRCText &text)
 	{
 		add_line(nick, text, chat->get_color_text(), chat->get_color_nick_others());
 	}
-}
-
-void ChatController::on_visibility_change(bool new_visibility)
-{
-	if (new_visibility)
-		inputbox->set_focus();
 }
 
 void ChatController::on_toolbar_item_clicked(CL_ToolBarItem item)

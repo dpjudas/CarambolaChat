@@ -13,8 +13,15 @@ WorkspaceController::WorkspaceController()
 void WorkspaceController::add_page(const std::string &label_text, std::shared_ptr<WorkspacePageController> controller, bool app_page)
 {
 	controller->workspace = this;
-	view->add_page(controller->get_page_id(), label_text, controller->view, app_page);
+	WorkspacePageController *controller_ptr = controller.get();
+	view->add_page(controller->get_page_id(), label_text, controller->view, app_page, [=]() { controller_ptr->close_clicked(); });
 	pages.push_back(controller);
+}
+
+void WorkspaceController::remove_page(WorkspacePageController *controller)
+{
+	controller->workspace = nullptr;
+	view->remove_page(controller->view);
 }
 
 void WorkspaceController::set_label(const std::string &id, const std::string &text)

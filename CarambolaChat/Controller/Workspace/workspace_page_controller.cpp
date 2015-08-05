@@ -10,6 +10,12 @@ WorkspacePageController::WorkspacePageController()
 	view->style()->set("flex: auto");
 }
 
+void WorkspacePageController::close()
+{
+	if (workspace)
+		workspace->remove_page(this);
+}
+
 void WorkspacePageController::set_tab_title(const std::string &text)
 {
 	if (workspace)

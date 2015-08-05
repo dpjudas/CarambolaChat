@@ -15,6 +15,11 @@ public:
 	void set_tab_title(const std::string &text);
 	void increment_message_count();
 
+	void close();
+
+protected:
+	virtual void close_clicked() { }
+
 private:
 	static std::string generate_page_id() { int id = next_page_id++; return clan::StringHelp::int_to_text(id); }
 	static int next_page_id;

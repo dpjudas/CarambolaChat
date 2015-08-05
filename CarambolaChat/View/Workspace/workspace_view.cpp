@@ -34,7 +34,7 @@ WorkspaceView::WorkspaceView()
 	add_subview(pages_group);
 }
 
-void WorkspaceView::add_page(const std::string &id, const std::string &label_text, std::shared_ptr<View> page_view, bool app_page)
+void WorkspaceView::add_page(const std::string &id, const std::string &label_text, std::shared_ptr<View> page_view, bool app_page, std::function<void()> close_clicked)
 {
 	bool first_tab = tabs.empty();
 
@@ -42,6 +42,7 @@ void WorkspaceView::add_page(const std::string &id, const std::string &label_tex
 
 	page.tab = std::make_shared<WorkspaceTabView>(label_text, app_page);
 	page.page = page_view;
+	page.close_clicked = close_clicked;
 
 	auto on_click = [=](PointerEvent &e)
 	{
@@ -51,7 +52,14 @@ void WorkspaceView::add_page(const std::string &id, const std::string &label_tex
 		}
 	};
 
+	auto on_close = [=](PointerEvent &e)
+	{
+		e.stop_propagation();
+		tabs[id].close_clicked();
+	};
+
 	slots.connect(page.tab->sig_pointer_press(), on_click);
+	slots.connect(page.tab->close->sig_pointer_press(), on_close);
 
 	labels_group->add_subview(page.tab);
 
@@ -63,6 +71,7 @@ void WorkspaceView::add_page(const std::string &id, const std::string &label_tex
 
 void WorkspaceView::remove_page(std::shared_ptr<View> page_view)
 {
+	bool was_selected = !page_view->hidden();
 	page_view->remove_from_super();
 
 	for (auto it = tabs.begin(); it != tabs.end(); ++it)
@@ -74,6 +83,11 @@ void WorkspaceView::remove_page(std::shared_ptr<View> page_view)
 			break;
 		}
 	}
+
+	if (was_selected && !tabs.empty())
+	{
+		set_selected(tabs.begin()->second, true);
+	}
 }
 
 void WorkspaceView::set_label(const std::string &id, const std::string &text)
@@ -83,8 +97,11 @@ void WorkspaceView::set_label(const std::string &id, const std::string &text)
 
 void WorkspaceView::set_message_count(const std::string &id, const std::string &text)
 {
-	tabs[id].tab->message_count->set_text(text);
-	tabs[id].tab->message_count->set_state("highlight", !text.empty());
+	if (!tabs[id].tab->state("selected"))
+	{
+		tabs[id].tab->message_count->set_text(text);
+		tabs[id].tab->message_count->set_state("highlight", !text.empty());
+	}
 }
 
 bool WorkspaceView::is_message_count_hidden(const std::string &id) const
@@ -137,4 +154,7 @@ void WorkspaceView::set_selected(TabPage &page, bool selected, bool animated)
 	}
 	*/
 	page.page->set_hidden(!selected);
+
+	if (selected)
+		page.page->set_focus();
 }

@@ -26,6 +26,9 @@ public:
 
 	//void add_private_text(const IRCNick &nick, const IRCText &text);
 
+protected:
+	void close_clicked() override;
+
 private:
 	void create_layout();
 	bool is_active_view();
@@ -86,8 +89,6 @@ private:
 
 /*
 	static std::string get_view_caption(IRCSession *session, const IRCEntity &filter);
-
-	void on_visibility_change(bool new_visibility);
 
 	void on_inputbox_filter_message(CL_GUIMessage &message);
 	void on_inputbox_tab_pressed();
