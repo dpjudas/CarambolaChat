@@ -221,6 +221,12 @@
     <ClInclude Include="View\About\about_view.h">
       <Filter>View\About</Filter>
     </ClInclude>
+    <ClInclude Include="View\Connections\connections_view.h">
+      <Filter>View\Connections</Filter>
+    </ClInclude>
+    <ClInclude Include="View\Chat\chat_page_view.h">
+      <Filter>View\Chat</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

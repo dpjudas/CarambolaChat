@@ -4,7 +4,7 @@
 #include "Controller/Workspace/workspace_page_controller.h"
 #include "Model/IRCSession/irc_entity.h"
 #include "Model/IRCSession/irc_text.h"
-#include "View/Chat/chat_view.h"
+#include "View/Chat/chat_page_view.h"
 #include <regex>
 
 class WorkspaceController;
@@ -30,7 +30,6 @@ protected:
 	void close_clicked() override;
 
 private:
-	void create_layout();
 	bool is_active_view();
 
 	std::vector<std::string> split_input_text(const std::string &text);
@@ -67,15 +66,13 @@ private:
 	void on_url_clicked(int object_id);
 	void on_inputbox_return_pressed();
 
+	std::shared_ptr<ChatPageView> view = std::make_shared<ChatPageView>();
+
 	IRCSession *session = 0;
 	IRCEntity filter;
 
 	std::vector<std::string> chat_input_history;
 	unsigned int chat_input_history_index = 0;
-
-	std::shared_ptr<ChatView> chat_log;
-	std::shared_ptr<UserListView> user_list;
-	std::shared_ptr<clan::TextFieldView> input_text;
 
 	std::string icon_normal = "Icons/user.png";
 	std::string icon_operator = "Icons/user_operator.png";

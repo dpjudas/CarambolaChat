@@ -153,7 +153,9 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="View\About\about_view.h" />
     <ClInclude Include="View\Chat\chat_line.h" />
+    <ClInclude Include="View\Chat\chat_page_view.h" />
     <ClInclude Include="View\Chat\chat_view.h" />
+    <ClInclude Include="View\Connections\connections_view.h" />
     <ClInclude Include="View\Connections\network_list_item_view.h" />
     <ClInclude Include="View\Connections\network_list_view.h" />
     <ClInclude Include="View\EditConnection\edit_connection_view.h" />

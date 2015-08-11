@@ -12,23 +12,7 @@ using namespace clan;
 
 ConnectionsController::ConnectionsController()
 {
-	view->style()->set("flex: auto");
-	view->style()->set("flex-direction: column");
-	view->style()->set("margin: 11px");
-
-	auto title = std::make_shared<LabelView>();
-	title->style()->set("font: bold 16px/20px 'Source Sans Pro'");
-	title->set_text("Chat Networks");
-	view->add_subview(title);
-
-	networks = std::make_shared<NetworkListView>();
-	view->add_subview(networks);
-
-	auto about_button = view->add_subview<ButtonView>();
-	about_button->label()->set_text("About Carambola Chat..");
-	about_button->label()->style()->set("font: 13px/16px 'Source Sans Pro'");
-	about_button->label()->style()->set("color: rgb(0,0,128)");
-	about_button->label()->style()->set("margin: 15px 0");
+	set_page_view(view);
 
 	slots.connect(AppModel::instance()->cb_irc_session_created, this, &ConnectionsController::on_irc_session_created);
 	slots.connect(AppModel::instance()->cb_irc_session_destroyed, this, &ConnectionsController::on_irc_session_destroyed);
@@ -45,16 +29,15 @@ ConnectionsController::ConnectionsController()
 		XMLSettings connection = connections.get(i);
 		std::string name = connection.get_string("connectionname");
 
-		auto item = networks->add_item(name);
+		auto item = view->networks->add_item(name);
 
 		slots.connect(item->connect_button->sig_pointer_release(), [=](PointerEvent &) { connect_clicked(connection); });
 		slots.connect(item->edit_button->sig_pointer_release(), [=](PointerEvent &) { edit_clicked(connection); });
 		slots.connect(item->remove_button->sig_pointer_release(), [=](PointerEvent &) { remove_clicked(connection); });
 	}
 
-	networks->add_button->func_clicked() = [this]() { add_clicked(); };
-
-	about_button->func_clicked() = [this]() { windows.present_modal<AboutController>(view.get()); };
+	view->networks->add_button->func_clicked() = [this]() { add_clicked(); };
+	view->about_button->func_clicked() = [this]() { windows.present_modal<AboutController>(view.get()); };
 }
 
 void ConnectionsController::add_clicked()
@@ -77,7 +60,7 @@ void ConnectionsController::add_clicked()
 		connection.set_bool("autoconnect", edit->auto_connect());
 		XMLSettingsList performlist = connection.get_list("performlist");
 
-		auto item = networks->add_item(name);
+		auto item = view->networks->add_item(name);
 
 		slots.connect(item->connect_button->sig_pointer_release(), [=](PointerEvent &) { connect_clicked(connection); });
 		slots.connect(item->edit_button->sig_pointer_release(), [=](PointerEvent &) { edit_clicked(connection); });
@@ -124,7 +107,7 @@ void ConnectionsController::on_irc_session_created(IRCSession *session)
 
 void ConnectionsController::on_irc_session_destroyed(IRCSession *session)
 {
-	auto item = networks->get_item(session->get_connection_name());
+	auto item = view->networks->get_item(session->get_connection_name());
 	if (item)
 	{
 		item->set_status_offline("Not connected");
@@ -182,7 +165,7 @@ void ConnectionsController::on_xmpp_session_roster_updated(XMPPSession *session)
 
 void ConnectionsController::on_session_connect_status_changed(IRCSession::ConnectStatus status, IRCSession *session)
 {
-	auto item = networks->get_item(session->get_connection_name());
+	auto item = view->networks->get_item(session->get_connection_name());
 	if (item)
 	{
 		switch (status)

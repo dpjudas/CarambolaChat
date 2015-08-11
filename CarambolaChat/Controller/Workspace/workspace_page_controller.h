@@ -8,7 +8,8 @@ class WorkspacePageController
 public:
 	WorkspacePageController();
 
-	std::shared_ptr<clan::View> view = std::make_shared<clan::View>();
+	const std::shared_ptr<clan::View> &page_view() const { return controller_view; }
+	void set_page_view(const std::shared_ptr<clan::View> &new_page_view);
 
 	const std::string &get_page_id() const { return page_id; }
 
@@ -23,6 +24,8 @@ protected:
 private:
 	static std::string generate_page_id() { int id = next_page_id++; return clan::StringHelp::int_to_text(id); }
 	static int next_page_id;
+
+	std::shared_ptr<clan::View> controller_view = std::make_shared<clan::View>();
 
 	WorkspaceController *workspace = nullptr;
 	std::string page_id = generate_page_id();

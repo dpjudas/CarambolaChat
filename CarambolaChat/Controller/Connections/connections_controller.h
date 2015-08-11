@@ -3,9 +3,9 @@
 
 #include "Controller/Workspace/workspace_page_controller.h"
 #include "Model/IRCSession/irc_session.h"
+#include "View/Connections/connections_view.h"
 
 class XMLSettings;
-class NetworkListView;
 
 class ConnectionsController : public WorkspacePageController
 {
@@ -28,8 +28,7 @@ private:
 #endif
 	void on_session_connect_status_changed(IRCSession::ConnectStatus status, IRCSession *session);
 
-	std::shared_ptr<NetworkListView> networks;
-
+	std::shared_ptr<ConnectionsView> view = std::make_shared<ConnectionsView>();
 	clan::WindowManager windows;
 	clan::SlotContainer slots;
 };

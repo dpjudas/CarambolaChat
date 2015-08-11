@@ -7,7 +7,13 @@ using namespace clan;
 
 WorkspacePageController::WorkspacePageController()
 {
-	view->style()->set("flex: auto");
+	controller_view->style()->set("flex: auto");
+}
+
+void WorkspacePageController::set_page_view(const std::shared_ptr<clan::View> &new_page_view)
+{
+	controller_view = new_page_view;
+	controller_view->style()->set("flex: auto");
 }
 
 void WorkspacePageController::close()

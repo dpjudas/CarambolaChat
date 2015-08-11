@@ -3,7 +3,6 @@
 #include "chat_controller.h"
 #include "View/Chat/chat_view.h"
 #include "View/Chat/chat_line.h"
-#include "View/UserList/user_list_view.h"
 #include "chat_url.h"
 #include "Model/IRCSession/irc_session.h"
 #include "Model/IRCSession/irc_text.h"
@@ -14,7 +13,7 @@ using namespace clan;
 
 ChatController::ChatController(IRCSession *session, const IRCEntity &filter) : session(session), filter(filter)
 {
-	create_layout();
+	set_page_view(view);
 
 	slots.connect(AppModel::instance()->cb_irc_session_destroyed, this, &ChatController::irc_session_destroyed);
 	if (session)
@@ -23,8 +22,8 @@ ChatController::ChatController(IRCSession *session, const IRCEntity &filter) : s
 	// Only show userlist for channels:
 	if (!get_filter().is_channel())
 	{
-		//channel_topic->set_hidden();
-		user_list->set_hidden();
+		//view->channel_topic->set_hidden();
+		view->user_list->set_hidden();
 	}
 
 	slots.connect(session->cb_channel_topic_updated, this, &ChatController::on_channel_topic_updated);
@@ -44,10 +43,10 @@ ChatController::ChatController(IRCSession *session, const IRCEntity &filter) : s
 	slots.connect(session->cb_channel_mode_change, this, &ChatController::on_channel_mode_change);
 	slots.connect(session->cb_nick_mode_change, this, &ChatController::on_nick_mode_change);
 
-	slots.connect(chat_log->cb_url_clicked, this, &ChatController::on_url_clicked);
-	slots.connect(input_text->sig_enter_pressed(), this, &ChatController::on_inputbox_return_pressed);
+	slots.connect(view->chat_log->cb_url_clicked, this, &ChatController::on_url_clicked);
+	slots.connect(view->input_text->sig_enter_pressed(), this, &ChatController::on_inputbox_return_pressed);
 
-	slots.connect(view->sig_focus_gained(), [this](FocusChangeEvent &) { input_text->set_focus(); });
+	slots.connect(view->sig_focus_gained(), [this](FocusChangeEvent &) { view->input_text->set_focus(); });
 
 	/*
 	icon_action = CL_Image(gc, "Resources/Icons/chat_icon_action.png");
@@ -88,44 +87,6 @@ void ChatController::close_clicked()
 	close();
 }
 
-void ChatController::create_layout()
-{
-	auto chat_users_group = std::make_shared<View>();
-	chat_users_group->style()->set("flex-direction: row");
-	chat_users_group->style()->set("flex: auto");
-
-	chat_log = std::make_shared<ChatView>();
-	chat_log->style()->set("flex: auto");
-	chat_users_group->add_subview(chat_log);
-
-	user_list = std::make_shared<UserListView>();
-	user_list->style()->set("width: 200px");
-	user_list->style()->set("flex: none");
-	chat_users_group->add_subview(user_list);
-
-	auto input_bar = std::make_shared<View>();
-	input_bar->style()->set("flex: none");
-	input_bar->style()->set("background: linear-gradient(to bottom, rgb(235,243,252), rgb(219,234,249))");
-	input_bar->style()->set("border-top: 1px solid rgb(153,153,153)");
-	input_bar->style()->set("padding: 5px");
-	input_bar->style()->set("flex-direction: row");
-
-	input_text = std::make_shared<TextFieldView>();
-	input_text->style()->set("flex: auto");
-	input_text->style()->set("border: 1px solid rgb(153,153,153)");
-	input_text->style()->set("border-radius: 2px");
-	input_text->style()->set("background: white");
-	input_text->style()->set("padding: 2px 5px");
-	input_text->style()->set("font: 12px/20px 'Source Sans Pro'");
-	input_text->set_select_all_on_focus_gain(false);
-	input_bar->add_subview(input_text);
-
-	view->style()->set("flex: auto");
-	view->style()->set("flex-direction: column");
-	view->add_subview(chat_users_group);
-	view->add_subview(input_bar);
-}
-
 bool ChatController::is_active_view()
 {
 	// To do: track which view on this irc network was last displayed
@@ -138,17 +99,17 @@ void ChatController::add_action_line(const IRCNick &nick, const IRCText &text)
 	//get_mainframe()->flag_activity(this, nick.get_name(), text.get_text(), false);
 	ChatLine line;
 	//line.add_image(icon_action);
-	add_line_text(line, " " + nick.get_name() + " " + text.get_text(), chat_log->get_color_channel());
-	chat_log->add_line(line);
+	add_line_text(line, " " + nick.get_name() + " " + text.get_text(), view->chat_log->get_color_channel());
+	view->chat_log->add_line(line);
 }
 
 void ChatController::add_notice_line(const IRCNick &nick, const IRCText &text)
 {
 	//get_mainframe()->flag_activity(this, nick.get_name(), text.get_text(), false);
-	ChatLine line(nick.get_name(), chat_log->get_color_nick_others());
+	ChatLine line(nick.get_name(), view->chat_log->get_color_nick_others());
 	//line.add_image(icon_notice);
-	add_line_text(line, " " + text.get_text(), chat_log->get_color_channel());
-	chat_log->add_line(line);
+	add_line_text(line, " " + text.get_text(), view->chat_log->get_color_channel());
+	view->chat_log->add_line(line);
 }
 
 void ChatController::add_error_line(const IRCText &text)
@@ -156,8 +117,8 @@ void ChatController::add_error_line(const IRCText &text)
 	//get_mainframe()->flag_activity(this, std::string(), text.get_text(), false);
 	ChatLine line;
 	//line.add_image(icon_error);
-	add_line_text(line, " " + text.get_text(), chat_log->get_color_system());
-	chat_log->add_line(line);
+	add_line_text(line, " " + text.get_text(), view->chat_log->get_color_system());
+	view->chat_log->add_line(line);
 }
 
 void ChatController::add_line(const IRCText &text, const Colorf &text_color, bool unimportant)
@@ -165,7 +126,7 @@ void ChatController::add_line(const IRCText &text, const Colorf &text_color, boo
 	//get_mainframe()->flag_activity(this, std::string(), text.get_text(), unimportant);
 	ChatLine line;
 	add_line_text(line, text.get_text(), text_color);
-	chat_log->add_line(line);
+	view->chat_log->add_line(line);
 }
 
 void ChatController::add_line(const IRCNick &sender, const IRCText &text, const Colorf &text_color, const Colorf &nick_color)
@@ -173,7 +134,7 @@ void ChatController::add_line(const IRCNick &sender, const IRCText &text, const 
 	//get_mainframe()->flag_activity(this, sender.get_name(), text.get_text(), false);
 	ChatLine line(sender.get_name(), nick_color);
 	add_line_text(line, text.get_text(), text_color);
-	chat_log->add_line(line);
+	view->chat_log->add_line(line);
 }
 
 void ChatController::add_line_text(ChatLine &line, const std::string &text, const Colorf &color)
@@ -218,10 +179,10 @@ void ChatController::add_topic_text()
 
 	ChatLine line;
 	// layout.add_image(icon_topic);
-	add_line_text(line, status.topic.get_text(), chat_log->get_color_channel());
+	add_line_text(line, status.topic.get_text(), view->chat_log->get_color_channel());
 	add_line_text(line, " set by ", Colorf::gray);
-	add_line_text(line, status.topic_author.get_name(), chat_log->get_color_channel());
-	chat_log->add_line(line);
+	add_line_text(line, status.topic_author.get_name(), view->chat_log->get_color_channel());
+	view->chat_log->add_line(line);
 
 	//channel_topic->set_topic("Unknown time", status.topic, status.topic_author);
 	//get_mainframe()->flag_activity(this, status.topic_author.get_name(), status.topic.get_text(), false);
@@ -248,7 +209,7 @@ void ChatController::on_text(const IRCChannel &room, const IRCNick &nick, const 
 	if (get_filter() == room)
 	{
 		increment_message_count();
-		add_line(nick, text, chat_log->get_color_text(), chat_log->get_color_nick_others());
+		add_line(nick, text, view->chat_log->get_color_text(), view->chat_log->get_color_nick_others());
 	}
 }
 
@@ -283,7 +244,7 @@ void ChatController::on_system_text(const IRCText &text)
 {
 	if (get_filter().empty())
 	{
-		add_line(text, chat_log->get_color_system(), false);
+		add_line(text, view->chat_log->get_color_system(), false);
 	}
 }
 
@@ -301,7 +262,7 @@ void ChatController::on_channel_names_updated(const IRCChannel &channel)
 	{
 		IRCJoinedChannel status = session->get_channel_status(channel);
 
-		user_list->clear();
+		view->user_list->clear();
 
 		for (size_t i = 0; i < status.users.size(); i++)
 		{
@@ -320,21 +281,21 @@ void ChatController::on_channel_names_updated(const IRCChannel &channel)
 				sort_priority = 1;
 			}
 
-			user_list->update_user(nick.get_name(), nick.get_name(), icon, sort_priority);
+			view->user_list->update_user(nick.get_name(), nick.get_name(), icon, sort_priority);
 		}
 
-		user_list->sort();
+		view->user_list->sort();
 	}
 }
 
 void ChatController::on_nick_changed(const IRCNick &old_nick, const IRCNick &new_nick)
 {
-	if (user_list->has_user(old_nick.get_name()))
+	if (view->user_list->has_user(old_nick.get_name()))
 	{
-		user_list->rename_user(old_nick.get_name(), new_nick.get_name(), new_nick.get_name());
-		user_list->sort();
+		view->user_list->rename_user(old_nick.get_name(), new_nick.get_name(), new_nick.get_name());
+		view->user_list->sort();
 
-		add_line(IRCText::from_text(string_format("%1 is now known as %2", old_nick.get_name(), new_nick.get_name())), chat_log->get_color_channel(), true);
+		add_line(IRCText::from_text(string_format("%1 is now known as %2", old_nick.get_name(), new_nick.get_name())), view->chat_log->get_color_channel(), true);
 	}
 }
 
@@ -342,7 +303,7 @@ void ChatController::on_parted(const IRCChannel &channel)
 {
 	if (get_filter() == channel)
 	{
-		add_line(IRCText::from_text("You left this channel"), chat_log->get_color_channel(), false);
+		add_line(IRCText::from_text("You left this channel"), view->chat_log->get_color_channel(), false);
 	}
 }
 
@@ -363,10 +324,10 @@ void ChatController::on_user_joined(const IRCChannel &channel, const IRCNick &ni
 			sort_priority = 1;
 		}
 
-		user_list->update_user(nick.get_name(), nick.get_name(), icon, sort_priority);
-		user_list->sort();
+		view->user_list->update_user(nick.get_name(), nick.get_name(), icon, sort_priority);
+		view->user_list->sort();
 
-		add_line(IRCText::from_text(string_format("%1 joined the channel", nick.get_name())), chat_log->get_color_channel(), true);
+		add_line(IRCText::from_text(string_format("%1 joined the channel", nick.get_name())), view->chat_log->get_color_channel(), true);
 	}
 }
 
@@ -374,12 +335,12 @@ void ChatController::on_user_parted(const IRCChannel &channel, const IRCNick &ni
 {
 	if (get_filter() == channel)
 	{
-		user_list->remove_user(nick.get_name());
+		view->user_list->remove_user(nick.get_name());
 
 		if (text.empty())
-			add_line(IRCText::from_text(string_format("%1 left the channel", nick.get_name())), chat_log->get_color_channel(), true);
+			add_line(IRCText::from_text(string_format("%1 left the channel", nick.get_name())), view->chat_log->get_color_channel(), true);
 		else
-			add_line(IRCText::from_text(string_format("%1 left the channel (%2)", nick.get_name(), text.get_text())), chat_log->get_color_channel(), true);
+			add_line(IRCText::from_text(string_format("%1 left the channel (%2)", nick.get_name(), text.get_text())), view->chat_log->get_color_channel(), true);
 	}
 }
 
@@ -387,25 +348,25 @@ void ChatController::on_user_kicked(const IRCNick &nick, const IRCChannel &chann
 {
 	if (get_filter() == channel)
 	{
-		user_list->remove_user(nick.get_name());
+		view->user_list->remove_user(nick.get_name());
 
 		if (text.empty())
-			add_line(IRCText::from_text(string_format("%1 kicked %2 from the channel", nick.get_name(), target.get_name())), chat_log->get_color_channel(), false);
+			add_line(IRCText::from_text(string_format("%1 kicked %2 from the channel", nick.get_name(), target.get_name())), view->chat_log->get_color_channel(), false);
 		else
-			add_line(IRCText::from_text(string_format("%1 kicked %2 from the channel (%3)", nick.get_name(), target.get_name(), text.get_text())), chat_log->get_color_channel(), false);
+			add_line(IRCText::from_text(string_format("%1 kicked %2 from the channel (%3)", nick.get_name(), target.get_name(), text.get_text())), view->chat_log->get_color_channel(), false);
 	}
 }
 
 void ChatController::on_user_quit(const IRCNick &nick, const IRCText &text)
 {
-	if (user_list->has_user(nick.get_name()))
+	if (view->user_list->has_user(nick.get_name()))
 	{
-		user_list->remove_user(nick.get_name());
+		view->user_list->remove_user(nick.get_name());
 
 		if (text.empty())
-			add_line(IRCText::from_text(string_format("%1 quit", nick.get_name())), chat_log->get_color_channel(), true);
+			add_line(IRCText::from_text(string_format("%1 quit", nick.get_name())), view->chat_log->get_color_channel(), true);
 		else
-			add_line(IRCText::from_text(string_format("%1 quit (%2)", nick.get_name(), text.get_text())), chat_log->get_color_channel(), true);
+			add_line(IRCText::from_text(string_format("%1 quit (%2)", nick.get_name(), text.get_text())), view->chat_log->get_color_channel(), true);
 	}
 }
 
@@ -420,7 +381,7 @@ void ChatController::on_channel_mode_change(const IRCNick &executing_nick, const
 				text += " ";
 			text += IRCText::from_raw(command[i]).get_text();
 		}
-		add_line(IRCText::from_text(string_format("%1 sets mode %2", executing_nick.get_name(), text)), chat_log->get_color_channel(), true);
+		add_line(IRCText::from_text(string_format("%1 sets mode %2", executing_nick.get_name(), text)), view->chat_log->get_color_channel(), true);
 
 		if (command.size() > 1)
 		{
@@ -439,7 +400,7 @@ void ChatController::on_channel_mode_change(const IRCNick &executing_nick, const
 				sort_priority = 1;
 			}
 
-			user_list->update_user(nick.get_name(), nick.get_name(), icon, sort_priority);
+			view->user_list->update_user(nick.get_name(), nick.get_name(), icon, sort_priority);
 		}
 	}
 }
@@ -455,7 +416,7 @@ void ChatController::on_nick_mode_change(const IRCNick &executing_nick, const IR
 				text += " ";
 			text += IRCText::from_raw(command[i]).get_text();
 		}
-		add_line(IRCText::from_text(string_format("%1 sets mode %2 on %3", executing_nick.get_name(), text, target_nick.get_name())), chat_log->get_color_system(), true);
+		add_line(IRCText::from_text(string_format("%1 sets mode %2 on %3", executing_nick.get_name(), text, target_nick.get_name())), view->chat_log->get_color_system(), true);
 	}
 }
 
@@ -474,7 +435,7 @@ void ChatController::on_url_clicked(int object_id)
 
 void ChatController::on_inputbox_return_pressed()
 {
-	std::string chat_line = input_text->text();
+	std::string chat_line = view->input_text->text();
 	if (!chat_line.empty())
 	{
 		chat_input_history.push_back(chat_line);
@@ -489,7 +450,7 @@ void ChatController::on_inputbox_return_pressed()
 				if (command_line[0] != '/')
 				{
 					session->send_text(get_filter(), IRCText::from_text(command_line));
-					add_line(session->get_nick(), IRCText::from_text(command_line), chat_log->get_color_text(), chat_log->get_color_nick());
+					add_line(session->get_nick(), IRCText::from_text(command_line), view->chat_log->get_color_text(), view->chat_log->get_color_nick());
 				}
 				else
 				{
@@ -505,7 +466,7 @@ void ChatController::on_inputbox_return_pressed()
 			}
 		}
 
-		input_text->set_text("");
+		view->input_text->set_text("");
 	}
 }
 
