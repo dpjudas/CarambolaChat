@@ -1,27 +1,24 @@
 
 #pragma once
 
+#include "View/Theme/theme_views.h"
+
 class EditConnectionCheckView : public clan::RowView
 {
 public:
 	EditConnectionCheckView(const std::string &label_text = std::string())
 	{
-		value = add_subview<clan::CheckBoxView>();
-		label = add_subview<clan::LabelView>();
+		value = add_subview<ThemeCheckBoxView>();
+		label = add_subview<ThemeLabelView>();
 
 		label->set_text(label_text);
 
 		style()->set("margin-bottom: 5px");
-		label->style()->set("font: 13px/22px 'Source Sans Pro'");
-		value->style()->set("font: 13px/22px 'Source Sans Pro'");
-		value->style()->set("background: white");
-		value->style()->set("width: 16px; height: 16px; margin: auto 0");
-		value->style()->set("border: 1px solid #ccc");
-		value->style("checked")->set("background: yellow");
+		value->style()->set("margin: auto 3px auto 0");
 	}
 
-	std::shared_ptr<clan::LabelView> label;
-	std::shared_ptr<clan::CheckBoxView> value;
+	std::shared_ptr<ThemeLabelView> label;
+	std::shared_ptr<ThemeCheckBoxView> value;
 };
 
 class EditConnectionTextView : public clan::RowView
@@ -29,18 +26,13 @@ class EditConnectionTextView : public clan::RowView
 public:
 	EditConnectionTextView(const std::string &label_text = std::string(), const std::string &placeholder = std::string(), int size = 0)
 	{
-		label = add_subview<clan::LabelView>();
-		value = add_subview<clan::TextFieldView>();
+		label = add_subview<ThemeLabelView>();
+		value = add_subview<ThemeTextFieldView>();
 
 		label->set_text(label_text);
 
 		style()->set("margin-bottom: 5px");
 		label->style()->set("width: 150px");
-		label->style()->set("font: 13px/22px 'Source Sans Pro'");
-		value->style()->set("font: 13px/16px 'Source Sans Pro'");
-		value->style()->set("background: white");
-		value->style()->set("padding: 2px 5px");
-		value->style()->set("border: 1px solid #ccc");
 
 		value->set_placeholder(placeholder);
 		
@@ -50,22 +42,17 @@ public:
 			value->style()->set("flex: auto");
 	}
 
-	std::shared_ptr<clan::LabelView> label;
-	std::shared_ptr<clan::TextFieldView> value;
+	std::shared_ptr<ThemeLabelView> label;
+	std::shared_ptr<ThemeTextFieldView> value;
 };
 
-class EditConnectionButtonView : public clan::ButtonView
+class EditConnectionButtonView : public ThemeButtonView
 {
 public:
 	EditConnectionButtonView(const std::string &text)
 	{
 		label()->set_text(text);
-		label()->set_text_alignment(clan::TextAlignment::center);
-		label()->style()->set("font: 13px/16px 'Source Sans Pro'");
-		style()->set("background: rgb(245,245,245)");
-		style("hot")->set("background: rgb(255,255,255)");
-		style()->set("padding: 7px 0; margin-left: 5px");
-		style()->set("border: 1px solid #ccc");
+		style()->set("margin-left: 5px");
 		style()->set("width: 75px");
 	}
 };

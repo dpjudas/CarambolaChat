@@ -113,6 +113,7 @@
     <ClCompile Include="View\Chat\chat_view.cpp" />
     <ClCompile Include="View\Connections\network_list_item_view.cpp" />
     <ClCompile Include="View\Connections\network_list_view.cpp" />
+    <ClCompile Include="View\Theme\theme_views.cpp" />
     <ClCompile Include="View\UserList\user_list_view.cpp" />
     <ClCompile Include="View\Workspace\workspace_tab_view.cpp" />
     <ClCompile Include="View\Workspace\workspace_view.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="View\Connections\network_list_item_view.h" />
     <ClInclude Include="View\Connections\network_list_view.h" />
     <ClInclude Include="View\EditConnection\edit_connection_view.h" />
+    <ClInclude Include="View\Theme\theme_views.h" />
     <ClInclude Include="View\UserList\user_list_view.h" />
     <ClInclude Include="View\Workspace\workspace_tab_view.h" />
     <ClInclude Include="View\Workspace\workspace_view.h" />

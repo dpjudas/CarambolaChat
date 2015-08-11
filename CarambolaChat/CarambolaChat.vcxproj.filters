@@ -96,6 +96,9 @@
     <ClCompile Include="Controller\Workspace\taskbar_notification.cpp">
       <Filter>Controller\Workspace</Filter>
     </ClCompile>
+    <ClCompile Include="View\Theme\theme_views.cpp">
+      <Filter>View\Theme</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="precomp.h" />
@@ -206,6 +209,9 @@
     <ClInclude Include="Controller\Workspace\taskbar_notification.h">
       <Filter>Controller\Workspace</Filter>
     </ClInclude>
+    <ClInclude Include="View\Theme\theme_views.h">
+      <Filter>View\Theme</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -264,6 +270,9 @@
     </Filter>
     <Filter Include="View\EditConnection">
       <UniqueIdentifier>{8523c622-b0b3-45a9-b448-256de9711b13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="View\Theme">
+      <UniqueIdentifier>{2bc473d8-c6c0-49c0-9c3b-7fcf7e6f0d80}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
