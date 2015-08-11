@@ -1,6 +1,8 @@
 
 #include "precomp.h"
 #include "connections_controller.h"
+#include "Controller/EditConnection/edit_connection_controller.h"
+#include "Controller/About/about_controller.h"
 #include "View/Connections/network_list_view.h"
 #include "View/Connections/network_list_item_view.h"
 #include "Model/XMLSettings/xml_settings_list.h"
@@ -21,6 +23,12 @@ ConnectionsController::ConnectionsController()
 
 	networks = std::make_shared<NetworkListView>();
 	view->add_subview(networks);
+
+	auto about_button = view->add_subview<ButtonView>();
+	about_button->label()->set_text("About Carambola Chat..");
+	about_button->label()->style()->set("font: 13px/16px 'Source Sans Pro'");
+	about_button->label()->style()->set("color: rgb(0,0,128)");
+	about_button->label()->style()->set("margin: 15px 0");
 
 	slots.connect(AppModel::instance()->cb_irc_session_created, this, &ConnectionsController::on_irc_session_created);
 	slots.connect(AppModel::instance()->cb_irc_session_destroyed, this, &ConnectionsController::on_irc_session_destroyed);
@@ -45,6 +53,8 @@ ConnectionsController::ConnectionsController()
 	}
 
 	networks->add_button->func_clicked() = [this]() { add_clicked(); };
+
+	about_button->func_clicked() = [this]() { windows.present_modal<AboutController>(view.get()); };
 }
 
 void ConnectionsController::add_clicked()

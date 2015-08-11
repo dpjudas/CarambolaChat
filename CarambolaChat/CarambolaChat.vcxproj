@@ -80,6 +80,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Controller\About\about_controller.cpp" />
     <ClCompile Include="Controller\ChatWindow\chat_window_controller.cpp" />
     <ClCompile Include="Controller\Chat\chat_controller.cpp" />
     <ClCompile Include="Controller\Connections\connections_controller.cpp" />
@@ -119,6 +120,7 @@
     <ClCompile Include="View\Workspace\workspace_view.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Controller\About\about_controller.h" />
     <ClInclude Include="Controller\ChatWindow\chat_window_controller.h" />
     <ClInclude Include="Controller\Chat\chat_url.h" />
     <ClInclude Include="Controller\Chat\chat_controller.h" />
@@ -149,6 +151,7 @@
     <ClInclude Include="program.h" />
     <ClInclude Include="precomp.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="View\About\about_view.h" />
     <ClInclude Include="View\Chat\chat_line.h" />
     <ClInclude Include="View\Chat\chat_view.h" />
     <ClInclude Include="View\Connections\network_list_item_view.h" />

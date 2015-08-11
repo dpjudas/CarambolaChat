@@ -99,6 +99,9 @@
     <ClCompile Include="View\Theme\theme_views.cpp">
       <Filter>View\Theme</Filter>
     </ClCompile>
+    <ClCompile Include="Controller\About\about_controller.cpp">
+      <Filter>Controller\About</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="precomp.h" />
@@ -212,6 +215,12 @@
     <ClInclude Include="View\Theme\theme_views.h">
       <Filter>View\Theme</Filter>
     </ClInclude>
+    <ClInclude Include="Controller\About\about_controller.h">
+      <Filter>Controller\About</Filter>
+    </ClInclude>
+    <ClInclude Include="View\About\about_view.h">
+      <Filter>View\About</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -273,6 +282,12 @@
     </Filter>
     <Filter Include="View\Theme">
       <UniqueIdentifier>{2bc473d8-c6c0-49c0-9c3b-7fcf7e6f0d80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controller\About">
+      <UniqueIdentifier>{11a9ad89-0c86-478b-a8f5-d3368554a062}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="View\About">
+      <UniqueIdentifier>{448d7fc4-1b8c-4dea-ab38-122c5ae187ec}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

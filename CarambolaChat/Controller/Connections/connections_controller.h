@@ -2,7 +2,6 @@
 #pragma once
 
 #include "Controller/Workspace/workspace_page_controller.h"
-#include "Controller/EditConnection/edit_connection_controller.h"
 #include "Model/IRCSession/irc_session.h"
 
 class XMLSettings;
