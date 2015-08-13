@@ -8,7 +8,7 @@ using namespace clan;
 
 WorkspaceController::WorkspaceController()
 {
-	taskbar = std::make_unique<TaskbarNotification>(view);
+	taskbar = clan::make_unique<TaskbarNotification>(view);
 }
 
 void WorkspaceController::add_page(const std::string &label_text, std::shared_ptr<WorkspacePageController> controller, bool app_page)

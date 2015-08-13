@@ -24,10 +24,6 @@ OBJF =  CarambolaChat/precomp.o \
  CarambolaChat/Model/XMLSettings/xml_settings_map.o \
  CarambolaChat/Model/XMLSettings/xml_settings.o \
  CarambolaChat/Model/settings.o \
- CarambolaChat/Model/XMPPSession/xmpp_session.o \
- CarambolaChat/Model/XMPPSession/xmpp_stanza.o \
- CarambolaChat/Model/XMPPSession/xmpp_connection_queues.o \
- CarambolaChat/Model/XMPPSession/xmpp_connection.o \
  CarambolaChat/Model/IdentServer/ident_server.o \
  CarambolaChat/Model/IdentServer/ident_server_connection.o \
  CarambolaChat/Controller/ChatWindow/chat_window_controller.o \
@@ -38,6 +34,11 @@ OBJF =  CarambolaChat/precomp.o \
  CarambolaChat/Controller/Workspace/workspace_controller.o \
  CarambolaChat/Controller/Workspace/taskbar_notification.o \
  CarambolaChat/Controller/Connections/connections_controller.o
+
+# CarambolaChat/Model/XMPPSession/xmpp_session.o \
+# CarambolaChat/Model/XMPPSession/xmpp_stanza.o \
+# CarambolaChat/Model/XMPPSession/xmpp_connection_queues.o \
+# CarambolaChat/Model/XMPPSession/xmpp_connection.o \
 
 LIBS=clanApp clanDisplay clanCore clanGL clanUI clanSound clanNetwork
 
