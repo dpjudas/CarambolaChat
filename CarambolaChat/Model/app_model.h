@@ -24,6 +24,10 @@ public:
 
 	Settings settings;
 
+	clan::Signal<void(XMLSettings connection)> sig_connection_added;
+	clan::Signal<void(XMLSettings connection)> sig_connection_edited;
+	clan::Signal<void(const std::string &name)> sig_connection_removed;
+
 	void auto_connect_to_servers();
 	void connect_to_server(XMLSettings &connection);
 

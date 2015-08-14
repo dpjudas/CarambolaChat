@@ -90,7 +90,8 @@ public:
 		perform_list->style()->set("flex: auto");
 		button_bar = add_subview<EditConnectionButtonBarView>();
 
-		style()->set("margin: 11px; flex: auto");
+		style()->set("padding: 11px; flex: auto");
+		style()->set("background: rgb(240,240,240)");
 	}
 
 	std::shared_ptr<EditConnectionTextView> connection_name;
