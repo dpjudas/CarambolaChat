@@ -51,14 +51,25 @@ void ConnectionsController::add_clicked()
 
 		connection.set_string("connectionname", name);
 		connection.set_string("server", edit->server());
-		//connection.set_string("port", edit->port());
 		connection.set_string("comment", "");
 		connection.set_string("nick", edit->nick());
 		connection.set_string("altnick", edit->alt_nick());
 		connection.set_string("username", "carambola");
 		connection.set_string("name", "Anonymous Carambola User");
 		connection.set_bool("autoconnect", edit->auto_connect());
+
 		XMLSettingsList performlist = connection.get_list("performlist");
+
+		std::vector<std::string> lines = StringHelp::split_text(edit->perform_list(), "\n", true);
+		int perform_count = performlist.get_count();
+		for (int i = 0; i < perform_count; i++)
+			performlist.remove(0);
+
+		for (size_t i = 0; i < lines.size(); i++)
+		{
+			XMLSettings item = performlist.add();
+			item.set_string("command", lines[i]);
+		}
 
 		auto item = view->networks->add_item(name);
 
@@ -80,18 +91,41 @@ void ConnectionsController::edit_clicked(XMLSettings const_connection)
 		XMLSettings connection = const_connection;
 		connection.set_string("connectioname", edit->connection_name());
 		connection.set_string("server", edit->server());
-		//connection.set_string("port", edit->port());
 		connection.set_string("nick", edit->nick());
 		connection.set_string("altnick", edit->alt_nick());
 		connection.set_bool("autoconnect", edit->auto_connect());
+
+		XMLSettingsList performlist = connection.get_list("performlist");
+
+		std::vector<std::string> lines = StringHelp::split_text(edit->perform_list(), "\n", true);
+		int perform_count = performlist.get_count();
+		for (int i = 0; i < perform_count; i++)
+			performlist.remove(0);
+
+		for (size_t i = 0; i < lines.size(); i++)
+		{
+			XMLSettings item = performlist.add();
+			item.set_string("command", lines[i]);
+		}
 	});
 
 	dialog->set_connection_name(const_connection.get_string("connectionname"));
 	dialog->set_server(const_connection.get_string("server"));
-	//dialog->set_port(const_connection.get_string("port"));
 	dialog->set_nick(const_connection.get_string("nick"));
 	dialog->set_alt_nick(const_connection.get_string("altnick"));
 	dialog->set_auto_connect(const_connection.get_bool("autoconnect"));
+
+	XMLSettingsList performlist = const_connection.get_list("performlist");
+	std::string lines;
+	int perform_count = performlist.get_count();
+	for (int i = 0; i<perform_count; i++)
+	{
+		XMLSettings item = performlist.get(i);
+		if (!lines.empty())
+			lines.push_back('\n');
+		lines += item.get_string("command");
+	}
+	dialog->set_perform_list(lines);
 
 	windows.present_modal(view.get(), dialog);
 }

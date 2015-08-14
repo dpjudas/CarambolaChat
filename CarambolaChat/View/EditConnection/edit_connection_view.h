@@ -80,21 +80,24 @@ public:
 	{
 		connection_name = add_subview<EditConnectionTextView>("Connection name", "Some IRC Network");
 		server = add_subview<EditConnectionTextView>("Server", "irc.server.net", 30);
-		port = add_subview<EditConnectionTextView>("Port", "6667", 6);
 		nick = add_subview<EditConnectionTextView>("Nick", "name", 20);
 		alt_nick = add_subview<EditConnectionTextView>("Alternative nick", "alternative name", 20);
 		auto_connect = add_subview<EditConnectionCheckView>("Auto connect on startup");
-		add_subview<clan::SpacerView>();
+		auto label = add_subview<ThemeLabelView>();
+		label->set_text("Commands to execute on connect:");
+		perform_list = add_subview<ThemeTextView>();
+		perform_list->set_preferred_size({ 40, 5 });
+		perform_list->style()->set("flex: auto");
 		button_bar = add_subview<EditConnectionButtonBarView>();
 
-		style()->set("margin: 11px");
+		style()->set("margin: 11px; flex: auto");
 	}
 
 	std::shared_ptr<EditConnectionTextView> connection_name;
 	std::shared_ptr<EditConnectionTextView> server;
-	std::shared_ptr<EditConnectionTextView> port;
 	std::shared_ptr<EditConnectionTextView> nick;
 	std::shared_ptr<EditConnectionTextView> alt_nick;
 	std::shared_ptr<EditConnectionCheckView> auto_connect;
 	std::shared_ptr<EditConnectionButtonBarView> button_bar;
+	std::shared_ptr<clan::TextView> perform_list;
 };

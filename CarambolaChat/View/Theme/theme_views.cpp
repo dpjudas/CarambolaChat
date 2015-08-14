@@ -248,4 +248,8 @@ ThemeTextFieldView::ThemeTextFieldView()
 
 ThemeTextView::ThemeTextView()
 {
+	style()->set("font: 13px/16px 'Source Sans Pro'");
+	style()->set("background: white");
+	style()->set("padding: 2px 5px");
+	style()->set("border: 1px solid #ccc");
 }
