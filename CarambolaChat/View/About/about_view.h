@@ -12,6 +12,7 @@ public:
 		auto p1 = add_subview<clan::SpanLayoutView>();
 		auto image_view = add_subview<clan::ImageView>();
 		auto p2 = add_subview<clan::SpanLayoutView>();
+		add_subview<clan::SpacerView>();
 
 		auto buttons = add_subview<clan::RowView>();
 		buttons->add_subview<clan::SpacerView>();
@@ -19,8 +20,8 @@ public:
 
 		style()->set("background: rgb(240,240,240); padding: 11px");
 		h1->style()->set("font: bold 22px/26px 'Source Sans Pro'");
-		p1->style()->set("font: 13px/17px 'Source Sans Pro'; margin: 0 0 20px 0; flex: auto; width: 370px;");
-		p2->style()->set("font: 13px/17px 'Source Sans Pro'; margin: 11px 0; flex: auto; width: 370px;");
+		p1->style()->set("font: 13px/17px 'Source Sans Pro'; margin: 0 0 20px 0; width: 370px;");
+		p2->style()->set("font: 13px/17px 'Source Sans Pro'; margin: 11px 0; width: 370px;");
 		image_view->style()->set("margin: 0 auto");
 		ok_button->style()->set("width: 75px");
 
