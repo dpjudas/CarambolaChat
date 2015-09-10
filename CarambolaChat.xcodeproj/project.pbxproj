@@ -1,0 +1,300 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		181D07C21BA11A0C002267C2 /* precomp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 181D07BE1BA11A0C002267C2 /* precomp.cpp */; };
+		181D07C31BA11A0C002267C2 /* program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 181D07C01BA11A0C002267C2 /* program.cpp */; };
+		181D07C71BA11A4F002267C2 /* Controller in Resources */ = {isa = PBXBuildFile; fileRef = 181D07C41BA11A4F002267C2 /* Controller */; };
+		181D07C81BA11A4F002267C2 /* Model in Resources */ = {isa = PBXBuildFile; fileRef = 181D07C51BA11A4F002267C2 /* Model */; };
+		181D07C91BA11A4F002267C2 /* View in Resources */ = {isa = PBXBuildFile; fileRef = 181D07C61BA11A4F002267C2 /* View */; };
+		18AA94E31BA1172D00F35B03 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AA94E21BA1172D00F35B03 /* AppDelegate.m */; };
+		18AA94E71BA1172D00F35B03 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18AA94E61BA1172D00F35B03 /* Images.xcassets */; };
+		18AA94EA1BA1172D00F35B03 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AA94E81BA1172D00F35B03 /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		181D07BE1BA11A0C002267C2 /* precomp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = precomp.cpp; sourceTree = "<group>"; };
+		181D07BF1BA11A0C002267C2 /* precomp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = precomp.h; sourceTree = "<group>"; };
+		181D07C01BA11A0C002267C2 /* program.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = program.cpp; sourceTree = "<group>"; };
+		181D07C11BA11A0C002267C2 /* program.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = program.h; sourceTree = "<group>"; };
+		181D07C41BA11A4F002267C2 /* Controller */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Controller; sourceTree = "<group>"; };
+		181D07C51BA11A4F002267C2 /* Model */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Model; sourceTree = "<group>"; };
+		181D07C61BA11A4F002267C2 /* View */ = {isa = PBXFileReference; lastKnownFileType = folder; path = View; sourceTree = "<group>"; };
+		18AA94DC1BA1172D00F35B03 /* CarambolaChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarambolaChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18AA94E01BA1172D00F35B03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18AA94E11BA1172D00F35B03 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		18AA94E21BA1172D00F35B03 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		18AA94E61BA1172D00F35B03 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		18AA94E91BA1172D00F35B03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		18AA94D91BA1172D00F35B03 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		18AA94D31BA1172D00F35B03 = {
+			isa = PBXGroup;
+			children = (
+				18AA94DE1BA1172D00F35B03 /* CarambolaChat */,
+				18AA94DD1BA1172D00F35B03 /* Products */,
+			);
+			sourceTree = "<group>";
+			usesTabs = 1;
+		};
+		18AA94DD1BA1172D00F35B03 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18AA94DC1BA1172D00F35B03 /* CarambolaChat.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		18AA94DE1BA1172D00F35B03 /* CarambolaChat */ = {
+			isa = PBXGroup;
+			children = (
+				181D07C41BA11A4F002267C2 /* Controller */,
+				181D07C51BA11A4F002267C2 /* Model */,
+				181D07C61BA11A4F002267C2 /* View */,
+				181D07BE1BA11A0C002267C2 /* precomp.cpp */,
+				181D07BF1BA11A0C002267C2 /* precomp.h */,
+				181D07C01BA11A0C002267C2 /* program.cpp */,
+				181D07C11BA11A0C002267C2 /* program.h */,
+				18AA94E11BA1172D00F35B03 /* AppDelegate.h */,
+				18AA94E21BA1172D00F35B03 /* AppDelegate.m */,
+				18AA94E61BA1172D00F35B03 /* Images.xcassets */,
+				18AA94E01BA1172D00F35B03 /* Info.plist */,
+				18AA94E81BA1172D00F35B03 /* MainMenu.xib */,
+			);
+			path = CarambolaChat;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		18AA94DB1BA1172D00F35B03 /* CarambolaChat */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18AA94F91BA1172D00F35B03 /* Build configuration list for PBXNativeTarget "CarambolaChat" */;
+			buildPhases = (
+				18AA94D81BA1172D00F35B03 /* Sources */,
+				18AA94D91BA1172D00F35B03 /* Frameworks */,
+				18AA94DA1BA1172D00F35B03 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CarambolaChat;
+			productName = CarambolaChat;
+			productReference = 18AA94DC1BA1172D00F35B03 /* CarambolaChat.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		18AA94D41BA1172D00F35B03 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = ClanLib;
+				TargetAttributes = {
+					18AA94DB1BA1172D00F35B03 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+				};
+			};
+			buildConfigurationList = 18AA94D71BA1172D00F35B03 /* Build configuration list for PBXProject "CarambolaChat" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 18AA94D31BA1172D00F35B03;
+			productRefGroup = 18AA94DD1BA1172D00F35B03 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				18AA94DB1BA1172D00F35B03 /* CarambolaChat */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		18AA94DA1BA1172D00F35B03 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18AA94E71BA1172D00F35B03 /* Images.xcassets in Resources */,
+				18AA94EA1BA1172D00F35B03 /* MainMenu.xib in Resources */,
+				181D07C81BA11A4F002267C2 /* Model in Resources */,
+				181D07C91BA11A4F002267C2 /* View in Resources */,
+				181D07C71BA11A4F002267C2 /* Controller in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		18AA94D81BA1172D00F35B03 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				181D07C21BA11A0C002267C2 /* precomp.cpp in Sources */,
+				181D07C31BA11A0C002267C2 /* program.cpp in Sources */,
+				18AA94E31BA1172D00F35B03 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		18AA94E81BA1172D00F35B03 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18AA94E91BA1172D00F35B03 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		18AA94F71BA1172D00F35B03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		18AA94F81BA1172D00F35B03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		18AA94FA1BA1172D00F35B03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = CarambolaChat/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		18AA94FB1BA1172D00F35B03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = CarambolaChat/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		18AA94D71BA1172D00F35B03 /* Build configuration list for PBXProject "CarambolaChat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18AA94F71BA1172D00F35B03 /* Debug */,
+				18AA94F81BA1172D00F35B03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18AA94F91BA1172D00F35B03 /* Build configuration list for PBXNativeTarget "CarambolaChat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18AA94FA1BA1172D00F35B03 /* Debug */,
+				18AA94FB1BA1172D00F35B03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 18AA94D41BA1172D00F35B03 /* Project object */;
+}

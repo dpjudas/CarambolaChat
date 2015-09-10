@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>F2BE841F-4171-4A46-BCE8-A72633662E1D</string>
+	<key>IDESourceControlProjectName</key>
+	<string>CarambolaChat</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>6D0D95B6A1825DCE8D3D91C3D94D1112D703A979</key>
+		<string>https://github.com/dpjudas/CarambolaChat.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>CarambolaChat.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>6D0D95B6A1825DCE8D3D91C3D94D1112D703A979</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/dpjudas/CarambolaChat.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>6D0D95B6A1825DCE8D3D91C3D94D1112D703A979</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6D0D95B6A1825DCE8D3D91C3D94D1112D703A979</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CarambolaChat</string>
+		</dict>
+	</array>
+</dict>
+</plist>
