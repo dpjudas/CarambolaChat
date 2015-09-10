@@ -12,6 +12,8 @@
 	<dict>
 		<key>6D0D95B6A1825DCE8D3D91C3D94D1112D703A979</key>
 		<string>https://github.com/dpjudas/CarambolaChat.git</string>
+		<key>F81644AC9DF8B605DF53701B0769C4626BECA4CC</key>
+		<string>https://github.com/sphair/ClanLib.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>CarambolaChat.xcodeproj</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>6D0D95B6A1825DCE8D3D91C3D94D1112D703A979</key>
 		<string>../..</string>
+		<key>F81644AC9DF8B605DF53701B0769C4626BECA4CC</key>
+		<string>../../../ClanLib</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/dpjudas/CarambolaChat.git</string>
@@ -35,6 +39,14 @@
 			<string>6D0D95B6A1825DCE8D3D91C3D94D1112D703A979</string>
 			<key>IDESourceControlWCCName</key>
 			<string>CarambolaChat</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F81644AC9DF8B605DF53701B0769C4626BECA4CC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ClanLib</string>
 		</dict>
 	</array>
 </dict>

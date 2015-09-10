@@ -53,6 +53,7 @@
 		18E0BEE91BA1243E0071B89C /* workspace_view.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E0BECB1BA1243E0071B89C /* workspace_view.cpp */; };
 		18E0BEEB1BA126170071B89C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E0BEEA1BA126170071B89C /* Cocoa.framework */; };
 		18E0BEED1BA126310071B89C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E0BEEC1BA126310071B89C /* OpenGL.framework */; };
+		18F740F31BA19D4200321FF1 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 18F740F21BA19D4200321FF1 /* Resources */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -158,6 +159,7 @@
 		18E0BECC1BA1243E0071B89C /* workspace_view.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = workspace_view.h; sourceTree = "<group>"; };
 		18E0BEEA1BA126170071B89C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		18E0BEEC1BA126310071B89C /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		18F740F21BA19D4200321FF1 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resources; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +203,7 @@
 		18AA94DE1BA1172D00F35B03 /* CarambolaChat */ = {
 			isa = PBXGroup;
 			children = (
+				18F740F21BA19D4200321FF1 /* Resources */,
 				18E0BE7A1BA1243E0071B89C /* Model */,
 				18E0BEB11BA1243E0071B89C /* View */,
 				18E0BE5A1BA1241A0071B89C /* Controller */,
@@ -548,6 +551,7 @@
 			files = (
 				18AA94E71BA1172D00F35B03 /* Images.xcassets in Resources */,
 				18AA94EA1BA1172D00F35B03 /* MainMenu.xib in Resources */,
+				18F740F31BA19D4200321FF1 /* Resources in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
