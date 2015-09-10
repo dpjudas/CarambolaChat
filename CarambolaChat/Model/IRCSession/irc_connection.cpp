@@ -331,7 +331,7 @@ void IRCConnection::write_connection_data(IRCRawString &write_line, IRCRawString
 	{
 		if (write_line.length() != write_pos)
 		{
-			int result = connection.write(write_line.data() + write_pos, write_line.length() - write_pos);
+			int result = connection.write(write_line.data() + write_pos, (int)(write_line.length() - write_pos));
 			if (result == -1)
 				break;
 			write_pos += result;

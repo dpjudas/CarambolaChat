@@ -11,8 +11,8 @@ public:
 	XMPPStanza pop_send();
 	void push_received(const XMPPStanza &stanza);
 	XMPPStanza pop_received();
-	void set_disconnected(const CL_String &reason);
-	bool pop_disconnected(CL_String &out_reason);
+	void set_disconnected(const std::string &reason);
+	bool pop_disconnected(std::string &out_reason);
 
 	CL_Event send_event;
 
@@ -21,5 +21,5 @@ private:
 	std::vector<XMPPStanza> send_queue;
 	std::vector<XMPPStanza> receive_queue;
 	CL_InterlockedVariable disconnected;
-	CL_String disconnected_reason;
+	std::string disconnected_reason;
 };

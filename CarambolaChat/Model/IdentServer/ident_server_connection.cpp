@@ -85,7 +85,7 @@ bool IdentServerConnection::received_message(std::string message)
 	int pos = 0;
 	while (pos != response.length())
 	{
-		int written = connection.write(response.data() + pos, response.length() - pos);
+		int written = connection.write(response.data() + pos, (int)response.length() - pos);
 		if (written == -1)
 		{
 			clan::NetworkEvent *events[] = { &connection };

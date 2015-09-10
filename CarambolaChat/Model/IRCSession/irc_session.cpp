@@ -917,7 +917,6 @@ void IRCSession::on_ctcp_privmsg_dcc(const IRCText &data, const IRCPrivateMessag
 std::vector<std::string> IRCSession::split_command_line(std::string command_line)
 {
 	std::vector<std::string> args;
-	bool new_arg = true;
 
 	bool in_quoted_string = false;
 	bool in_escape = false;

@@ -38,8 +38,6 @@ std::string IRCText::get_text() const
 	else
 	{
 		IRCRawString s = text8;
-		IRCRawString::size_type pos = 0;
-		bool ctcp = false;
 		for (size_t i = 0; i<s.size();)
 		{
 			if (((unsigned int)s[i]) < 32)

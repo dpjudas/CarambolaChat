@@ -66,7 +66,7 @@ IRCRawString IRCMessage::create_line(const IRCRawString &prefix, const IRCRawStr
 	
 	line.append(command);
 	
-	int size = params.size();
+	int size = (int)params.size();
 	for (int i=0; i<size;i++)
 	{
 		line.append(" ");

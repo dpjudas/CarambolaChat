@@ -75,7 +75,7 @@ Program::Program()
 #ifdef WIN32
 	D3DTarget::enable();
 #else
-	OpenGLTarget::enable();
+	OpenGLTarget::set_current();
 #endif
 
 	ResourceManager resources;

@@ -96,7 +96,7 @@ void ChatView::render_text_content(ChatTextView *text_view, Canvas &canvas)
 	int skip_lines = (int)std::round(scroll->max_position() - (scroll->position() + 1));
 
 	std::list<ChatLine>::reverse_iterator it;
-	int line_index = lines.size();
+	int line_index = (int)lines.size();
 	for (it = lines.rbegin(); it != lines.rend(); ++it, line_index--)
 	{
 		if (y < 0)
@@ -137,7 +137,7 @@ ChatView::TextPosition ChatView::hit_test(const Point &pos)
 	int skip_lines = (int)std::round(scroll->max_position() - (scroll->position() + 1));
 
 	std::list<ChatLine>::reverse_iterator it;
-	int line_index = lines.size();
+	int line_index = (int)lines.size();
 	for (it = lines.rbegin(); it != lines.rend(); ++it, line_index--)
 	{
 		if (y < 0)
@@ -208,7 +208,7 @@ void ChatView::layout_line(Canvas &canvas, ChatLine &line, Rect &client_area, in
 			line.column3_rendered = true;
 		}
 
-		Colorf timestamp_color = get_color_timestamp();
+		//Colorf timestamp_color = get_color_timestamp();
 
 		std::pair<int,int> sel_col1 = get_selection_for_line(line_index, 0);
 		std::pair<int,int> sel_col2 = get_selection_for_line(line_index, 1);

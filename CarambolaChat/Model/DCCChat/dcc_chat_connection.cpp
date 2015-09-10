@@ -195,7 +195,7 @@ bool DCCChatConnection::write_connection_data(IRCRawString &write_line, IRCRawSt
 	{
 		if (write_line.length() != write_pos)
 		{
-			int bytes_written = connection.write(write_line.data() + write_pos, write_line.length() - write_pos);
+			int bytes_written = connection.write(write_line.data() + write_pos, (int)(write_line.length() - write_pos));
 			if (bytes_written == -1)
 				return true;
 			write_pos += bytes_written;

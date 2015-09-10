@@ -4,9 +4,9 @@
 class XMPPAttribute
 {
 public:
-	XMPPAttribute(const CL_String &name, const CL_String &value) : name(name), value(value) { }
-	CL_String name;
-	CL_String value;
+	XMPPAttribute(const std::string &name, const std::string &value) : name(name), value(value) { }
+	std::string name;
+	std::string value;
 };
 
 class XMPPToken
@@ -23,7 +23,7 @@ public:
 		type_text
 	};
 	Type type;
-	CL_String name;
+	std::string name;
 	std::vector<XMPPAttribute> attributes;
-	CL_String value;
+	std::string value;
 };

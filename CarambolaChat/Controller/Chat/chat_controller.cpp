@@ -439,7 +439,7 @@ void ChatController::on_inputbox_return_pressed()
 	if (!chat_line.empty())
 	{
 		chat_input_history.push_back(chat_line);
-		chat_input_history_index = chat_input_history.size();
+		chat_input_history_index = (int)chat_input_history.size();
 
 		std::vector<std::string> lines = split_input_text(chat_line);
 		for (size_t i = 0; i < lines.size(); i++)
