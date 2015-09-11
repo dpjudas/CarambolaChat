@@ -94,6 +94,14 @@ bool ChatController::is_active_view()
 	return true;
 }
 
+void ChatController::add_private_text(const IRCNick &nick, const IRCText &text)
+{
+	if (get_filter() == nick)
+	{
+		add_line(nick, text, view->chat_log->get_color_text(), view->chat_log->get_color_nick_others());
+	}
+}
+
 void ChatController::add_action_line(const IRCNick &nick, const IRCText &text)
 {
 	//get_mainframe()->flag_activity(this, nick.get_name(), text.get_text(), false);
@@ -670,14 +678,6 @@ void ChatController::on_userlist_whois()
     CL_ListViewItem selected_item = userlist->get_selected_item();
     if (!selected_item.is_null())
         Command::execute(session, filter, string_format("/whois %1", selected_item.get_column("nick").get_text()));
-}
-
-void ChatController::add_private_text(const IRCNick &nick, const IRCText &text)
-{
-	if (get_filter() == nick)
-	{
-		add_line(nick, text, chat->get_color_text(), chat->get_color_nick_others());
-	}
 }
 
 void ChatController::on_toolbar_item_clicked(CL_ToolBarItem item)

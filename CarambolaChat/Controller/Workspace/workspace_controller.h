@@ -14,6 +14,7 @@ public:
 	std::shared_ptr<WorkspaceView> view = std::make_shared<WorkspaceView>();
 
 	void add_page(const std::string &label, std::shared_ptr<WorkspacePageController> controller, bool app_page);
+	std::shared_ptr<WorkspacePageController> find_page(const std::string &label);
 
 private:
 	void remove_page(WorkspacePageController *controller);

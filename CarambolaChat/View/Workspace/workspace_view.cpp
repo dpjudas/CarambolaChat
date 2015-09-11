@@ -90,6 +90,15 @@ void WorkspaceView::remove_page(std::shared_ptr<View> page_view)
 	}
 }
 
+std::string WorkspaceView::label(const std::string &id) const
+{
+	auto it = tabs.find(id);
+	if (it != tabs.end())
+		return it->second.tab->label->text();
+	else
+		return std::string();
+}
+
 void WorkspaceView::set_label(const std::string &id, const std::string &text)
 {
 	tabs[id].tab->label->set_text(text);

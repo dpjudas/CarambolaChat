@@ -19,6 +19,16 @@ void WorkspaceController::add_page(const std::string &label_text, std::shared_pt
 	pages.push_back(controller);
 }
 
+std::shared_ptr<WorkspacePageController> WorkspaceController::find_page(const std::string &label)
+{
+	for (auto &page : pages)
+	{
+		if (view->label(page->get_page_id()) == label)
+			return page;
+	}
+	return std::shared_ptr<WorkspacePageController>();
+}
+
 void WorkspaceController::remove_page(WorkspacePageController *controller)
 {
 	controller->workspace = nullptr;

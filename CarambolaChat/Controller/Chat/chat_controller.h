@@ -24,7 +24,7 @@ public:
 	const IRCEntity &get_filter() const { return filter; }
 	IRCSession *get_session() const { return session; }
 
-	//void add_private_text(const IRCNick &nick, const IRCText &text);
+	void add_private_text(const IRCNick &nick, const IRCText &text);
 
 protected:
 	void close_clicked() override;

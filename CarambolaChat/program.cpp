@@ -88,7 +88,7 @@ Program::Program()
 	#endif
 	*/
 #ifdef WIN32
-	D3DTarget::enable();
+	D3DTarget::set_current();
 #else
 	OpenGLTarget::set_current();
 #endif
