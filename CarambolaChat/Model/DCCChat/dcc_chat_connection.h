@@ -6,7 +6,7 @@
 class DCCChatConnection
 {
 public:
-	DCCChatConnection(const std::string &local_nick, const std::string &remote_nick, const clan::SocketName &socket_name);
+	DCCChatConnection(const std::string &local_nick, const std::string &remote_nick, const uicore::SocketName &socket_name);
 	~DCCChatConnection();
 
 	void connect();
@@ -16,15 +16,15 @@ public:
 
 	std::string local_nick;
 	std::string remote_nick;
-	clan::Signal<void(const std::string &)> sig_system_text;
-	clan::Signal<void(const std::string &)> sig_disconnected;
-	clan::Signal<void(const IRCText &)> sig_text_line;
+	uicore::Signal<void(const std::string &)> sig_system_text;
+	uicore::Signal<void(const std::string &)> sig_disconnected;
+	uicore::Signal<void(const IRCText &)> sig_text_line;
 
 private:
 	void process();
 	void worker_main();
-	bool read_connection_data(clan::TCPConnection &connection, IRCRawString &read_line);
-	bool write_connection_data(IRCRawString &write_line, IRCRawString::size_type &write_pos, clan::TCPConnection &connection);
+	bool read_connection_data(uicore::TCPConnection &connection, IRCRawString &read_line);
+	bool write_connection_data(IRCRawString &write_line, IRCRawString::size_type &write_pos, uicore::TCPConnection &connection);
 	void queue_system(const IRCRawString &text);
 	void queue_disconnected(const IRCRawString &reason);
 	void queue_line(const IRCRawString &line);
@@ -42,11 +42,11 @@ private:
 		IRCRawString text;
 	};
 
-	clan::SocketName socket_name;
+	uicore::SocketName socket_name;
 	std::thread thread;
 	std::mutex mutex;
 	std::condition_variable started_event;
-	clan::NetworkConditionVariable change_event;
+	uicore::NetworkConditionVariable change_event;
 	bool stop_flag = false;
 	bool started_flag = false;
 	bool is_server;

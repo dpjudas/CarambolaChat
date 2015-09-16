@@ -3,7 +3,7 @@
 
 #include "View/About/about_view.h"
 
-class AboutController : public clan::WindowController
+class AboutController : public uicore::WindowController
 {
 public:
 	AboutController();

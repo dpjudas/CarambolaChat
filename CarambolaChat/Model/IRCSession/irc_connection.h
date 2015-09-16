@@ -13,7 +13,7 @@ public:
 	IRCConnection();
 	~IRCConnection();
 
-	void connect(const clan::SocketName &server);
+	void connect(const uicore::SocketName &server);
 	void disconnect();
 
 	void send_command(const IRCRawString &command, const std::vector<IRCRawString> params);
@@ -55,13 +55,13 @@ private:
 	void process();
 
 	void worker_main();
-	bool read_connection_data(clan::TCPConnection &connection, IRCRawString &read_line);
-	void write_connection_data(IRCRawString &write_line, IRCRawString::size_type &write_pos, clan::TCPConnection &connection);
+	bool read_connection_data(uicore::TCPConnection &connection, IRCRawString &read_line);
+	void write_connection_data(IRCRawString &write_line, IRCRawString::size_type &write_pos, uicore::TCPConnection &connection);
 
-	clan::SocketName server;
+	uicore::SocketName server;
 	std::thread thread_worker;
 	std::mutex mutex;
-	clan::NetworkConditionVariable change_event;
+	uicore::NetworkConditionVariable change_event;
 	bool stop_flag = false;
 	IRCConnectionQueues queues;
 

@@ -13,7 +13,7 @@ ThemeButtonView::ThemeButtonView()
 	style("disabled")->set("border-image-source:url('Theme/button_disabled.png');");
 	label()->style()->set("margin: 5px auto; font: 13px/18px 'Source Sans Pro'; padding: 0 10px; color: rgb(0,0,0);");
 	label()->style("disabled")->set("color: rgb(128,128,128);");
-	label()->set_text_alignment(clan::TextAlignment::center);
+	label()->set_text_alignment(uicore::TextAlignment::center);
 }
 
 ThemeCheckBoxView::ThemeCheckBoxView()

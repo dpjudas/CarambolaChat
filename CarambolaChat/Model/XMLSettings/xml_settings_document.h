@@ -1,6 +1,10 @@
 
 #pragma once
 
+#include "Model/XMLSettings/DOM/dom_document.h"
+#include "Model/XMLSettings/DOM/dom_element.h"
+#include "Model/XMLSettings/DOM/dom_node.h"
+
 class XMLSettings;
 
 class XMLSettingsAppModel
@@ -9,13 +13,13 @@ public:
 	XMLSettingsAppModel();
 
 	void load(const std::string &filename);
-	void load(clan::IODevice device);
+	void load(uicore::IODevice device);
 	void save(const std::string &filename);
-	void save(clan::IODevice device);
+	void save(uicore::IODevice device);
 
 	XMLSettings get_root();
 
 private:
-	clan::DomDocument document;
+	DomDocument document;
 };
 

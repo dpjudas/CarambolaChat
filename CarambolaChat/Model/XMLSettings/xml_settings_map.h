@@ -9,7 +9,7 @@ class XMLSettingsMap
 {
 public:
 	XMLSettingsMap();
-	XMLSettingsMap(const XMLSettingsAppModel &document, const clan::DomElement &node);
+	XMLSettingsMap(const XMLSettingsAppModel &document, const DomElement &node);
 
 	XMLSettingsAppModel get_document();
 
@@ -18,5 +18,5 @@ public:
 
 private:
 	XMLSettingsAppModel document;
-	clan::DomElement node;
+	DomElement node;
 };

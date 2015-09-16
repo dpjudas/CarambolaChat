@@ -9,29 +9,29 @@ XMLSettingsAppModel::XMLSettingsAppModel()
 
 void XMLSettingsAppModel::load(const std::string &filename)
 {
-	clan::File file(filename, clan::File::open_existing, clan::File::access_read, clan::File::share_read);
+	uicore::File file(filename, uicore::File::open_existing, uicore::File::access_read, uicore::File::share_read);
 	load(file);
 }
 
-void XMLSettingsAppModel::load(clan::IODevice device)
+void XMLSettingsAppModel::load(uicore::IODevice device)
 {
 	document.load(device, false);
 }
 
 void XMLSettingsAppModel::save(const std::string &filename)
 {
-	clan::File file(filename, clan::File::create_always, clan::File::access_write, 0);
+	uicore::File file(filename, uicore::File::create_always, uicore::File::access_write, 0);
 	save(file);
 }
 
-void XMLSettingsAppModel::save(clan::IODevice device)
+void XMLSettingsAppModel::save(uicore::IODevice device)
 {
 	document.save(device, false);
 }
 
 XMLSettings XMLSettingsAppModel::get_root()
 {
-	clan::DomElement element = document.get_document_element();
+	DomElement element = document.get_document_element();
 	if (element.is_null())
 	{
 		element = document.create_element("settings");

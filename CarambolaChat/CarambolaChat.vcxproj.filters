@@ -102,6 +102,72 @@
     <ClCompile Include="Controller\About\about_controller.cpp">
       <Filter>Controller\About</Filter>
     </ClCompile>
+    <ClCompile Include="Model\XMLSettings\DOM\dom_attr.cpp">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\XMLSettings\DOM\dom_cdata_section.cpp">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\XMLSettings\DOM\dom_character_data.cpp">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\XMLSettings\DOM\dom_comment.cpp">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\XMLSettings\DOM\dom_document.cpp">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\XMLSettings\DOM\dom_document_fragment.cpp">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\XMLSettings\DOM\dom_document_generic.cpp">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\XMLSettings\DOM\dom_document_type.cpp">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\XMLSettings\DOM\dom_element.cpp">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\XMLSettings\DOM\dom_entity.cpp">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\XMLSettings\DOM\dom_entity_reference.cpp">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\XMLSettings\DOM\dom_exception.cpp">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\XMLSettings\DOM\dom_implementation.cpp">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\XMLSettings\DOM\dom_named_node_map.cpp">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\XMLSettings\DOM\dom_node.cpp">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\XMLSettings\DOM\dom_node_list.cpp">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\XMLSettings\DOM\dom_notation.cpp">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\XMLSettings\DOM\dom_processing_instruction.cpp">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\XMLSettings\DOM\dom_text.cpp">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\XMLSettings\DOM\xml_tokenizer.cpp">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\XMLSettings\DOM\xml_writer.cpp">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\XMLSettings\DOM\block_allocator.cpp">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="precomp.h" />
@@ -227,6 +293,93 @@
     <ClInclude Include="View\Chat\chat_page_view.h">
       <Filter>View\Chat</Filter>
     </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\dom_attr.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\dom_cdata_section.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\dom_character_data.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\dom_comment.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\dom_document.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\dom_document_fragment.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\dom_document_generic.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\dom_document_type.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\dom_element.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\dom_entity.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\dom_entity_reference.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\dom_exception.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\dom_implementation.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\dom_named_node_map.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\dom_named_node_map_generic.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\dom_node.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\dom_node_generic.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\dom_node_list.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\dom_notation.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\dom_processing_instruction.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\dom_string.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\dom_text.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\dom_tree_node.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\xml_token.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\xml_tokenizer.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\xml_tokenizer_generic.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\xml_writer.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\xml_writer_generic.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\XMLSettings\DOM\block_allocator.h">
+      <Filter>Model\XMLSettings\DOM</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -294,6 +447,9 @@
     </Filter>
     <Filter Include="View\About">
       <UniqueIdentifier>{448d7fc4-1b8c-4dea-ab38-122c5ae187ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\XMLSettings\DOM">
+      <UniqueIdentifier>{1c7f03a8-479d-4321-9cc5-24e3c0b8a300}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

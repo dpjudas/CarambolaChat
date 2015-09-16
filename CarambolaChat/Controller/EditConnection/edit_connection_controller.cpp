@@ -5,7 +5,7 @@
 #include "Model/XMLSettings/xml_settings.h"
 #include "Model/XMLSettings/xml_settings_list.h"
 
-using namespace clan;
+using namespace uicore;
 
 EditConnectionController::EditConnectionController() : add_dialog(true)
 {

@@ -9,7 +9,7 @@ IRCEntity::IRCEntity()
 IRCEntity IRCEntity::from_text(const std::string &name)
 {
 	IRCEntity entity;
-	entity.label = clan::StringHelp::text_to_utf8(name);
+	entity.label = uicore::StringHelp::text_to_utf8(name);
 	return entity;
 }
 
@@ -25,7 +25,7 @@ bool IRCEntity::operator ==(const IRCEntity &other) const
 	if (is_channel() != other.is_channel())
 		return false;
 	else
-		return clan::StringHelp::compare(get_name(), other.get_name(), true) == 0;
+		return uicore::StringHelp::compare(get_name(), other.get_name(), true) == 0;
 }
 
 std::string IRCEntity::get_name() const
@@ -44,14 +44,14 @@ std::string IRCEntity::get_name() const
 		case '#':
 		case '@':
 		case '+':
-			return clan::StringHelp::utf8_to_text(labelshort.substr(1));
+			return uicore::StringHelp::utf8_to_text(labelshort.substr(1));
 		default:
-			return clan::StringHelp::utf8_to_text(labelshort);
+			return uicore::StringHelp::utf8_to_text(labelshort);
 		}
 	}
 	else
 	{
-		return clan::StringHelp::utf8_to_text(labelshort);
+		return uicore::StringHelp::utf8_to_text(labelshort);
 	}
 }
 

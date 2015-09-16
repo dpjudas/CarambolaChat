@@ -17,6 +17,6 @@ private:
 
 	std::thread thread;
 	std::mutex mutex;
-	clan::NetworkConditionVariable change_event;
+	uicore::NetworkConditionVariable change_event;
 	bool stop_flag = true;
 };

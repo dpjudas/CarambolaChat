@@ -7,7 +7,7 @@ XMLSettingsMap::XMLSettingsMap()
 {
 }
 
-XMLSettingsMap::XMLSettingsMap(const XMLSettingsAppModel &document, const clan::DomElement &node)
+XMLSettingsMap::XMLSettingsMap(const XMLSettingsAppModel &document, const DomElement &node)
 : document(document), node(node)
 {
 }
@@ -19,7 +19,7 @@ XMLSettingsAppModel XMLSettingsMap::get_document()
 
 XMLSettings XMLSettingsMap::get(const std::string &key)
 {
-	clan::DomElement cur = node.get_first_child_element();
+	DomElement cur = node.get_first_child_element();
 	while (!cur.is_null())
 	{
 		if (cur.get_attribute("key") == key)
@@ -36,7 +36,7 @@ XMLSettings XMLSettingsMap::get(const std::string &key)
 
 void XMLSettingsMap::remove(const std::string &key)
 {
-	clan::DomElement cur = node.get_first_child_element();
+	DomElement cur = node.get_first_child_element();
 	while (!cur.is_null())
 	{
 		if (cur.get_attribute("key") == key)

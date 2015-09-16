@@ -4,11 +4,11 @@
 #include "workspace_page_controller.h"
 #include "View/Workspace/workspace_view.h"
 
-using namespace clan;
+using namespace uicore;
 
 WorkspaceController::WorkspaceController()
 {
-	taskbar = clan::make_unique<TaskbarNotification>(view);
+	taskbar = uicore::make_unique<TaskbarNotification>(view);
 }
 
 void WorkspaceController::add_page(const std::string &label_text, std::shared_ptr<WorkspacePageController> controller, bool app_page)

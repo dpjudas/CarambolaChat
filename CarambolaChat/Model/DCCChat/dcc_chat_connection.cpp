@@ -2,7 +2,7 @@
 #include "precomp.h"
 #include "dcc_chat_connection.h"
 
-DCCChatConnection::DCCChatConnection(const std::string &local_nick, const std::string &remote_nick, const clan::SocketName &socket_name)
+DCCChatConnection::DCCChatConnection(const std::string &local_nick, const std::string &remote_nick, const uicore::SocketName &socket_name)
 : local_nick(local_nick), remote_nick(remote_nick), socket_name(socket_name), is_server(false)
 {
 }
@@ -87,12 +87,12 @@ void DCCChatConnection::worker_main()
 	try
 	{
 		std::unique_lock<std::mutex> lock(mutex);
-		clan::TCPConnection connection;
+		uicore::TCPConnection connection;
 		if (is_server)
 		{
-			queue_system(clan::string_format("Started listening on port %1", socket_name.get_port()));
+			queue_system(uicore::string_format("Started listening on port %1", socket_name.get_port()));
 
-			clan::TCPListen listen(socket_name);
+			uicore::TCPListen listen(socket_name);
 
 			while (true)
 			{
@@ -102,25 +102,25 @@ void DCCChatConnection::worker_main()
 					return;
 				}
 
-				clan::SocketName end_point;
+				uicore::SocketName end_point;
 				connection = listen.accept(end_point);
 				if (!connection.is_null())
 					break;
 
-				clan::NetworkEvent *events[] = { &listen };
+				uicore::NetworkEvent *events[] = { &listen };
 				change_event.wait(lock, 1, events);
 			}
 
-			clan::SocketName remote_name = connection.get_remote_name();
+			uicore::SocketName remote_name = connection.get_remote_name();
 
 			lock.unlock();
 			try
 			{
-				queue_system(clan::string_format("Accepted connection from %1 port %2", remote_name.lookup_hostname(), remote_name.get_port()));
+				queue_system(uicore::string_format("Accepted connection from %1 port %2", remote_name.lookup_hostname(), remote_name.get_port()));
 			}
-			catch (clan::Exception &)
+			catch (uicore::Exception &)
 			{
-				queue_system(clan::string_format("Accepted connection from %1 port %2", remote_name.get_address(), remote_name.get_port()));
+				queue_system(uicore::string_format("Accepted connection from %1 port %2", remote_name.get_address(), remote_name.get_port()));
 			}
 			lock.lock();
 		}
@@ -129,13 +129,13 @@ void DCCChatConnection::worker_main()
 			lock.unlock();
 			try
 			{
-				queue_system(clan::string_format("Connecting to %1 port %2", socket_name.lookup_hostname(), socket_name.get_port()));
+				queue_system(uicore::string_format("Connecting to %1 port %2", socket_name.lookup_hostname(), socket_name.get_port()));
 			}
-			catch (clan::Exception &)
+			catch (uicore::Exception &)
 			{
-				queue_system(clan::string_format("Connecting to %1 port %2", socket_name.get_address(), socket_name.get_port()));
+				queue_system(uicore::string_format("Connecting to %1 port %2", socket_name.get_address(), socket_name.get_port()));
 			}
-			connection = clan::TCPConnection(socket_name);
+			connection = uicore::TCPConnection(socket_name);
 			lock.lock();
 		}
 
@@ -150,20 +150,20 @@ void DCCChatConnection::worker_main()
 			if (!write_connection_data(write_line, write_pos, connection))
 				break;
 
-			clan::NetworkEvent *events[] = { &connection };
+			uicore::NetworkEvent *events[] = { &connection };
 			change_event.wait(lock, 1, events);
 		}
 
 		queue_disconnected(IRCRawString());
 	}
-	catch (clan::Exception &e)
+	catch (uicore::Exception &e)
 	{
 		std::unique_lock<std::mutex> lock(mutex);
 		queue_disconnected(e.message);
 	}
 }
 
-bool DCCChatConnection::read_connection_data(clan::TCPConnection &connection, IRCRawString &read_line)
+bool DCCChatConnection::read_connection_data(uicore::TCPConnection &connection, IRCRawString &read_line)
 {
 	while (true)
 	{
@@ -189,7 +189,7 @@ bool DCCChatConnection::read_connection_data(clan::TCPConnection &connection, IR
 	}
 }
 
-bool DCCChatConnection::write_connection_data(IRCRawString &write_line, IRCRawString::size_type &write_pos, clan::TCPConnection &connection)
+bool DCCChatConnection::write_connection_data(IRCRawString &write_line, IRCRawString::size_type &write_pos, uicore::TCPConnection &connection)
 {
 	while (true)
 	{
@@ -224,17 +224,17 @@ bool DCCChatConnection::write_connection_data(IRCRawString &write_line, IRCRawSt
 void DCCChatConnection::queue_system(const IRCRawString &text)
 {
 	receive_queue.push_back(Message(Message::type_system, text));
-	clan::RunLoop::main_thread_async(clan::bind_member(this, &DCCChatConnection::process));
+	uicore::RunLoop::main_thread_async(uicore::bind_member(this, &DCCChatConnection::process));
 }
 
 void DCCChatConnection::queue_disconnected(const IRCRawString &reason)
 {
 	receive_queue.push_back(Message(Message::type_disconnect, reason));
-	clan::RunLoop::main_thread_async(clan::bind_member(this, &DCCChatConnection::process));
+	uicore::RunLoop::main_thread_async(uicore::bind_member(this, &DCCChatConnection::process));
 }
 
 void DCCChatConnection::queue_line(const IRCRawString &line)
 {
 	receive_queue.push_back(Message(Message::type_text, line));
-	clan::RunLoop::main_thread_async(clan::bind_member(this, &DCCChatConnection::process));
+	uicore::RunLoop::main_thread_async(uicore::bind_member(this, &DCCChatConnection::process));
 }

@@ -9,7 +9,7 @@ XMLSettings::XMLSettings()
 	*this = document.get_root();
 }
 
-XMLSettings::XMLSettings(const XMLSettingsAppModel &document, const clan::DomElement &node)
+XMLSettings::XMLSettings(const XMLSettingsAppModel &document, const DomElement &node)
 : document(document), node(node)
 {
 }
@@ -51,7 +51,7 @@ void XMLSettings::set_string(const std::string &key, const std::string &value)
 
 XMLSettingsList XMLSettings::get_list(const std::string &key)
 {
-	clan::DomNode value_node = node.named_item(key);
+	DomNode value_node = node.named_item(key);
 	if (value_node.is_null())
 	{
 		value_node = node.get_owner_document().create_element(key);
@@ -62,7 +62,7 @@ XMLSettingsList XMLSettings::get_list(const std::string &key)
 
 XMLSettingsMap XMLSettings::get_map(const std::string &key)
 {
-	clan::DomNode value_node = node.named_item(key);
+	DomNode value_node = node.named_item(key);
 	if (value_node.is_null())
 	{
 		value_node = node.get_owner_document().create_element(key);
@@ -73,7 +73,7 @@ XMLSettingsMap XMLSettings::get_map(const std::string &key)
 
 XMLSettings XMLSettings::get_section(const std::string &key)
 {
-	clan::DomNode value_node = node.named_item(key);
+	DomNode value_node = node.named_item(key);
 	if (value_node.is_null())
 	{
 		value_node = node.get_owner_document().create_element(key);

@@ -20,7 +20,7 @@ public:
 	Type get_type() const { return type; }
 	std::string::size_type get_position() const { return position; }
 	IRCRawString get_ctcp_data() const;
-	clan::Colorf get_color() const;
+	uicore::Colorf get_color() const;
 
 private:
 	Type type;

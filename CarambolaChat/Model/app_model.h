@@ -24,9 +24,9 @@ public:
 
 	Settings settings;
 
-	clan::Signal<void(XMLSettings connection)> sig_connection_added;
-	clan::Signal<void(XMLSettings connection)> sig_connection_edited;
-	clan::Signal<void(const std::string &name)> sig_connection_removed;
+	uicore::Signal<void(XMLSettings connection)> sig_connection_added;
+	uicore::Signal<void(XMLSettings connection)> sig_connection_edited;
+	uicore::Signal<void(const std::string &name)> sig_connection_removed;
 
 	void auto_connect_to_servers();
 	void connect_to_server(XMLSettings &connection);
@@ -39,17 +39,17 @@ public:
 	void destroy_xmpp_session(XMPPSession *session);
 #endif
 
-	DCCChatConnection *create_dcc_chat_connection(const std::string &local_nick, const std::string &remote_nick, clan::SocketName socket_name, bool is_server);
+	DCCChatConnection *create_dcc_chat_connection(const std::string &local_nick, const std::string &remote_nick, uicore::SocketName socket_name, bool is_server);
 	void destroy_dcc_chat_connection(DCCChatConnection *connection);
 
-	clan::Signal<void(IRCSession *)> cb_irc_session_created;
-	clan::Signal<void(IRCSession *)> cb_irc_session_destroyed;
+	uicore::Signal<void(IRCSession *)> cb_irc_session_created;
+	uicore::Signal<void(IRCSession *)> cb_irc_session_destroyed;
 #if defined(XMPP_SUPPORT)
-	clan::Signal<void(XMPPSession *)> cb_xmpp_session_created;
-	clan::Signal<void(XMPPSession *)> cb_xmpp_session_destroyed;
+	uicore::Signal<void(XMPPSession *)> cb_xmpp_session_created;
+	uicore::Signal<void(XMPPSession *)> cb_xmpp_session_destroyed;
 #endif
-	clan::Signal<void(DCCChatConnection *)> cb_dcc_chat_connection_created;
-	clan::Signal<void(DCCChatConnection *)> cb_dcc_chat_connection_destroyed;
+	uicore::Signal<void(DCCChatConnection *)> cb_dcc_chat_connection_created;
+	uicore::Signal<void(DCCChatConnection *)> cb_dcc_chat_connection_destroyed;
 
 private:
 	std::vector<IRCSession *> irc_sessions;

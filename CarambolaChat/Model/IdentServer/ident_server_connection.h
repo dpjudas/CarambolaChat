@@ -6,7 +6,7 @@ class IdentServer;
 class IdentServerConnection
 {
 public:
-	IdentServerConnection(IdentServer *server, clan::TCPConnection connection);
+	IdentServerConnection(IdentServer *server, uicore::TCPConnection connection);
 	~IdentServerConnection();
 
 private:
@@ -14,8 +14,8 @@ private:
 	bool received_message(std::string message);
 
 	IdentServer *server;
-	clan::TCPConnection connection;
-	clan::NetworkConditionVariable change_event;
+	uicore::TCPConnection connection;
+	uicore::NetworkConditionVariable change_event;
 	std::mutex mutex;
 	bool stop_flag = false;
 	std::thread thread;

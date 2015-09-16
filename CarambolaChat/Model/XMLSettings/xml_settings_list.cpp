@@ -7,7 +7,7 @@ XMLSettingsList::XMLSettingsList()
 {
 }
 
-XMLSettingsList::XMLSettingsList(const XMLSettingsAppModel &document, const clan::DomElement &node)
+XMLSettingsList::XMLSettingsList(const XMLSettingsAppModel &document, const DomElement &node)
 : document(document), node(node)
 {
 }
@@ -19,7 +19,7 @@ XMLSettingsAppModel XMLSettingsList::get_document()
 
 XMLSettings XMLSettingsList::add()
 {
-	clan::DomElement element = node.get_owner_document().create_element("item");
+	DomElement element = node.get_owner_document().create_element("item");
 	node.append_child(element);
 	return XMLSettings(document, element);
 }
@@ -27,7 +27,7 @@ XMLSettings XMLSettingsList::add()
 XMLSettings XMLSettingsList::get(int index)
 {
 	int count = 0;
-	clan::DomElement cur = node.get_first_child_element();
+	DomElement cur = node.get_first_child_element();
 	while (!cur.is_null())
 	{
 		if (count == index)
@@ -42,7 +42,7 @@ XMLSettings XMLSettingsList::get(int index)
 void XMLSettingsList::remove(int index)
 {
 	int count = 0;
-	clan::DomElement cur = node.get_first_child_element();
+	DomElement cur = node.get_first_child_element();
 	while (!cur.is_null())
 	{
 		if (count == index)
@@ -59,7 +59,7 @@ void XMLSettingsList::remove(int index)
 int XMLSettingsList::get_count() const
 {
 	int count = 0;
-	clan::DomElement cur = node.get_first_child_element();
+	DomElement cur = node.get_first_child_element();
 	while (!cur.is_null())
 	{
 		count++;

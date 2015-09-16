@@ -26,7 +26,7 @@ public:
 	std::string filename;
 	unsigned int size;
 	bool size_provided;
-	clan::SocketName host;
+	uicore::SocketName host;
 };
 
 class IRCSession
@@ -70,30 +70,30 @@ public:
 
 	void execute_command(const IRCEntity &filter, std::string command_line);
 
-	clan::Signal<void(const IRCNick &, const IRCNick &)> cb_nick_changed;
-	clan::Signal<void(const IRCChannel &)> cb_joined;
-	clan::Signal<void(const IRCChannel &)> cb_parted;
-	clan::Signal<void(const IRCChannel &, const IRCNick &)> cb_user_joined;
-	clan::Signal<void(const IRCChannel &, const IRCNick &, const IRCText &)> cb_user_parted;
-	clan::Signal<void(const IRCNick &, const IRCChannel &, const IRCNick &, const IRCText &)> cb_user_kicked;
-	clan::Signal<void(const IRCNick &, const IRCText &)> cb_user_quit;
+	uicore::Signal<void(const IRCNick &, const IRCNick &)> cb_nick_changed;
+	uicore::Signal<void(const IRCChannel &)> cb_joined;
+	uicore::Signal<void(const IRCChannel &)> cb_parted;
+	uicore::Signal<void(const IRCChannel &, const IRCNick &)> cb_user_joined;
+	uicore::Signal<void(const IRCChannel &, const IRCNick &, const IRCText &)> cb_user_parted;
+	uicore::Signal<void(const IRCNick &, const IRCChannel &, const IRCNick &, const IRCText &)> cb_user_kicked;
+	uicore::Signal<void(const IRCNick &, const IRCText &)> cb_user_quit;
 
-	clan::Signal<void(const IRCEntity &, const IRCNick &, const IRCText &)> cb_text;
-	clan::Signal<void(const IRCEntity &, const IRCNick &, const IRCText &)> cb_notice;
-	clan::Signal<void(const IRCEntity &, const IRCNick &, const IRCText &)> cb_action;
-	clan::Signal<void(const IRCText &)> cb_error_text;
-	clan::Signal<void(const IRCText &)> cb_system_text;
+	uicore::Signal<void(const IRCEntity &, const IRCNick &, const IRCText &)> cb_text;
+	uicore::Signal<void(const IRCEntity &, const IRCNick &, const IRCText &)> cb_notice;
+	uicore::Signal<void(const IRCEntity &, const IRCNick &, const IRCText &)> cb_action;
+	uicore::Signal<void(const IRCText &)> cb_error_text;
+	uicore::Signal<void(const IRCText &)> cb_system_text;
 
-	clan::Signal<void(const IRCNick &, const IRCChannel &, const std::vector<IRCRawString> &)> cb_channel_mode_change;
-	clan::Signal<void(const IRCNick &, const IRCNick &, const std::vector<IRCRawString> &)> cb_nick_mode_change;
+	uicore::Signal<void(const IRCNick &, const IRCChannel &, const std::vector<IRCRawString> &)> cb_channel_mode_change;
+	uicore::Signal<void(const IRCNick &, const IRCNick &, const std::vector<IRCRawString> &)> cb_nick_mode_change;
 
-	clan::Signal<void(const IRCChannel &)> cb_channel_topic_updated;
-	clan::Signal<void(const IRCChannel &)> cb_channel_names_updated;
+	uicore::Signal<void(const IRCChannel &)> cb_channel_topic_updated;
+	uicore::Signal<void(const IRCChannel &)> cb_channel_names_updated;
 
-	clan::Signal<void(ConnectStatus)> cb_connect_status_changed;
+	uicore::Signal<void(ConnectStatus)> cb_connect_status_changed;
 
-	clan::Signal<void(const IRCFileOffer &)> cb_dcc_file_offer;
-	clan::Signal<void(const IRCNick &, const clan::SocketName &)> cb_dcc_chat_offer;
+	uicore::Signal<void(const IRCFileOffer &)> cb_dcc_file_offer;
+	uicore::Signal<void(const IRCNick &, const uicore::SocketName &)> cb_dcc_chat_offer;
 
 private:
 	void set_connect_status(ConnectStatus new_status);
@@ -155,7 +155,7 @@ private:
 	ConnectStatus connect_status;
 	std::vector<std::string> perform_list;
 
-	clan::Timer reconnect_timer;
+	uicore::Timer reconnect_timer;
 	int reconnect_timeout;
 	bool user_requested_disconnect;
 

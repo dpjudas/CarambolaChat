@@ -3,19 +3,19 @@
 
 #include "View/Theme/theme_views.h"
 
-class AboutView : public clan::ColumnView
+class AboutView : public uicore::ColumnView
 {
 public:
 	AboutView()
 	{
-		auto h1 = add_subview<clan::SpanLayoutView>();
-		auto p1 = add_subview<clan::SpanLayoutView>();
-		auto image_view = add_subview<clan::ImageView>();
-		auto p2 = add_subview<clan::SpanLayoutView>();
-		add_subview<clan::SpacerView>();
+		auto h1 = add_subview<uicore::SpanLayoutView>();
+		auto p1 = add_subview<uicore::SpanLayoutView>();
+		auto image_view = add_subview<uicore::ImageView>();
+		auto p2 = add_subview<uicore::SpanLayoutView>();
+		add_subview<uicore::SpacerView>();
 
-		auto buttons = add_subview<clan::RowView>();
-		buttons->add_subview<clan::SpacerView>();
+		auto buttons = add_subview<uicore::RowView>();
+		buttons->add_subview<uicore::SpacerView>();
 		ok_button = buttons->add_subview<ThemeButtonView>();
 
 		style()->set("background: rgb(240,240,240); padding: 11px");
@@ -25,13 +25,13 @@ public:
 		image_view->style()->set("margin: 0 auto");
 		ok_button->style()->set("width: 75px");
 
-		h1->set_text_alignment(clan::TextAlignment::center);
-		p1->set_text_alignment(clan::TextAlignment::center);
-		p2->set_text_alignment(clan::TextAlignment::center);
+		h1->set_text_alignment(uicore::TextAlignment::center);
+		p1->set_text_alignment(uicore::TextAlignment::center);
+		p2->set_text_alignment(uicore::TextAlignment::center);
 
 		h1->add_text("Carambola Chat");
 		p1->add_text("Copyright 2015 The ClanLib Team");
-		image_view->set_image(clan::ImageSource::from_resource("Icons/carambola-256.png"));
+		image_view->set_image(uicore::ImageSource::from_resource("Icons/carambola-256.png"));
 		p2->add_text("This is where you usually read a long tale about how much we are going to put you behind bars if you pirate this software. But luckily for you this product is free!");
 
 		ok_button->label()->set_text("OK");

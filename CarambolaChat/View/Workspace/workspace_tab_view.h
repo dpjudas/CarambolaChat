@@ -1,12 +1,12 @@
 
 #pragma once
 
-class WorkspaceTabView : public clan::View
+class WorkspaceTabView : public uicore::View
 {
 public:
 	WorkspaceTabView(const std::string &label_text, bool app_label);
 
-	std::shared_ptr<clan::LabelView> label;
-	std::shared_ptr<clan::LabelView> message_count;
-	std::shared_ptr<clan::ImageView> close;
+	std::shared_ptr<uicore::LabelView> label;
+	std::shared_ptr<uicore::LabelView> message_count;
+	std::shared_ptr<uicore::ImageView> close;
 };

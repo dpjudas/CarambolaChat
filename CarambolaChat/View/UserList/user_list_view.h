@@ -1,7 +1,7 @@
 
 #pragma once
 
-class UserListView : public clan::ScrollView
+class UserListView : public uicore::ScrollView
 {
 public:
 	UserListView();
@@ -17,9 +17,9 @@ private:
 	struct User
 	{
 		int sort_priority = 0;
-		std::shared_ptr<clan::View> view;
-		std::shared_ptr<clan::ImageView> icon;
-		std::shared_ptr<clan::LabelView> label;
+		std::shared_ptr<uicore::View> view;
+		std::shared_ptr<uicore::ImageView> icon;
+		std::shared_ptr<uicore::LabelView> label;
 	};
 
 	std::map<std::string, User> users;

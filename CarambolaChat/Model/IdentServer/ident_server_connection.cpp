@@ -3,7 +3,7 @@
 #include "ident_server_connection.h"
 #include "ident_server.h"
 
-IdentServerConnection::IdentServerConnection(IdentServer *server, clan::TCPConnection connection)
+IdentServerConnection::IdentServerConnection(IdentServer *server, uicore::TCPConnection connection)
 : server(server), connection(connection)
 {
 	thread = std::thread(&IdentServerConnection::worker_main, this);
@@ -55,17 +55,17 @@ void IdentServerConnection::worker_main()
 				input_message.append(buffer + start, bytes_read - start);
 
 				if (input_message.length() > 1024)
-					throw clan::Exception("Invalid request");
+					throw uicore::Exception("Invalid request");
 			}
 			else
 			{
-				clan::NetworkEvent *events[] = { &connection };
+				uicore::NetworkEvent *events[] = { &connection };
 				if (!change_event.wait(lock, 1, events, 60 * 1000))
 					return;
 			}
 		}
 	}
-	catch (clan::Exception &)
+	catch (uicore::Exception &)
 	{
 	}
 }
@@ -74,11 +74,11 @@ bool IdentServerConnection::received_message(std::string message)
 {
 	std::string::size_type p = message.find(',');
 	if (p == std::string::npos)
-		throw clan::Exception("Invalid request");
-	std::string port_on_server = clan::StringHelp::trim(clan::StringHelp::utf8_to_text(message.substr(0, p)));
-	std::string port_on_client = clan::StringHelp::trim(clan::StringHelp::utf8_to_text(message.substr(p+1)));
+		throw uicore::Exception("Invalid request");
+	std::string port_on_server = uicore::StringHelp::trim(uicore::StringHelp::utf8_to_text(message.substr(0, p)));
+	std::string port_on_client = uicore::StringHelp::trim(uicore::StringHelp::utf8_to_text(message.substr(p+1)));
 	
-	std::string response = clan::string_format("%1,%2:UNIX:carambola\r\n", port_on_server, port_on_client);
+	std::string response = uicore::string_format("%1,%2:UNIX:carambola\r\n", port_on_server, port_on_client);
 
 	std::unique_lock<std::mutex> lock(mutex);
 
@@ -88,7 +88,7 @@ bool IdentServerConnection::received_message(std::string message)
 		int written = connection.write(response.data() + pos, (int)response.length() - pos);
 		if (written == -1)
 		{
-			clan::NetworkEvent *events[] = { &connection };
+			uicore::NetworkEvent *events[] = { &connection };
 			if (!change_event.wait(lock, 1, events, 60 * 1000))
 				return false;
 		}

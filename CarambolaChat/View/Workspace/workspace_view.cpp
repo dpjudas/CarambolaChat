@@ -3,7 +3,7 @@
 #include "workspace_view.h"
 #include "workspace_tab_view.h"
 
-using namespace clan;
+using namespace uicore;
 
 WorkspaceView::WorkspaceView()
 {

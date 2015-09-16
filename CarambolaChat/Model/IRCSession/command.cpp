@@ -48,7 +48,7 @@ void Command::execute(IRCSession *session, const IRCEntity &filter, std::string 
 		0, 0
 	};
 
-	std::vector<std::string> args = clan::StringHelp::split_text(command_line, " ");
+	std::vector<std::string> args = uicore::StringHelp::split_text(command_line, " ");
 	for (int i=0; functions[i].name != 0; i++)
 	{
 		std::string str(functions[i].name);
@@ -68,7 +68,7 @@ void Command::execute_nick(IRCSession *session, const IRCEntity &filter, std::ve
 	}
 	else
 	{
-		throw clan::Exception("syntax: /nick <new nick>");
+		throw uicore::Exception("syntax: /nick <new nick>");
 	}
 }
 
@@ -101,11 +101,11 @@ void Command::execute_join(IRCSession *session, const IRCEntity &filter, std::ve
 	}
 	else if (args.size() == 3)
 	{
-		session->connection.send_join(IRCChannel::from_text(args[1]), clan::StringHelp::text_to_utf8(args[2]));
+		session->connection.send_join(IRCChannel::from_text(args[1]), uicore::StringHelp::text_to_utf8(args[2]));
 	}
 	else
 	{
-		throw clan::Exception("syntax: /join <channel> [key]");
+		throw uicore::Exception("syntax: /join <channel> [key]");
 	}
 }
 
@@ -128,8 +128,8 @@ void Command::execute_part(IRCSession *session, const IRCEntity &filter, std::ve
 	}*/
 	else
 	{
-		throw clan::Exception("syntax: /part <channel>");
-		//throw clan::Exception("syntax: /part <channel> [reason]");
+		throw uicore::Exception("syntax: /part <channel>");
+		//throw uicore::Exception("syntax: /part <channel> [reason]");
 	}
 }
 
@@ -143,7 +143,7 @@ void Command::execute_mode(IRCSession *session, const IRCEntity &filter, std::ve
 	}
 	else
 	{
-		throw clan::Exception("syntax: /mode <channel or nick> <mode> [args]");
+		throw uicore::Exception("syntax: /mode <channel or nick> <mode> [args]");
 	}
 }
 
@@ -165,7 +165,7 @@ void Command::execute_topic(IRCSession *session, const IRCEntity &filter, std::v
 	}
 	else
 	{
-		throw clan::Exception("syntax: /topic <channel> [new topic]");
+		throw uicore::Exception("syntax: /topic <channel> [new topic]");
 	}
 }
 
@@ -177,7 +177,7 @@ void Command::execute_names(IRCSession *session, const IRCEntity &filter, std::v
 	}
 	else
 	{
-		throw clan::Exception("syntax: /names <channel>");
+		throw uicore::Exception("syntax: /names <channel>");
 	}
 }
 
@@ -197,7 +197,7 @@ void Command::execute_list(IRCSession *session, const IRCEntity &filter, std::ve
 	}
 	else
 	{
-		throw clan::Exception("syntax: /list [channel] [server]");
+		throw uicore::Exception("syntax: /list [channel] [server]");
 	}
 }
 
@@ -209,7 +209,7 @@ void Command::execute_invite(IRCSession *session, const IRCEntity &filter, std::
 	}
 	else
 	{
-		throw clan::Exception("syntax: /invite <nick> <channel>");
+		throw uicore::Exception("syntax: /invite <nick> <channel>");
 	}
 }
 
@@ -227,7 +227,7 @@ void Command::execute_kick(IRCSession *session, const IRCEntity &filter, std::ve
 	}
 	else
 	{
-		throw clan::Exception("syntax: /kick <channel> <user> [comment]");
+		throw uicore::Exception("syntax: /kick <channel> <user> [comment]");
 	}
 }
 
@@ -243,7 +243,7 @@ void Command::execute_send_version(IRCSession *session, const IRCEntity &filter,
 	}
 	else
 	{
-		throw clan::Exception("syntax: /send_version [server]");
+		throw uicore::Exception("syntax: /send_version [server]");
 	}
 }
 
@@ -263,7 +263,7 @@ void Command::execute_stats(IRCSession *session, const IRCEntity &filter, std::v
 	}
 	else
 	{
-		throw clan::Exception("syntax: /stats [query] [server]");
+		throw uicore::Exception("syntax: /stats [query] [server]");
 	}
 }
 
@@ -283,7 +283,7 @@ void Command::execute_links(IRCSession *session, const IRCEntity &filter, std::v
 	}
 	else
 	{
-		throw clan::Exception("syntax: /links [remote server] [server mask]");
+		throw uicore::Exception("syntax: /links [remote server] [server mask]");
 	}
 }
 
@@ -299,7 +299,7 @@ void Command::execute_send_time(IRCSession *session, const IRCEntity &filter, st
 	}
 	else
 	{
-		throw clan::Exception("syntax: /send_time [server]");
+		throw uicore::Exception("syntax: /send_time [server]");
 	}
 }
 
@@ -311,15 +311,15 @@ void Command::execute_connect(IRCSession *session, const IRCEntity &filter, std:
 	}
 	else if (args.size() == 3)
 	{
-//		session->connection.send_connect(args[1], clan::StringHelp::text_to_int(args[2]));
+//		session->connection.send_connect(args[1], uicore::StringHelp::text_to_int(args[2]));
 	}
 	else if (args.size() == 4)
 	{
-//		session->connection.send_connect(args[1], clan::StringHelp::text_to_int(args[2]), args[3]);
+//		session->connection.send_connect(args[1], uicore::StringHelp::text_to_int(args[2]), args[3]);
 	}
 	else
 	{
-		throw clan::Exception("syntax: /connect <target server> [port] [remote server]");
+		throw uicore::Exception("syntax: /connect <target server> [port] [remote server]");
 	}
 }
 
@@ -335,7 +335,7 @@ void Command::execute_trace(IRCSession *session, const IRCEntity &filter, std::v
 	}
 	else
 	{
-		throw clan::Exception("syntax: /trace [server]");
+		throw uicore::Exception("syntax: /trace [server]");
 	}
 }
 
@@ -351,7 +351,7 @@ void Command::execute_admin(IRCSession *session, const IRCEntity &filter, std::v
 	}
 	else
 	{
-		throw clan::Exception("syntax: /admin [server]");
+		throw uicore::Exception("syntax: /admin [server]");
 	}
 }
 
@@ -367,7 +367,7 @@ void Command::execute_info(IRCSession *session, const IRCEntity &filter, std::ve
 	}
 	else
 	{
-		throw clan::Exception("syntax: /info [server]");
+		throw uicore::Exception("syntax: /info [server]");
 	}
 }
 
@@ -385,7 +385,7 @@ void Command::execute_privmsg(IRCSession *session, const IRCEntity &filter, std:
 	}
 	else
 	{
-		throw clan::Exception("syntax: /privmsg <nick or channel> <text>");
+		throw uicore::Exception("syntax: /privmsg <nick or channel> <text>");
 	}
 }
 
@@ -403,7 +403,7 @@ void Command::execute_ctcp(IRCSession *session, const IRCEntity &filter, std::ve
 	}
 	else
 	{
-		throw clan::Exception("syntax: /ctcp <nick or channel> <command> [data]");
+		throw uicore::Exception("syntax: /ctcp <nick or channel> <command> [data]");
 	}
 }
 
@@ -421,7 +421,7 @@ void Command::execute_notice(IRCSession *session, const IRCEntity &filter, std::
 	}
 	else
 	{
-		throw clan::Exception("syntax: /notice <nick or channel> <text>");
+		throw uicore::Exception("syntax: /notice <nick or channel> <text>");
 	}
 }
 
@@ -439,7 +439,7 @@ void Command::execute_notice_ctcp(IRCSession *session, const IRCEntity &filter, 
 	}
 	else
 	{
-		throw clan::Exception("syntax: /notice_ctcp <nick or channel> <command> [data]");
+		throw uicore::Exception("syntax: /notice_ctcp <nick or channel> <command> [data]");
 	}
 }
 
@@ -455,7 +455,7 @@ void Command::execute_who(IRCSession *session, const IRCEntity &filter, std::vec
 	}
 	else
 	{
-		throw clan::Exception("syntax: /whois <name> [oper = false]");
+		throw uicore::Exception("syntax: /whois <name> [oper = false]");
 	}
 }
 
@@ -471,8 +471,8 @@ void Command::execute_whois(IRCSession *session, const IRCEntity &filter, std::v
 	}
 	else
 	{
-		throw clan::Exception("syntax: /whois <nickmask>");
-		// throw clan::Exception("syntax: /whois <server> <nickmask>");
+		throw uicore::Exception("syntax: /whois <nickmask>");
+		// throw uicore::Exception("syntax: /whois <server> <nickmask>");
 	}
 }
 
@@ -484,15 +484,15 @@ void Command::execute_whowas(IRCSession *session, const IRCEntity &filter, std::
 	}
 	else if (args.size() == 3)
 	{
-//		session->connection.send_whowas(IRCEntity::from_text(args[1]), clan::StringHelp::text_to_int(args[2]));
+//		session->connection.send_whowas(IRCEntity::from_text(args[1]), uicore::StringHelp::text_to_int(args[2]));
 	}
 	else if (args.size() == 4)
 	{
-//		session->connection.send_whowas(IRCEntity::from_text(args[1]), clan::StringHelp::text_to_int(args[2]), IRCEntity::from_text(args[3]));
+//		session->connection.send_whowas(IRCEntity::from_text(args[1]), uicore::StringHelp::text_to_int(args[2]), IRCEntity::from_text(args[3]));
 	}
 	else
 	{
-		throw clan::Exception("syntax: /whowas <nick> [count] [server]");
+		throw uicore::Exception("syntax: /whowas <nick> [count] [server]");
 	}
 }
 
@@ -510,7 +510,7 @@ void Command::execute_kill(IRCSession *session, const IRCEntity &filter, std::ve
 	}
 	else
 	{
-		throw clan::Exception("syntax: /kill <nick> <comment>");
+		throw uicore::Exception("syntax: /kill <nick> <comment>");
 	}
 }
 
@@ -534,7 +534,7 @@ void Command::execute_finger(IRCSession *session, const IRCEntity &filter, std::
 	}
 	else
 	{
-		throw clan::Exception("syntax: /finger <channel or user>");
+		throw uicore::Exception("syntax: /finger <channel or user>");
 	}
 }
 
@@ -546,7 +546,7 @@ void Command::execute_version(IRCSession *session, const IRCEntity &filter, std:
 	}
 	else
 	{
-		throw clan::Exception("syntax: /version <channel or user>");
+		throw uicore::Exception("syntax: /version <channel or user>");
 	}
 }
 
@@ -558,7 +558,7 @@ void Command::execute_userinfo(IRCSession *session, const IRCEntity &filter, std
 	}
 	else
 	{
-		throw clan::Exception("syntax: /userinfo <channel or user>");
+		throw uicore::Exception("syntax: /userinfo <channel or user>");
 	}
 }
 
@@ -570,7 +570,7 @@ void Command::execute_clientinfo(IRCSession *session, const IRCEntity &filter, s
 	}
 	else
 	{
-		throw clan::Exception("syntax: /clientinfo <channel or user>");
+		throw uicore::Exception("syntax: /clientinfo <channel or user>");
 	}
 }
 
@@ -578,11 +578,11 @@ void Command::execute_ping(IRCSession *session, const IRCEntity &filter, std::ve
 {
 	if (args.size() == 2)
 	{
-		//session->connection.send_privmsg_ctcp(args[1], "PING", clan::StringHelp::int_to_text(clan::System::get_time()));
+		//session->connection.send_privmsg_ctcp(args[1], "PING", uicore::StringHelp::int_to_text(uicore::System::get_time()));
 	}
 	else
 	{
-		throw clan::Exception("syntax: /ping <channel or user>");
+		throw uicore::Exception("syntax: /ping <channel or user>");
 	}
 }
 
@@ -594,7 +594,7 @@ void Command::execute_time(IRCSession *session, const IRCEntity &filter, std::ve
 	}
 	else
 	{
-		throw clan::Exception("syntax: /time <channel or user>");
+		throw uicore::Exception("syntax: /time <channel or user>");
 	}
 }
 

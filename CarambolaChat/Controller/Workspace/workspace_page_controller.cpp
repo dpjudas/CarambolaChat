@@ -3,14 +3,14 @@
 #include "workspace_page_controller.h"
 #include "workspace_controller.h"
 
-using namespace clan;
+using namespace uicore;
 
 WorkspacePageController::WorkspacePageController()
 {
 	controller_view->style()->set("flex: auto");
 }
 
-void WorkspacePageController::set_page_view(const std::shared_ptr<clan::View> &new_page_view)
+void WorkspacePageController::set_page_view(const std::shared_ptr<uicore::View> &new_page_view)
 {
 	controller_view = new_page_view;
 	controller_view->style()->set("flex: auto");

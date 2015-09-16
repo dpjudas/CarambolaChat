@@ -3,7 +3,7 @@
 
 #include "View/Theme/theme_views.h"
 
-class EditConnectionCheckView : public clan::RowView
+class EditConnectionCheckView : public uicore::RowView
 {
 public:
 	EditConnectionCheckView(const std::string &label_text = std::string())
@@ -21,7 +21,7 @@ public:
 	std::shared_ptr<ThemeCheckBoxView> value;
 };
 
-class EditConnectionTextView : public clan::RowView
+class EditConnectionTextView : public uicore::RowView
 {
 public:
 	EditConnectionTextView(const std::string &label_text = std::string(), const std::string &placeholder = std::string(), int size = 0)
@@ -57,12 +57,12 @@ public:
 	}
 };
 
-class EditConnectionButtonBarView : public clan::RowView
+class EditConnectionButtonBarView : public uicore::RowView
 {
 public:
 	EditConnectionButtonBarView()
 	{
-		add_subview<clan::SpacerView>();
+		add_subview<uicore::SpacerView>();
 		ok_button = add_subview<EditConnectionButtonView>("OK");
 		cancel_button = add_subview<EditConnectionButtonView>("Cancel");
 
@@ -73,7 +73,7 @@ public:
 	std::shared_ptr<EditConnectionButtonView> cancel_button;
 };
 
-class EditConnectionView : public clan::ColumnView
+class EditConnectionView : public uicore::ColumnView
 {
 public:
 	EditConnectionView()
@@ -100,5 +100,5 @@ public:
 	std::shared_ptr<EditConnectionTextView> alt_nick;
 	std::shared_ptr<EditConnectionCheckView> auto_connect;
 	std::shared_ptr<EditConnectionButtonBarView> button_bar;
-	std::shared_ptr<clan::TextView> perform_list;
+	std::shared_ptr<uicore::TextView> perform_list;
 };

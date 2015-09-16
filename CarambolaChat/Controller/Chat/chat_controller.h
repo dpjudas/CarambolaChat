@@ -34,12 +34,12 @@ private:
 
 	std::vector<std::string> split_input_text(const std::string &text);
 
-	void add_line(const IRCText &text, const clan::Colorf &text_color, bool unimportant);
-	void add_line(const IRCNick &sender, const IRCText &text, const clan::Colorf &text_color, const clan::Colorf &nick_color);
+	void add_line(const IRCText &text, const uicore::Colorf &text_color, bool unimportant);
+	void add_line(const IRCNick &sender, const IRCText &text, const uicore::Colorf &text_color, const uicore::Colorf &nick_color);
 	void add_action_line(const IRCNick &nick, const IRCText &text);
 	void add_notice_line(const IRCNick &nick, const IRCText &text);
 	void add_error_line(const IRCText &text);
-	void add_line_text(ChatLine &line, const std::string &text, const clan::Colorf &color);
+	void add_line_text(ChatLine &line, const std::string &text, const uicore::Colorf &color);
 	void add_topic_text();
 
 	void on_channel_topic_updated(const IRCChannel &channel);
@@ -82,7 +82,7 @@ private:
 	int next_chat_url_id = 1;
 	std::regex regexp_url1 = std::regex("(https?://.*?)([ \\r\\n\\t\"'>)]|$)");
 
-	clan::SlotContainer slots;
+	uicore::SlotContainer slots;
 
 /*
 	static std::string get_view_caption(IRCSession *session, const IRCEntity &filter);

@@ -11,8 +11,8 @@ public:
 
 	XMLSettings xml_settings;
 
-	clan::Rect get_window_geometry();
-	void set_window_geometry(const clan::Rect &rect);
+	uicore::Rect get_window_geometry();
+	void set_window_geometry(const uicore::Rect &rect);
 
 	bool get_minimize_to_tray();
 	void set_minimize_to_tray(bool enable_minimize_to_tray);

@@ -12,7 +12,7 @@ IRCConnection::~IRCConnection()
 	disconnect();
 }
 
-void IRCConnection::connect(const clan::SocketName &new_server)
+void IRCConnection::connect(const uicore::SocketName &new_server)
 {
 	disconnect();
 
@@ -265,7 +265,7 @@ void IRCConnection::worker_main()
 {
 	try
 	{
-		clan::TCPConnection connection(server);
+		uicore::TCPConnection connection(server);
 
 		IRCRawString read_line, write_line;
 		IRCRawString::size_type write_pos = 0;
@@ -282,21 +282,21 @@ void IRCConnection::worker_main()
 
 			write_connection_data(write_line, write_pos, connection);
 
-			clan::NetworkEvent *events[] = { &connection };
+			uicore::NetworkEvent *events[] = { &connection };
 			change_event.wait(lock, 1, events);
 		}
 
 		queues.set_disconnected(std::string());
-		clan::RunLoop::main_thread_async(clan::bind_member(this, &IRCConnection::process));
+		uicore::RunLoop::main_thread_async(uicore::bind_member(this, &IRCConnection::process));
 	}
-	catch (clan::Exception &e)
+	catch (uicore::Exception &e)
 	{
 		queues.set_disconnected(e.message);
-		clan::RunLoop::main_thread_async(clan::bind_member(this, &IRCConnection::process));
+		uicore::RunLoop::main_thread_async(uicore::bind_member(this, &IRCConnection::process));
 	}
 }
 
-bool IRCConnection::read_connection_data(clan::TCPConnection &connection, IRCRawString &read_line)
+bool IRCConnection::read_connection_data(uicore::TCPConnection &connection, IRCRawString &read_line)
 {
 	while (true)
 	{
@@ -316,7 +316,7 @@ bool IRCConnection::read_connection_data(clan::TCPConnection &connection, IRCRaw
 				start_pos = i + 1;
 				queues.push_received(read_line);
 
-				clan::RunLoop::main_thread_async(clan::bind_member(this, &IRCConnection::process));
+				uicore::RunLoop::main_thread_async(uicore::bind_member(this, &IRCConnection::process));
 
 				read_line.clear();
 			}
@@ -325,7 +325,7 @@ bool IRCConnection::read_connection_data(clan::TCPConnection &connection, IRCRaw
 	}
 }
 
-void IRCConnection::write_connection_data(IRCRawString &write_line, IRCRawString::size_type &write_pos, clan::TCPConnection &connection)
+void IRCConnection::write_connection_data(IRCRawString &write_line, IRCRawString::size_type &write_pos, uicore::TCPConnection &connection)
 {
 	while (true)
 	{

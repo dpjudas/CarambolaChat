@@ -4,7 +4,7 @@
 #include "View/EditConnection/edit_connection_view.h"
 #include "Model/XMLSettings/xml_settings.h"
 
-class EditConnectionController : public clan::WindowController
+class EditConnectionController : public uicore::WindowController
 {
 public:
 	EditConnectionController();

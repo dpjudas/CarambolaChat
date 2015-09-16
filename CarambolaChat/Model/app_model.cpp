@@ -38,7 +38,7 @@ AppModel::~AppModel()
 AppModel *AppModel::instance()
 {
 	if (instance_ptr == nullptr)
-		throw clan::Exception("No AppModel instance!");
+		throw uicore::Exception("No AppModel instance!");
 	return instance_ptr;
 }
 
@@ -66,7 +66,7 @@ void AppModel::destroy_irc_session(IRCSession *session)
 	{
 		std::vector<IRCSession*>::iterator it = std::find(irc_sessions.begin(), irc_sessions.end(), session);
 		if (it == irc_sessions.end())
-			throw clan::Exception("IRCSession object is already destroyed or does not belong to this document");
+			throw uicore::Exception("IRCSession object is already destroyed or does not belong to this document");
 
 		cb_irc_session_destroyed(session);
 
@@ -103,7 +103,7 @@ void AppModel::destroy_xmpp_session(XMPPSession *session)
 	{
 		std::vector<XMPPSession*>::iterator it = std::find(xmpp_sessions.begin(), xmpp_sessions.end(), session);
 		if (it == xmpp_sessions.end())
-			throw clan::Exception("XMPPSession object is already destroyed or does not belong to this document");
+			throw uicore::Exception("XMPPSession object is already destroyed or does not belong to this document");
 
 		cb_xmpp_session_destroyed(session);
 
@@ -113,7 +113,7 @@ void AppModel::destroy_xmpp_session(XMPPSession *session)
 }
 #endif
 
-DCCChatConnection *AppModel::create_dcc_chat_connection(const std::string &local_nick, const std::string &remote_nick, clan::SocketName socket_name, bool is_server)
+DCCChatConnection *AppModel::create_dcc_chat_connection(const std::string &local_nick, const std::string &remote_nick, uicore::SocketName socket_name, bool is_server)
 {
 	DCCChatConnection *connection = new DCCChatConnection(local_nick, remote_nick, socket_name);
 	if (is_server)
@@ -131,7 +131,7 @@ void AppModel::destroy_dcc_chat_connection(DCCChatConnection *connection)
 	{
 		std::vector<DCCChatConnection*>::iterator it = std::find(dcc_chat_connections.begin(), dcc_chat_connections.end(), connection);
 		if (it == dcc_chat_connections.end())
-			throw clan::Exception("DCCChatConnection object is already destroyed or does not belong to this document");
+			throw uicore::Exception("DCCChatConnection object is already destroyed or does not belong to this document");
 
 		cb_dcc_chat_connection_destroyed(connection);
 

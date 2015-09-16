@@ -5,7 +5,7 @@
 #include <shobjidl.h>
 #endif
 
-using namespace clan;
+using namespace uicore;
 
 TaskbarNotification::TaskbarNotification(std::shared_ptr<View> init_view) : view(init_view)
 {

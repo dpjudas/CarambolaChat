@@ -4,7 +4,7 @@
 class DCCFileTransferConnection
 {
 public:
-	DCCFileTransferConnection(const clan::SocketName &socket_name);
+	DCCFileTransferConnection(const uicore::SocketName &socket_name);
 	~DCCFileTransferConnection();
 
 	enum Status
@@ -26,12 +26,12 @@ public:
 private:
 	void worker_main();
 
-	clan::SocketName socket_name;
+	uicore::SocketName socket_name;
 	std::string filename;
-	clan::TCPConnection connection;
+	uicore::TCPConnection connection;
 	std::thread thread;
 	std::mutex mutex;
-	clan::NetworkConditionVariable change_event;
+	uicore::NetworkConditionVariable change_event;
 	bool abort_flag = false;
 	unsigned int bytes_received;
 	Status status;

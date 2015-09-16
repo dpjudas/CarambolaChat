@@ -4,7 +4,7 @@
 #include "chat_line.h"
 #include <algorithm>
 
-using namespace clan;
+using namespace uicore;
 
 ChatView::ChatView()
 {
@@ -61,7 +61,7 @@ std::string ChatView::create_timestamp()
 	return hour+":"+minute;
 }
 
-void ChatView::layout_subviews(clan::Canvas &canvas)
+void ChatView::layout_subviews(uicore::Canvas &canvas)
 {
 	scroll->set_page_step(geometry().content_box().get_height() / 15.0f);
 	View::layout_subviews(canvas);
@@ -74,12 +74,12 @@ void ChatView::render_text_content(ChatTextView *text_view, Canvas &canvas)
 
 	if (font.is_null())
 	{
-		clan::Style style;
+		uicore::Style style;
 		style.set("font: 14px/20px 'Source Sans Pro'");
 
-		clan::StyleCascade cascade({ &style });
+		uicore::StyleCascade cascade({ &style });
 
-		font = cascade.get_font(canvas);
+		font = cascade.get_font();
 		font_url = font;
 		font_fixed = font;
 		baseline_offset1 = (int)(font.get_font_metrics(canvas).get_ascent() - font_fixed.get_font_metrics(canvas).get_ascent());
@@ -202,7 +202,7 @@ void ChatView::layout_line(Canvas &canvas, ChatLine &line, Rect &client_area, in
 			for (auto &i : line.inlines)
 			{
 				StyleCascade cascade({ i.style.get() });
-				line.column3.add_text(i.text, cascade.get_font(canvas), cascade.computed_value("color").color(), i.id);
+				line.column3.add_text(i.text, cascade.get_font(), cascade.computed_value("color").color(), i.id);
 			}
 
 			line.column3_rendered = true;

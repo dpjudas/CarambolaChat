@@ -2,5 +2,5 @@
 IRC chat client
 
 ## Build Dependencies
-- Requires ClanLib: https://github.com/sphair/ClanLib
+- Requires UICore: https://github.com/dpjudas/UICore
 - Requires WiX Toolset for the MSI installer: http://wixtoolset.org/

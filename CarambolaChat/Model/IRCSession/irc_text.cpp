@@ -9,7 +9,7 @@ IRCText::IRCText()
 IRCText IRCText::from_text(const std::string &text)
 {
 	IRCText t;
-	t.text8 = clan::StringHelp::text_to_utf8(text);
+	t.text8 = uicore::StringHelp::text_to_utf8(text);
 	return t;
 }
 
@@ -70,7 +70,7 @@ std::string IRCText::get_text() const
 				i++;
 			}
 		}
-		return clan::StringHelp::utf8_to_text(s);
+		return uicore::StringHelp::utf8_to_text(s);
 	}
 }
 
@@ -129,7 +129,7 @@ IRCRawString IRCEscape::get_ctcp_data() const
 		return data.substr(1, data.length()-1);
 }
 
-clan::Colorf IRCEscape::get_color() const
+uicore::Colorf IRCEscape::get_color() const
 {
-	return clan::Colorf::black;
+	return uicore::Colorf::black;
 }

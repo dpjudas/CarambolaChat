@@ -6,10 +6,10 @@
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
-using namespace clan;
+using namespace uicore;
 
-clan::ApplicationInstance<Program> clanapp;
-
+uicore::ApplicationInstance<Program> app;
+/*
 class DisplayResources : public DisplayCache
 {
 public:
@@ -76,12 +76,13 @@ private:
 	std::map<std::string, FontFamily > loaded_fonts;
 	std::map<std::string, Resource<Image>> loaded_images;
 };
+*/
 
 Program::Program()
 {
 	/*
 	#ifndef _DEBUG
-	std::string appdata_dir = clan::Directory::get_appdata("ClanLib", "Carambola", "1.0");
+	std::string appdata_dir = uicore::Directory::get_appdata("ClanLib", "Carambola", "1.0");
 	CrashReporter crash_reporter(appdata_dir);
 
 	DetectHang detect_hang;
@@ -93,10 +94,14 @@ Program::Program()
 	OpenGLTarget::set_current();
 #endif
 
-	ResourceManager resources;
-	DisplayCache::set(resources, std::make_shared<DisplayResources>());
+	//ResourceManager resources;
+	//DisplayCache::set(resources, std::make_shared<DisplayResources>());
 
-	ui_thread = UIThread(resources);
+	std::string resource_path = "Resources";
+#ifdef __APPLE__
+	resource_path = Directory::get_resourcedata("CarambolaChat", resource_path);
+#endif
+	ui_thread = UIThread(resource_path);
 
 	chat_window_controller = std::make_shared<ChatWindowViewController>();
 
@@ -105,12 +110,12 @@ Program::Program()
 	DisplayWindowDescription desc;
 	desc.set_title("Carambola Chat");
 	desc.set_allow_resize(true);
-	desc.set_size(clan::Size(1536, 864), false);
+	desc.set_size(uicore::Size(1536, 864), false);
 
 	window = std::make_shared<TopLevelWindow>(desc);
 	window->set_root_view(chat_window_controller->view);
-	window->get_display_window().set_large_icon(ImageProviderFactory::load(PathHelp::combine(DisplayResources::resource_path(), "Icons/carambola-256.png")));
-	window->get_display_window().set_small_icon(ImageProviderFactory::load(PathHelp::combine(DisplayResources::resource_path(), "Icons/carambola-32.png")));
+	window->get_display_window().set_large_icon(ImageFile::load(PathHelp::combine(resource_path, "Icons/carambola-256.png")));
+	window->get_display_window().set_small_icon(ImageFile::load(PathHelp::combine(resource_path, "Icons/carambola-32.png")));
 	window->show(WindowShowType::show_default);
 
 	Application::use_timeout_timing(250);

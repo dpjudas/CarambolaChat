@@ -2,7 +2,7 @@
 #include "precomp.h"
 #include "network_list_item_view.h"
 
-using namespace clan;
+using namespace uicore;
 
 NetworkListItemView::NetworkListItemView()
 {

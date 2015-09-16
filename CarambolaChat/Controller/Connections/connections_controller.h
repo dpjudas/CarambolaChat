@@ -29,6 +29,6 @@ private:
 	void on_session_connect_status_changed(IRCSession::ConnectStatus status, IRCSession *session);
 
 	std::shared_ptr<ConnectionsView> view = std::make_shared<ConnectionsView>();
-	clan::WindowManager windows;
-	clan::SlotContainer slots;
+	uicore::WindowManager windows;
+	uicore::SlotContainer slots;
 };

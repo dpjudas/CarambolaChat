@@ -6,7 +6,7 @@
 #include <arpa/inet.h>
 #endif
 
-DCCFileTransferConnection::DCCFileTransferConnection(const clan::SocketName &socket_name)
+DCCFileTransferConnection::DCCFileTransferConnection(const uicore::SocketName &socket_name)
 : socket_name(socket_name), bytes_received(0), status(status_not_started)
 {
 }
@@ -20,7 +20,7 @@ void DCCFileTransferConnection::start(const std::string &output_filename)
 {
 	std::unique_lock<std::mutex> lock(mutex);
 	if (status != status_not_started)
-		throw clan::Exception("DCC file transfer can only be started once");
+		throw uicore::Exception("DCC file transfer can only be started once");
 
 	status = status_connecting;
 	status_text = "Connecting..";
@@ -63,7 +63,7 @@ void DCCFileTransferConnection::worker_main()
 {
 	try
 	{
-		connection = clan::TCPConnection(socket_name);
+		connection = uicore::TCPConnection(socket_name);
 
 		std::unique_lock<std::mutex> lock(mutex);
 
@@ -71,8 +71,8 @@ void DCCFileTransferConnection::worker_main()
 		status = status_receiving;
 		status_text = "Downloading..";
 
-		clan::File outputfile(filename, clan::File::create_always, clan::File::access_write, clan::File::share_read);
-		clan::DataBuffer buffer(1024*1024);
+		uicore::File outputfile(filename, uicore::File::create_always, uicore::File::access_write, uicore::File::share_read);
+		uicore::DataBuffer buffer(1024*1024);
 		int total_received_counter = 0;
 		while (true)
 		{
@@ -80,22 +80,22 @@ void DCCFileTransferConnection::worker_main()
 			{
 				status = status_aborted;
 				status_text = "Abort requested by user";
-				connection = clan::TCPConnection();
+				connection = uicore::TCPConnection();
 				return;
 			}
 
-			//int wakeup_reason = clan::Event::wait(abort_event, connection.get_read_event(), 60*1000);
+			//int wakeup_reason = uicore::Event::wait(abort_event, connection.get_read_event(), 60*1000);
 			int received = connection.read(buffer.get_data(), buffer.get_size());
 			if (received == 0)
 			{
 				status = status_finished_transfer;
 				status_text = "Transfer complete";
-				connection = clan::TCPConnection();
+				connection = uicore::TCPConnection();
 				return;
 			}
 			else if (received == -1)
 			{
-				clan::NetworkEvent *events[] = { &connection };
+				uicore::NetworkEvent *events[] = { &connection };
 				if (!change_event.wait(lock, 1, events))
 				{
 					status = status_error;
@@ -120,7 +120,7 @@ void DCCFileTransferConnection::worker_main()
 				{
 					status = status_aborted;
 					status_text = "Abort requested by user";
-					connection = clan::TCPConnection();
+					connection = uicore::TCPConnection();
 					return;
 				}
 
@@ -131,7 +131,7 @@ void DCCFileTransferConnection::worker_main()
 				}
 				else
 				{
-					clan::NetworkEvent *events[] = { &connection };
+					uicore::NetworkEvent *events[] = { &connection };
 					if (!change_event.wait(lock, 1, events))
 					{
 						status = status_error;
@@ -142,9 +142,9 @@ void DCCFileTransferConnection::worker_main()
 			}
 		}
 	}
-	catch (clan::Exception &e)
+	catch (uicore::Exception &e)
 	{
-		connection = clan::TCPConnection();
+		connection = uicore::TCPConnection();
 		std::unique_lock<std::mutex> lock(mutex);
 		status = status_error;
 		status_text = e.message;

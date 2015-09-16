@@ -2,7 +2,7 @@
 #include "precomp.h"
 #include "workspace_tab_view.h"
 
-using namespace clan;
+using namespace uicore;
 
 WorkspaceTabView::WorkspaceTabView(const std::string &label_text, bool app_label)
 {

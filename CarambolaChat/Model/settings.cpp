@@ -9,7 +9,7 @@ Settings::Settings()
 	{
 		xml_settings = load_settings("Carambola.xmlsettings");
 	}
-	catch (clan::Exception &)
+	catch (uicore::Exception &)
 	{
 		XMLSettingsList connections = xml_settings.get_list("connections");
 
@@ -44,10 +44,10 @@ Settings::~Settings()
 	save_settings("Carambola.xmlsettings", xml_settings);
 }
 
-clan::Rect Settings::get_window_geometry()
+uicore::Rect Settings::get_window_geometry()
 {
 	XMLSettings section = xml_settings.get_section("window-geometry");
-	clan::Rect box;
+	uicore::Rect box;
 	box.left = section.get_int("x");
 	box.top = section.get_int("y");
 	box.right = box.left + section.get_int("width");
@@ -55,7 +55,7 @@ clan::Rect Settings::get_window_geometry()
 	return box;
 }
 
-void Settings::set_window_geometry(const clan::Rect &rect)
+void Settings::set_window_geometry(const uicore::Rect &rect)
 {
 	XMLSettings section = xml_settings.get_section("window-geometry");
 	section.set_int("x", rect.left);
@@ -90,7 +90,7 @@ void Settings::set_dcc_port(const std::string &port)
 
 XMLSettings Settings::load_settings(const std::string &settings_file)
 {
-	std::string appdata_dir = clan::Directory::get_appdata("ClanLib", "Carambola", "1.0");
+	std::string appdata_dir = uicore::Directory::get_appdata("ClanLib", "Carambola", "1.0");
 	XMLSettingsAppModel document;
 	document.load(appdata_dir + settings_file);
 	return document.get_root();
@@ -98,6 +98,6 @@ XMLSettings Settings::load_settings(const std::string &settings_file)
 
 void Settings::save_settings(const std::string &settings_file, XMLSettings settings)
 {
-	std::string appdata_dir = clan::Directory::get_appdata("ClanLib", "Carambola", "1.0");
+	std::string appdata_dir = uicore::Directory::get_appdata("ClanLib", "Carambola", "1.0");
 	settings.get_document().save(appdata_dir + settings_file);
 }

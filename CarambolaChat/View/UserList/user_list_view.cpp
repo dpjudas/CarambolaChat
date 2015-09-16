@@ -2,7 +2,7 @@
 #include "precomp.h"
 #include "user_list_view.h"
 
-using namespace clan;
+using namespace uicore;
 
 UserListView::UserListView()
 {

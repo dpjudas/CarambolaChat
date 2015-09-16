@@ -1,79 +1,79 @@
 
 #pragma once
 
-class ThemeButtonView : public clan::ButtonView
+class ThemeButtonView : public uicore::ButtonView
 {
 public:
 	ThemeButtonView();
 };
 
-class ThemeCheckBoxView : public clan::CheckBoxView
+class ThemeCheckBoxView : public uicore::CheckBoxView
 {
 public:
 	ThemeCheckBoxView();
 };
 
-class ThemeImageView : public clan::ImageView
+class ThemeImageView : public uicore::ImageView
 {
 public:
 	ThemeImageView();
 };
 
-class ThemeLabelView : public clan::LabelView
+class ThemeLabelView : public uicore::LabelView
 {
 public:
 	ThemeLabelView();
 };
 
-class ThemeListBoxView : public clan::ListBoxView
+class ThemeListBoxView : public uicore::ListBoxView
 {
 public:
 	ThemeListBoxView();
 };
 
-class ThemeListBoxLabelView : public clan::LabelView
+class ThemeListBoxLabelView : public uicore::LabelView
 {
 public:
 	ThemeListBoxLabelView(const std::string &text = std::string());
 };
 
-class ThemeRadioButtonView : public clan::RadioButtonView
+class ThemeRadioButtonView : public uicore::RadioButtonView
 {
 public:
 	ThemeRadioButtonView();
 };
 
-class ThemeScrollView : public clan::ScrollView
+class ThemeScrollView : public uicore::ScrollView
 {
 public:
 	ThemeScrollView();
 };
 
-class ThemeScrollBarView : public clan::ScrollBarView
+class ThemeScrollBarView : public uicore::ScrollBarView
 {
 public:
 	ThemeScrollBarView();
 };
 
-class ThemeSliderView : public clan::SliderView
+class ThemeSliderView : public uicore::SliderView
 {
 public:
 	ThemeSliderView();
 };
 
-class ThemeSpinView : public clan::SpinView
+class ThemeSpinView : public uicore::SpinView
 {
 public:
 	ThemeSpinView();
 };
 
-class ThemeTextFieldView : public clan::TextFieldView
+class ThemeTextFieldView : public uicore::TextFieldView
 {
 public:
 	ThemeTextFieldView();
 };
 
-class ThemeTextView : public clan::TextView
+class ThemeTextView : public uicore::TextView
 {
 public:
 	ThemeTextView();

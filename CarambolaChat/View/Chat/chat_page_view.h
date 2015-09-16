@@ -4,12 +4,12 @@
 #include "View/Chat/chat_view.h"
 #include "View/UserList/user_list_view.h"
 
-class ChatPageView : public clan::ColumnView
+class ChatPageView : public uicore::ColumnView
 {
 public:
 	ChatPageView()
 	{
-		auto chat_users_group = std::make_shared<clan::View>();
+		auto chat_users_group = std::make_shared<uicore::View>();
 		chat_users_group->style()->set("flex-direction: row");
 		chat_users_group->style()->set("flex: auto");
 
@@ -22,14 +22,14 @@ public:
 		user_list->style()->set("flex: none");
 		chat_users_group->add_subview(user_list);
 
-		auto input_bar = std::make_shared<clan::View>();
+		auto input_bar = std::make_shared<uicore::View>();
 		input_bar->style()->set("flex: none");
 		input_bar->style()->set("background: linear-gradient(to bottom, rgb(235,243,252), rgb(219,234,249))");
 		input_bar->style()->set("border-top: 1px solid rgb(153,153,153)");
 		input_bar->style()->set("padding: 5px");
 		input_bar->style()->set("flex-direction: row");
 
-		input_text = std::make_shared<clan::TextFieldView>();
+		input_text = std::make_shared<uicore::TextFieldView>();
 		input_text->style()->set("flex: auto");
 		input_text->style()->set("border: 1px solid rgb(153,153,153)");
 		input_text->style()->set("border-radius: 2px");
@@ -45,5 +45,5 @@ public:
 
 	std::shared_ptr<ChatView> chat_log;
 	std::shared_ptr<UserListView> user_list;
-	std::shared_ptr<clan::TextFieldView> input_text;
+	std::shared_ptr<uicore::TextFieldView> input_text;
 };

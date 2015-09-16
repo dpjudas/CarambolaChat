@@ -9,7 +9,7 @@ class XMLSettingsList
 {
 public:
 	XMLSettingsList();
-	XMLSettingsList(const XMLSettingsAppModel &document, const clan::DomElement &node);
+	XMLSettingsList(const XMLSettingsAppModel &document, const DomElement &node);
 
 	XMLSettingsAppModel get_document();
 
@@ -20,5 +20,5 @@ public:
 
 private:
 	XMLSettingsAppModel document;
-	clan::DomElement node;
+	DomElement node;
 };

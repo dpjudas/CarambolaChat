@@ -40,24 +40,24 @@ void IdentServer::worker_main()
 
 	try
 	{
-		clan::TCPListen listen(clan::SocketName("113"));
+		uicore::TCPListen listen(uicore::SocketName("113"));
 		std::unique_lock<std::mutex> lock(mutex);
 		while (!stop_flag)
 		{
-			clan::SocketName end_point;
-			clan::TCPConnection connection = listen.accept(end_point);
+			uicore::SocketName end_point;
+			uicore::TCPConnection connection = listen.accept(end_point);
 			if (!connection.is_null())
 			{
 				connections.push_back(std::make_shared<IdentServerConnection>(this, connection));
 			}
 			else
 			{
-				clan::NetworkEvent *events[] = { &listen };
+				uicore::NetworkEvent *events[] = { &listen };
 				change_event.wait(lock, 1, events);
 			}
 		}
 	}
-	catch (clan::Exception &)
+	catch (uicore::Exception &)
 	{
 	}
 }

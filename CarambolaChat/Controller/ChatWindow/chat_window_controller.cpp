@@ -7,7 +7,7 @@
 #include "Model/app_model.h"
 #include "Model/IRCSession/irc_session.h"
 
-using namespace clan;
+using namespace uicore;
 
 ChatWindowViewController::ChatWindowViewController()
 {

@@ -8,7 +8,7 @@
 #include "Model/XMLSettings/xml_settings_list.h"
 #include "Model/app_model.h"
 
-using namespace clan;
+using namespace uicore;
 
 ConnectionsController::ConnectionsController()
 {
