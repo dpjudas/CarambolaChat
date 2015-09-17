@@ -1,10 +1,11 @@
 
 #include "precomp.h"
 #include "program.h"
+#include "Controller/ChatWindow/chat_window_controller.h"
 
 using namespace uicore;
 
-uicore::ApplicationInstance<Program> app;
+ApplicationInstance<Program> app;
 
 Program::Program()
 {
@@ -21,25 +22,5 @@ Program::Program()
 	UIThread::add_font_face("font-family: 'Source Sans Pro'; font-style: italic", "SourceSansPro/SourceSansPro-Italic.ttf");
 	UIThread::add_font_face("font-family: 'Source Sans Pro'; font-weight: bold; font-style: italic", "SourceSansPro/SourceSansPro-BoldItalic.ttf");
 
-	chat_window_controller = std::make_shared<ChatWindowViewController>();
-
-	exit_slot = chat_window_controller->view->sig_close().connect([&](CloseEvent &e) { exit = true; });
-
-	DisplayWindowDescription desc;
-	desc.set_title("Carambola Chat");
-	desc.set_allow_resize(true);
-	desc.set_size(uicore::Size(1536, 864), false);
-
-	window = std::make_shared<TopLevelWindow>(desc);
-	window->set_root_view(chat_window_controller->view);
-	window->get_display_window().set_large_icon(ImageFile::load(PathHelp::combine(resource_path, "Icons/carambola-256.png")));
-	window->get_display_window().set_small_icon(ImageFile::load(PathHelp::combine(resource_path, "Icons/carambola-32.png")));
-	window->show(WindowShowType::show_default);
-
-	Application::use_timeout_timing(250);
-}
-
-bool Program::update()
-{
-	return !exit;
+	WindowManager::present_main<ChatWindowViewController>();
 }

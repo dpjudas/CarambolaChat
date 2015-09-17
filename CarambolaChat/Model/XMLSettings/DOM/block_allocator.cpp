@@ -48,7 +48,7 @@ void *BlockAllocator::allocate(int size)
 	if (impl->blocks.empty())
 		impl->blocks.push_back(uicore::DataBuffer(size * 10));
 	uicore::DataBuffer &cur = impl->blocks.back();
-	if (impl->block_pos + size <= cur.get_size())
+	if (impl->block_pos + size <= (int)cur.get_size())
 	{
 		void *data = cur.get_data() + impl->block_pos;
 		impl->block_pos += size;

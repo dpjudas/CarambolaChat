@@ -10,7 +10,7 @@ class IRCText;
 class IRCFileOffer;
 class DCCChatConnection;
 
-class ChatWindowViewController
+class ChatWindowViewController : public uicore::WindowController
 {
 public:
 	ChatWindowViewController();

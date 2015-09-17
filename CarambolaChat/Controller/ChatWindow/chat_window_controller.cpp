@@ -11,6 +11,11 @@ using namespace uicore;
 
 ChatWindowViewController::ChatWindowViewController()
 {
+	set_title("Carambola Chat");
+	set_frame_size({ 1536.0f, 864.0f });
+	set_icon({ "Icons/carambola-256.png", "Icons/carambola-32.png" });
+	set_root_view(view);
+
 	workspace = std::make_shared<WorkspaceController>();
 	view->add_subview(workspace->view);
 

@@ -54,12 +54,12 @@ ConnectionsController::ConnectionsController()
 	});
 
 	view->networks->add_button->func_clicked() = [this]() { add_clicked(); };
-	view->about_button->func_clicked() = [this]() { windows.present_modal<AboutController>(view.get()); };
+	view->about_button->func_clicked() = [this]() { WindowManager::present_modal<AboutController>(view.get()); };
 }
 
 void ConnectionsController::add_clicked()
 {
-	windows.present_modal<EditConnectionController>(view.get());
+	WindowManager::present_modal<EditConnectionController>(view.get());
 }
 
 void ConnectionsController::connect_clicked(XMLSettings connection)
@@ -69,7 +69,7 @@ void ConnectionsController::connect_clicked(XMLSettings connection)
 
 void ConnectionsController::edit_clicked(XMLSettings connection)
 {
-	windows.present_modal<EditConnectionController>(view.get(), connection);
+	WindowManager::present_modal<EditConnectionController>(view.get(), connection);
 }
 
 void ConnectionsController::remove_clicked(XMLSettings connection)
