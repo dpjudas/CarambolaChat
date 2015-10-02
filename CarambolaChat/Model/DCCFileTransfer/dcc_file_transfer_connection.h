@@ -28,7 +28,7 @@ private:
 
 	uicore::SocketName socket_name;
 	std::string filename;
-	uicore::TCPConnection connection;
+	uicore::TCPConnectionPtr connection;
 	std::thread thread;
 	std::mutex mutex;
 	uicore::NetworkConditionVariable change_event;

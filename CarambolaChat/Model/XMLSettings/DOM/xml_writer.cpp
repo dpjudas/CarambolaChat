@@ -39,7 +39,7 @@ XMLWriter::XMLWriter(const XMLWriter &copy) : impl(copy.impl)
 {
 }
 
-XMLWriter::XMLWriter(uicore::IODevice &output) : impl(std::make_shared<XMLWriter_Impl>())
+XMLWriter::XMLWriter(const uicore::IODevicePtr &output) : impl(std::make_shared<XMLWriter_Impl>())
 {
 	impl->output = output;
 	impl->str.reserve(4096);
@@ -183,7 +183,7 @@ void XMLWriter::write(const XMLToken &token)
 		impl->indent++;
 	}
 
-	impl->output.send(str.data(), str.size());
+	impl->output->write(str.data(), str.size());
 }
 
 /////////////////////////////////////////////////////////////////////////////

@@ -65,7 +65,7 @@ public:
 	///
 	/// \param input = IODevice
 	/// \param eat_whitespace = bool
-	DomDocument(uicore::IODevice &input, bool eat_whitespace = true);
+	DomDocument(uicore::IODevicePtr input, bool eat_whitespace = true);
 
 	DomDocument(
 		const DomString &namespace_uri,
@@ -183,7 +183,7 @@ public:
 	/// \param insert_point Place in the DOM to insert the loaded XML code.
 	/// \return List of all top level nodes created.
 	std::vector<DomNode> load(
-		uicore::IODevice &input,
+		uicore::IODevicePtr input,
 		bool eat_whitespace = true,
 		DomNode insert_point = DomNode());
 
@@ -191,7 +191,7 @@ public:
 	///
 	/// \param output Output source to write to.
 	/// \param insert_whitespace Passed on to XMLWriter::set_insert_whitespace.
-	void save(uicore::IODevice &output, bool insert_whitespace = true);
+	void save(uicore::IODevicePtr output, bool insert_whitespace = true);
 
 	/// \brief Removes all nodes from the DOM document.
 	void clear_all();

@@ -52,7 +52,7 @@ DomDocument::DomDocument()
 	impl->owner_document = impl;
 }
 
-DomDocument::DomDocument(uicore::IODevice &input, bool eat_whitespace)
+DomDocument::DomDocument(uicore::IODevicePtr input, bool eat_whitespace)
 	: DomNode(std::shared_ptr<DomNode_Impl>(new DomDocument_Impl))
 {
 	impl->owner_document = impl;
@@ -250,7 +250,7 @@ DomNode DomDocument::import_node(const DomNode &node, bool deep)
 }
 
 std::vector<DomNode> DomDocument::load(
-	uicore::IODevice &input,
+	uicore::IODevicePtr input,
 	bool eat_whitespace,
 	DomNode insert_point)
 {
@@ -358,7 +358,7 @@ std::vector<DomNode> DomDocument::load(
 	return result;
 }
 
-void DomDocument::save(uicore::IODevice &output, bool insert_whitespace)
+void DomDocument::save(uicore::IODevicePtr output, bool insert_whitespace)
 {
 	XMLWriter writer(output);
 	writer.set_insert_whitespace(insert_whitespace);

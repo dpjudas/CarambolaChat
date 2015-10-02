@@ -34,7 +34,7 @@
 class BlockAllocator_Impl
 {
 public:
-	std::vector<uicore::DataBuffer> blocks;
+	std::vector<uicore::DataBufferPtr> blocks;
 	int block_pos = 0;
 };
 
@@ -46,17 +46,17 @@ BlockAllocator::BlockAllocator()
 void *BlockAllocator::allocate(int size)
 {
 	if (impl->blocks.empty())
-		impl->blocks.push_back(uicore::DataBuffer(size * 10));
-	uicore::DataBuffer &cur = impl->blocks.back();
-	if (impl->block_pos + size <= (int)cur.get_size())
+		impl->blocks.push_back(uicore::DataBuffer::create(size * 10));
+	uicore::DataBufferPtr &cur = impl->blocks.back();
+	if (impl->block_pos + size <= (int)cur->size())
 	{
-		void *data = cur.get_data() + impl->block_pos;
+		void *data = cur->data() + impl->block_pos;
 		impl->block_pos += size;
 		return data;
 	}
-	impl->blocks.push_back(uicore::DataBuffer(std::max((int)cur.get_size() * 2, size)));
+	impl->blocks.push_back(uicore::DataBuffer::create(std::max((int)cur->size() * 2, size)));
 	impl->block_pos = size;
-	return impl->blocks.back().get_data();
+	return impl->blocks.back()->data();
 }
 
 void BlockAllocator::free()

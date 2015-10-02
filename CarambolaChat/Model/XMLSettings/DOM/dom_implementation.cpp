@@ -48,9 +48,9 @@ bool DomImplementation::has_feature(
 	const DomString &feature,
 	const DomString &version)
 {
-	if (uicore::StringHelp::compare(feature, "xml") == 0 && (version == "1.0" || version.empty()))
+	if (uicore::Text::equal_caseless(feature, "xml") && (version == "1.0" || version.empty()))
 		return true;
-	if (uicore::StringHelp::compare(feature, "xml") == 0 && (version == "2.0" || version.empty()))
+	if (uicore::Text::equal_caseless(feature, "xml") && (version == "2.0" || version.empty()))
 		return true;
 	return false;
 }

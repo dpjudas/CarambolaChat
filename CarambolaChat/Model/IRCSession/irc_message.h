@@ -48,7 +48,7 @@ class IRCNumericReply : public IRCMessage
 public:
 	IRCNumericReply(const IRCMessage &src) : IRCMessage(src) { }
 
-	int get_numeric() const { return uicore::StringHelp::local8_to_int(get_command()); }
+	int get_numeric() const { return uicore::Text::parse_int32(get_command()); }
 };
 
 class IRCNickMessage : public IRCMessage

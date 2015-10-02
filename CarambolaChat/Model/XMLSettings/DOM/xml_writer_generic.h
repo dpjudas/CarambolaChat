@@ -33,7 +33,7 @@ class XMLWriter_Impl
 public:
 	XMLWriter_Impl() : insert_whitespace(true), indent(0), first_token(true), single_line_tag(true) { }
 
-	uicore::IODevice output;
+	uicore::IODevicePtr output;
 	bool insert_whitespace;
 	int indent;
 	//XXX:	StringAllocator string_allocator;

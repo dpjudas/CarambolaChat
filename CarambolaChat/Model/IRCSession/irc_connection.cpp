@@ -265,7 +265,7 @@ void IRCConnection::worker_main()
 {
 	try
 	{
-		uicore::TCPConnection connection(server);
+		auto connection = uicore::TCPConnection::connect(server);
 
 		IRCRawString read_line, write_line;
 		IRCRawString::size_type write_pos = 0;
@@ -277,12 +277,12 @@ void IRCConnection::worker_main()
 			if (stop_flag)
 				break;
 
-			if (!read_connection_data(connection, read_line))
+			if (!read_connection_data(*connection, read_line))
 				break;
 
-			write_connection_data(write_line, write_pos, connection);
+			write_connection_data(write_line, write_pos, *connection);
 
-			uicore::NetworkEvent *events[] = { &connection };
+			uicore::NetworkEvent *events[] = { connection.get() };
 			change_event.wait(lock, 1, events);
 		}
 

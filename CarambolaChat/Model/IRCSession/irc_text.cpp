@@ -9,7 +9,7 @@ IRCText::IRCText()
 IRCText IRCText::from_text(const std::string &text)
 {
 	IRCText t;
-	t.text8 = uicore::StringHelp::text_to_utf8(text);
+	t.text8 = text;
 	return t;
 }
 
@@ -70,7 +70,7 @@ std::string IRCText::get_text() const
 				i++;
 			}
 		}
-		return uicore::StringHelp::utf8_to_text(s);
+		return s;
 	}
 }
 

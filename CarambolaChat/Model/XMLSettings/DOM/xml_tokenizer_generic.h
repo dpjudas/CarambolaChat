@@ -33,7 +33,7 @@ class XMLTokenizer_Impl
 public:
 	XMLTokenizer_Impl() : pos(0), size(0), eat_whitespace(true) { }
 
-	uicore::IODevice input;
+	uicore::IODevicePtr input;
 	std::string::size_type pos, size;
 	std::string data;
 	bool eat_whitespace;

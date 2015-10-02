@@ -48,7 +48,7 @@ void Command::execute(IRCSession *session, const IRCEntity &filter, std::string 
 		0, 0
 	};
 
-	std::vector<std::string> args = uicore::StringHelp::split_text(command_line, " ");
+	std::vector<std::string> args = uicore::Text::split(command_line, " ");
 	for (int i=0; functions[i].name != 0; i++)
 	{
 		std::string str(functions[i].name);
@@ -101,7 +101,7 @@ void Command::execute_join(IRCSession *session, const IRCEntity &filter, std::ve
 	}
 	else if (args.size() == 3)
 	{
-		session->connection.send_join(IRCChannel::from_text(args[1]), uicore::StringHelp::text_to_utf8(args[2]));
+		session->connection.send_join(IRCChannel::from_text(args[1]), args[2]);
 	}
 	else
 	{
@@ -311,11 +311,11 @@ void Command::execute_connect(IRCSession *session, const IRCEntity &filter, std:
 	}
 	else if (args.size() == 3)
 	{
-//		session->connection.send_connect(args[1], uicore::StringHelp::text_to_int(args[2]));
+//		session->connection.send_connect(args[1], uicore::Text::parse_int32(args[2]));
 	}
 	else if (args.size() == 4)
 	{
-//		session->connection.send_connect(args[1], uicore::StringHelp::text_to_int(args[2]), args[3]);
+//		session->connection.send_connect(args[1], uicore::Text::parse_int32(args[2]), args[3]);
 	}
 	else
 	{
@@ -484,11 +484,11 @@ void Command::execute_whowas(IRCSession *session, const IRCEntity &filter, std::
 	}
 	else if (args.size() == 3)
 	{
-//		session->connection.send_whowas(IRCEntity::from_text(args[1]), uicore::StringHelp::text_to_int(args[2]));
+//		session->connection.send_whowas(IRCEntity::from_text(args[1]), uicore::Text::parse_int32(args[2]));
 	}
 	else if (args.size() == 4)
 	{
-//		session->connection.send_whowas(IRCEntity::from_text(args[1]), uicore::StringHelp::text_to_int(args[2]), IRCEntity::from_text(args[3]));
+//		session->connection.send_whowas(IRCEntity::from_text(args[1]), uicore::Text::parse_int32(args[2]), IRCEntity::from_text(args[3]));
 	}
 	else
 	{
@@ -578,7 +578,7 @@ void Command::execute_ping(IRCSession *session, const IRCEntity &filter, std::ve
 {
 	if (args.size() == 2)
 	{
-		//session->connection.send_privmsg_ctcp(args[1], "PING", uicore::StringHelp::int_to_text(uicore::System::get_time()));
+		//session->connection.send_privmsg_ctcp(args[1], "PING", uicore::Text::to_string(uicore::System::get_time()));
 	}
 	else
 	{

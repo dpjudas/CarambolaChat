@@ -9,22 +9,22 @@ XMLSettingsAppModel::XMLSettingsAppModel()
 
 void XMLSettingsAppModel::load(const std::string &filename)
 {
-	uicore::File file(filename, uicore::File::open_existing, uicore::File::access_read, uicore::File::share_read);
+	auto file = uicore::File::open_existing(filename);
 	load(file);
 }
 
-void XMLSettingsAppModel::load(uicore::IODevice device)
+void XMLSettingsAppModel::load(uicore::IODevicePtr device)
 {
 	document.load(device, false);
 }
 
 void XMLSettingsAppModel::save(const std::string &filename)
 {
-	uicore::File file(filename, uicore::File::create_always, uicore::File::access_write, 0);
+	auto file = uicore::File::create_always(filename);
 	save(file);
 }
 
-void XMLSettingsAppModel::save(uicore::IODevice device)
+void XMLSettingsAppModel::save(uicore::IODevicePtr device)
 {
 	document.save(device, false);
 }

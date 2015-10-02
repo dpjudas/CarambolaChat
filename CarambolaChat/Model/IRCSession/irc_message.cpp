@@ -14,23 +14,23 @@ IRCMessage::IRCMessage(const IRCRawString &prefix, const IRCRawString &command, 
 
 IRCMessage::Type IRCMessage::get_type() const
 {
-	if (uicore::StringHelp::compare(command, "PRIVMSG", true) == 0 && get_param_count() >= 2) return type_privmsg;
+	if (uicore::Text::equal_caseless(command, "PRIVMSG") && get_param_count() >= 2) return type_privmsg;
 	else if (!command.empty() && command[0] >= '0' && command[0] <= '9') return type_numeric_reply;
-	else if (uicore::StringHelp::compare(command, "NOTICE", true) == 0 && get_param_count() >= 2) return type_notice;
-	else if (uicore::StringHelp::compare(command, "PING", true) == 0 && get_param_count() >= 1) return type_ping;
-	else if (uicore::StringHelp::compare(command, "NICK", true) == 0 && get_param_count() >= 1) return type_nick;
-	else if (uicore::StringHelp::compare(command, "JOIN", true) == 0 && get_param_count() >= 1) return type_join;
-	else if (uicore::StringHelp::compare(command, "PART", true) == 0 && get_param_count() >= 1) return type_part;
-	else if (uicore::StringHelp::compare(command, "KICK", true) == 0 && get_param_count() >= 2) return type_kick;
-	else if (uicore::StringHelp::compare(command, "QUIT", true) == 0) return type_quit;
-	else if (uicore::StringHelp::compare(command, "MODE", true) == 0 && get_param_count() >= 1)
+	else if (uicore::Text::equal_caseless(command, "NOTICE") && get_param_count() >= 2) return type_notice;
+	else if (uicore::Text::equal_caseless(command, "PING") && get_param_count() >= 1) return type_ping;
+	else if (uicore::Text::equal_caseless(command, "NICK") && get_param_count() >= 1) return type_nick;
+	else if (uicore::Text::equal_caseless(command, "JOIN") && get_param_count() >= 1) return type_join;
+	else if (uicore::Text::equal_caseless(command, "PART") && get_param_count() >= 1) return type_part;
+	else if (uicore::Text::equal_caseless(command, "KICK") && get_param_count() >= 2) return type_kick;
+	else if (uicore::Text::equal_caseless(command, "QUIT")) return type_quit;
+	else if (uicore::Text::equal_caseless(command, "MODE") && get_param_count() >= 1)
 	{
 		if (IRCEntity::from_raw(get_param(0)).is_channel())
 			return type_channel_mode;
 		else
 			return type_nick_mode;
 	}
-	else if (uicore::StringHelp::compare(command, "TOPIC", true) == 0 && get_param_count() >= 2) return type_topic;
+	else if (uicore::Text::equal_caseless(command, "TOPIC") && get_param_count() >= 2) return type_topic;
 	else return type_unknown;
 }
 

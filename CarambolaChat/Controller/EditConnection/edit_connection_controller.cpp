@@ -62,7 +62,7 @@ void EditConnectionController::ok_clicked()
 
 	XMLSettingsList performlist = connection.get_list("performlist");
 
-	std::vector<std::string> lines = StringHelp::split_text(edit_view->perform_list->text(), "\n", true);
+	std::vector<std::string> lines = Text::split(edit_view->perform_list->text(), "\n", true);
 	int perform_count = performlist.get_count();
 	for (int i = 0; i < perform_count; i++)
 		performlist.remove(0);

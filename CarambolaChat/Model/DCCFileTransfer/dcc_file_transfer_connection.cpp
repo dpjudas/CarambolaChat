@@ -63,7 +63,7 @@ void DCCFileTransferConnection::worker_main()
 {
 	try
 	{
-		connection = uicore::TCPConnection(socket_name);
+		connection = uicore::TCPConnection::connect(socket_name);
 
 		std::unique_lock<std::mutex> lock(mutex);
 
@@ -71,8 +71,8 @@ void DCCFileTransferConnection::worker_main()
 		status = status_receiving;
 		status_text = "Downloading..";
 
-		uicore::File outputfile(filename, uicore::File::create_always, uicore::File::access_write, uicore::File::share_read);
-		uicore::DataBuffer buffer(1024*1024);
+		auto outputfile = uicore::File::create_always(filename);
+		auto buffer = uicore::DataBuffer::create(1024 * 1024);
 		int total_received_counter = 0;
 		while (true)
 		{
@@ -80,22 +80,22 @@ void DCCFileTransferConnection::worker_main()
 			{
 				status = status_aborted;
 				status_text = "Abort requested by user";
-				connection = uicore::TCPConnection();
+				connection = uicore::TCPConnectionPtr();
 				return;
 			}
 
 			//int wakeup_reason = uicore::Event::wait(abort_event, connection.get_read_event(), 60*1000);
-			int received = connection.read(buffer.get_data(), buffer.get_size());
+			int received = connection->read(buffer->data(), buffer->size());
 			if (received == 0)
 			{
 				status = status_finished_transfer;
 				status_text = "Transfer complete";
-				connection = uicore::TCPConnection();
+				connection = uicore::TCPConnectionPtr();
 				return;
 			}
 			else if (received == -1)
 			{
-				uicore::NetworkEvent *events[] = { &connection };
+				uicore::NetworkEvent *events[] = { connection.get() };
 				if (!change_event.wait(lock, 1, events))
 				{
 					status = status_error;
@@ -105,7 +105,7 @@ void DCCFileTransferConnection::worker_main()
 				continue;
 			}
 
-			outputfile.write(buffer.get_data(), received);
+			outputfile->write(buffer->data(), received);
 			total_received_counter += received;
 			bytes_received += received;
 
@@ -120,18 +120,18 @@ void DCCFileTransferConnection::worker_main()
 				{
 					status = status_aborted;
 					status_text = "Abort requested by user";
-					connection = uicore::TCPConnection();
+					connection = uicore::TCPConnectionPtr();
 					return;
 				}
 
-				int written = connection.write(write_data + write_pos, write_len - write_pos);
+				int written = connection->write(write_data + write_pos, write_len - write_pos);
 				if (written != -1)
 				{
 					write_pos += written;
 				}
 				else
 				{
-					uicore::NetworkEvent *events[] = { &connection };
+					uicore::NetworkEvent *events[] = { connection.get() };
 					if (!change_event.wait(lock, 1, events))
 					{
 						status = status_error;
@@ -144,7 +144,7 @@ void DCCFileTransferConnection::worker_main()
 	}
 	catch (uicore::Exception &e)
 	{
-		connection = uicore::TCPConnection();
+		connection = uicore::TCPConnectionPtr();
 		std::unique_lock<std::mutex> lock(mutex);
 		status = status_error;
 		status_text = e.message;

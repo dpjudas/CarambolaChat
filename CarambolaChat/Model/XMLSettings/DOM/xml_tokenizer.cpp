@@ -41,35 +41,34 @@ XMLTokenizer::XMLTokenizer(const XMLTokenizer &copy) : impl(copy.impl)
 {
 }
 
-XMLTokenizer::XMLTokenizer(uicore::IODevice &input) : impl(std::make_shared<XMLTokenizer_Impl>())
+XMLTokenizer::XMLTokenizer(const uicore::IODevicePtr &input) : impl(std::make_shared<XMLTokenizer_Impl>())
 {
 	impl->input = input;
-	impl->size = input.get_size();
+	impl->size = input->size();
 	impl->pos = 0;
 
-	uicore::DataBuffer buffer(impl->size);
-	input.receive(buffer.get_data(), buffer.get_size(), true);
+	auto buffer = uicore::DataBuffer::create(impl->size);
+	input->read(buffer->data(), buffer->size());
 
-	uicore::StringHelp::BOMType bom_type = uicore::StringHelp::detect_bom(buffer.get_data(), buffer.get_size());
+	uicore::ByteOrderMark bom_type = uicore::Text::detect_bom(buffer->data(), buffer->size());
 	switch (bom_type)
 	{
 	default:
-	case uicore::StringHelp::bom_none:
-		impl->data = uicore::StringHelp::utf8_to_text(std::string(buffer.get_data(), buffer.get_size()));
+	case uicore::ByteOrderMark::none:
+		impl->data = std::string(buffer->data(), buffer->size());
 		break;
-	case uicore::StringHelp::bom_utf32_be:
-	case uicore::StringHelp::bom_utf32_le:
-		throw uicore::Exception("UTF-16 XML files not supported yet");
-		break;
-	case uicore::StringHelp::bom_utf16_be:
-	case uicore::StringHelp::bom_utf16_le:
+	case uicore::ByteOrderMark::utf32_be:
+	case uicore::ByteOrderMark::utf32_le:
 		throw uicore::Exception("UTF-32 XML files not supported yet");
 		break;
-	case uicore::StringHelp::bom_utf8:
-		impl->data = uicore::StringHelp::utf8_to_text(std::string(buffer.get_data() + 3, buffer.get_size() - 3));
+	case uicore::ByteOrderMark::utf16_be:
+	case uicore::ByteOrderMark::utf16_le:
+		throw uicore::Exception("UTF-16 XML files not supported yet");
+		break;
+	case uicore::ByteOrderMark::utf8:
+		impl->data = std::string(buffer->data() + 3, buffer->size() - 3);
 		break;
 	}
-
 }
 
 XMLTokenizer::~XMLTokenizer()

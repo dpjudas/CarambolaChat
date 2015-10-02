@@ -51,10 +51,10 @@ void ChatView::add_line(ChatLine line)
 std::string ChatView::create_timestamp()
 {
 	DateTime datetime = DateTime::get_current_local_time();
-	std::string hour = StringHelp::int_to_text(datetime.get_hour());
+	std::string hour = Text::to_string(datetime.get_hour());
 	if (hour.length() < 2)
 		hour = "0"+hour;
-	std::string minute = StringHelp::int_to_text(datetime.get_minutes());
+	std::string minute = Text::to_string(datetime.get_minutes());
 	if (minute.length() < 2)
 		minute = "0"+minute;
 

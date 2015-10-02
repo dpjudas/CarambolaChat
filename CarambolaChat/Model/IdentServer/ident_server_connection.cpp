@@ -3,7 +3,7 @@
 #include "ident_server_connection.h"
 #include "ident_server.h"
 
-IdentServerConnection::IdentServerConnection(IdentServer *server, uicore::TCPConnection connection)
+IdentServerConnection::IdentServerConnection(IdentServer *server, uicore::TCPConnectionPtr connection)
 : server(server), connection(connection)
 {
 	thread = std::thread(&IdentServerConnection::worker_main, this);
@@ -31,7 +31,7 @@ void IdentServerConnection::worker_main()
 				break;
 
 			char buffer[1024];
-			int bytes_read = connection.read(buffer, 1024);
+			int bytes_read = connection->read(buffer, 1024);
 			if (bytes_read != -1)
 			{
 				lock.unlock();
@@ -59,7 +59,7 @@ void IdentServerConnection::worker_main()
 			}
 			else
 			{
-				uicore::NetworkEvent *events[] = { &connection };
+				uicore::NetworkEvent *events[] = { connection.get() };
 				if (!change_event.wait(lock, 1, events, 60 * 1000))
 					return;
 			}
@@ -75,8 +75,8 @@ bool IdentServerConnection::received_message(std::string message)
 	std::string::size_type p = message.find(',');
 	if (p == std::string::npos)
 		throw uicore::Exception("Invalid request");
-	std::string port_on_server = uicore::StringHelp::trim(uicore::StringHelp::utf8_to_text(message.substr(0, p)));
-	std::string port_on_client = uicore::StringHelp::trim(uicore::StringHelp::utf8_to_text(message.substr(p+1)));
+	std::string port_on_server = uicore::Text::trim(message.substr(0, p));
+	std::string port_on_client = uicore::Text::trim(message.substr(p+1));
 	
 	std::string response = uicore::string_format("%1,%2:UNIX:carambola\r\n", port_on_server, port_on_client);
 
@@ -85,10 +85,10 @@ bool IdentServerConnection::received_message(std::string message)
 	int pos = 0;
 	while (pos != response.length())
 	{
-		int written = connection.write(response.data() + pos, (int)response.length() - pos);
+		int written = connection->write(response.data() + pos, (int)response.length() - pos);
 		if (written == -1)
 		{
-			uicore::NetworkEvent *events[] = { &connection };
+			uicore::NetworkEvent *events[] = { connection.get() };
 			if (!change_event.wait(lock, 1, events, 60 * 1000))
 				return false;
 		}

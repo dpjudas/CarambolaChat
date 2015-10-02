@@ -41,7 +41,7 @@ void IRCSession::connect(const std::string &server, const std::string &port, con
 	set_connect_status(status_connecting);
 	connection.connect(uicore::SocketName(server, port));
 	connection.send_nick(IRCNick::from_text(nick));
-	connection.send_user(uicore::StringHelp::text_to_utf8(username), "localhost", uicore::StringHelp::text_to_utf8(server), uicore::StringHelp::text_to_utf8(full_name));
+	connection.send_user(username, "localhost", server, full_name);
 	our_nickname = IRCNick::from_text(nick);
 }
 
@@ -52,7 +52,7 @@ void IRCSession::on_reconnect_timer_expired()
 		set_connect_status(status_connecting);
 		connection.connect(uicore::SocketName(connect_server, connect_port));
 		connection.send_nick(IRCNick::from_text(connect_nick));
-		connection.send_user(uicore::StringHelp::text_to_utf8(connect_username), "localhost", uicore::StringHelp::text_to_utf8(connect_server), uicore::StringHelp::text_to_utf8(connect_full_name));
+		connection.send_user(connect_username, "localhost", connect_server, connect_full_name);
 		our_nickname = IRCNick::from_text(connect_nick);
 	}
 }
@@ -461,7 +461,7 @@ void IRCSession::on_numeric_reply(const IRCNumericReply &message)
 
 	bool invisible = false;
 	int numeric = message.get_numeric();
-	std::string numeric_name = uicore::StringHelp::int_to_text(numeric);
+	std::string numeric_name = uicore::Text::to_string(numeric);
 	for (int i = 0; numeric_to_string[i].str != 0; i++)
 	{
 		if (numeric_to_string[i].numeric == numeric)
@@ -543,10 +543,10 @@ void IRCSession::on_rpl_userhost(const IRCNumericReply &message)
 		if (pos == IRCRawString::npos) pos = param1.find("=-");
 		if (pos != IRCRawString::npos)
 		{
-			our_hostname = uicore::StringHelp::utf8_to_text(param1.substr(pos+2));
+			our_hostname = param1.substr(pos+2);
 			pos = our_hostname.find("@");
 			if (pos != IRCRawString::npos)
-				our_hostname = uicore::StringHelp::trim(our_hostname.substr(pos+1));
+				our_hostname = uicore::Text::trim(our_hostname.substr(pos+1));
 		}
 	}
 }
@@ -556,14 +556,14 @@ void IRCSession::on_rpl_namereply(const IRCNumericReply &message)
 	if (message.get_param_count() >= 4)
 	{
 		IRCChannel channel = IRCChannel::from_raw(message.get_param(2));
-		std::string nicks = uicore::StringHelp::utf8_to_text(message.get_param(3));
-		std::vector<std::string> nick_list = uicore::StringHelp::split_text(nicks, " ");
+		std::string nicks = message.get_param(3);
+		std::vector<std::string> nick_list = uicore::Text::split(nicks, " ");
 
 		IRCJoinedChannel status = get_channel_status(channel);
 
 		for (unsigned int i=0; i<nick_list.size(); i++)
 		{
-			IRCNick nick = IRCNick::from_raw(uicore::StringHelp::text_to_utf8(nick_list[i]));
+			IRCNick nick = IRCNick::from_raw(nick_list[i]);
 			status.users.push_back(nick);
 		}
 
@@ -600,7 +600,7 @@ void IRCSession::on_rpl_topicwhotime(const IRCNumericReply &message)
 		IRCNick target = IRCNick::from_raw(message.get_param(0));
 		IRCChannel channel = IRCChannel::from_raw(message.get_param(1));
 		IRCNick author = IRCNick::from_raw(message.get_param(2));
-		unsigned int timestamp = uicore::StringHelp::local8_to_uint(message.get_param(3));
+		unsigned int timestamp = uicore::Text::parse_uint32(message.get_param(3));
 
 		IRCJoinedChannel status = get_channel_status(channel);
 		status.topic_time = timestamp;
@@ -832,37 +832,37 @@ void IRCSession::extract_ctcp_command(const IRCText &ctcp_data, IRCRawString &co
 
 void IRCSession::on_ctcp_privmsg(const IRCRawString &command, const IRCText &data, const IRCPrivateMessage &message)
 {
-	if (uicore::StringHelp::compare(command, "ACTION", true) == 0)
+	if (uicore::Text::equal_caseless(command, "ACTION"))
 		on_ctcp_privmsg_action(data, message);
-	else if (uicore::StringHelp::compare(command, "DCC", true) == 0)
+	else if (uicore::Text::equal_caseless(command, "DCC"))
 		on_ctcp_privmsg_dcc(data, message);
-	else if (uicore::StringHelp::compare(command, "FINGER", true) == 0)
+	else if (uicore::Text::equal_caseless(command, "FINGER"))
 		on_ctcp_privmsg_finger(data, message);
-	else if (uicore::StringHelp::compare(command, "VERSION", true) == 0)
+	else if (uicore::Text::equal_caseless(command, "VERSION"))
 		on_ctcp_privmsg_version(data, message);
-	else if (uicore::StringHelp::compare(command, "USERINFO", true) == 0)
+	else if (uicore::Text::equal_caseless(command, "USERINFO"))
 		on_ctcp_privmsg_userinfo(data, message);
-	else if (uicore::StringHelp::compare(command, "CLIENTINFO", true) == 0)
+	else if (uicore::Text::equal_caseless(command, "CLIENTINFO"))
 		on_ctcp_privmsg_clientinfo(data, message);
-	else if (uicore::StringHelp::compare(command, "PING", true) == 0)
+	else if (uicore::Text::equal_caseless(command, "PING"))
 		on_ctcp_privmsg_ping(data, message);
-	else if (uicore::StringHelp::compare(command, "TIME", true) == 0)
+	else if (uicore::Text::equal_caseless(command, "TIME"))
 		on_ctcp_privmsg_time(data, message);
 }
 
 void IRCSession::on_ctcp_notice(const IRCRawString &command, const IRCText &data, const IRCNoticeMessage &message)
 {
-	if (uicore::StringHelp::compare(command, "FINGER", true) == 0)
+	if (uicore::Text::equal_caseless(command, "FINGER"))
 		on_ctcp_notice_finger(data, message);
-	else if (uicore::StringHelp::compare(command, "VERSION", true) == 0)
+	else if (uicore::Text::equal_caseless(command, "VERSION"))
 		on_ctcp_notice_version(data, message);
-	else if (uicore::StringHelp::compare(command, "USERINFO", true) == 0)
+	else if (uicore::Text::equal_caseless(command, "USERINFO"))
 		on_ctcp_notice_userinfo(data, message);
-	else if (uicore::StringHelp::compare(command, "CLIENTINFO", true) == 0)
+	else if (uicore::Text::equal_caseless(command, "CLIENTINFO"))
 		on_ctcp_notice_clientinfo(data, message);
-	else if (uicore::StringHelp::compare(command, "PING", true) == 0)
+	else if (uicore::Text::equal_caseless(command, "PING"))
 		on_ctcp_notice_ping(data, message);
-	else if (uicore::StringHelp::compare(command, "TIME", true) == 0)
+	else if (uicore::Text::equal_caseless(command, "TIME"))
 		on_ctcp_notice_time(data, message);
 }
 
@@ -884,13 +884,13 @@ void IRCSession::on_ctcp_privmsg_dcc(const IRCText &data, const IRCPrivateMessag
 		IRCFileOffer offer;
 		offer.sender = message.get_prefix();
 
-		unsigned int address = uicore::StringHelp::text_to_uint(tokens[2]);
+		unsigned int address = uicore::Text::parse_uint32(tokens[2]);
 		std::string ip_address = uicore::string_format(
 			"%1.%2.%3.%4",
-			uicore::StringHelp::int_to_text((address>>24)&0xff),
-			uicore::StringHelp::int_to_text((address>>16)&0xff),
-			uicore::StringHelp::int_to_text((address>>8)&0xff),
-			uicore::StringHelp::int_to_text(address&0xff));
+			uicore::Text::to_string((address>>24)&0xff),
+			uicore::Text::to_string((address>>16)&0xff),
+			uicore::Text::to_string((address>>8)&0xff),
+			uicore::Text::to_string(address&0xff));
 		std::string port = tokens[3];
 		offer.host = uicore::SocketName(ip_address, port);
 
@@ -898,7 +898,7 @@ void IRCSession::on_ctcp_privmsg_dcc(const IRCText &data, const IRCPrivateMessag
 		offer.size_provided = false;
 		if (tokens.size() >= 5)
 		{
-			offer.size = uicore::StringHelp::text_to_uint(tokens[4]);
+			offer.size = uicore::Text::parse_uint32(tokens[4]);
 			offer.size_provided = true;
 		}
 
@@ -1047,7 +1047,7 @@ void IRCSession::on_ctcp_notice_clientinfo(const IRCText &data, const IRCNoticeM
 
 void IRCSession::on_ctcp_notice_ping(const IRCText &data, const IRCNoticeMessage &message)
 {
-//	add_line(uicore::string_format("%1 PING: %2 ms", uicore::IRCConnection::extract_nick(prefix), uicore::StringHelp::int_to_text(uicore::System::get_time()-uicore::StringHelp::text_to_int(data))), color_text);
+//	add_line(uicore::string_format("%1 PING: %2 ms", uicore::IRCConnection::extract_nick(prefix), uicore::Text::to_string(uicore::System::get_time()-uicore::Text::parse_int32(data))), color_text);
 }
 
 void IRCSession::on_ctcp_notice_time(const IRCText &data, const IRCNoticeMessage &message)

@@ -35,7 +35,7 @@ void WorkspacePageController::increment_message_count()
 		if (workspace->is_message_count_hidden(page_id))
 			message_count = 0;
 		message_count++;
-		workspace->set_message_count(page_id, StringHelp::int_to_text(message_count));
+		workspace->set_message_count(page_id, Text::to_string(message_count));
 	}
 }
 

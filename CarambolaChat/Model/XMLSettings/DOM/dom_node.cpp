@@ -375,7 +375,7 @@ bool DomNode::is_supported(
 	const DomString &feature,
 	const DomString &version) const
 {
-	if (uicore::StringHelp::compare(feature, "xml") == 0)
+	if (uicore::Text::equal_caseless(feature, "xml"))
 	{
 		if (version.empty() || version == "1.0" || version == "2.0")
 			return true;

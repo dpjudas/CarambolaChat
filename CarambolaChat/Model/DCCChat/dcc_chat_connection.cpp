@@ -87,12 +87,12 @@ void DCCChatConnection::worker_main()
 	try
 	{
 		std::unique_lock<std::mutex> lock(mutex);
-		uicore::TCPConnection connection;
+		uicore::TCPConnectionPtr connection;
 		if (is_server)
 		{
-			queue_system(uicore::string_format("Started listening on port %1", socket_name.get_port()));
+			queue_system(uicore::string_format("Started listening on port %1", socket_name.port()));
 
-			uicore::TCPListen listen(socket_name);
+			auto listen = uicore::TCPListen::listen(socket_name);
 
 			while (true)
 			{
@@ -103,24 +103,24 @@ void DCCChatConnection::worker_main()
 				}
 
 				uicore::SocketName end_point;
-				connection = listen.accept(end_point);
-				if (!connection.is_null())
+				connection = listen->accept(end_point);
+				if (connection)
 					break;
 
-				uicore::NetworkEvent *events[] = { &listen };
+				uicore::NetworkEvent *events[] = { listen.get() };
 				change_event.wait(lock, 1, events);
 			}
 
-			uicore::SocketName remote_name = connection.get_remote_name();
+			uicore::SocketName remote_name = connection->remote_name();
 
 			lock.unlock();
 			try
 			{
-				queue_system(uicore::string_format("Accepted connection from %1 port %2", remote_name.lookup_hostname(), remote_name.get_port()));
+				queue_system(uicore::string_format("Accepted connection from %1 port %2", remote_name.lookup_hostname(), remote_name.port()));
 			}
 			catch (uicore::Exception &)
 			{
-				queue_system(uicore::string_format("Accepted connection from %1 port %2", remote_name.get_address(), remote_name.get_port()));
+				queue_system(uicore::string_format("Accepted connection from %1 port %2", remote_name.address(), remote_name.port()));
 			}
 			lock.lock();
 		}
@@ -129,13 +129,13 @@ void DCCChatConnection::worker_main()
 			lock.unlock();
 			try
 			{
-				queue_system(uicore::string_format("Connecting to %1 port %2", socket_name.lookup_hostname(), socket_name.get_port()));
+				queue_system(uicore::string_format("Connecting to %1 port %2", socket_name.lookup_hostname(), socket_name.port()));
 			}
 			catch (uicore::Exception &)
 			{
-				queue_system(uicore::string_format("Connecting to %1 port %2", socket_name.get_address(), socket_name.get_port()));
+				queue_system(uicore::string_format("Connecting to %1 port %2", socket_name.address(), socket_name.port()));
 			}
-			connection = uicore::TCPConnection(socket_name);
+			connection = uicore::TCPConnection::connect(socket_name);
 			lock.lock();
 		}
 
@@ -144,13 +144,13 @@ void DCCChatConnection::worker_main()
 
 		while (!stop_flag)
 		{
-			if (!read_connection_data(connection, read_line))
+			if (!read_connection_data(*connection, read_line))
 				break;
 
-			if (!write_connection_data(write_line, write_pos, connection))
+			if (!write_connection_data(write_line, write_pos, *connection))
 				break;
 
-			uicore::NetworkEvent *events[] = { &connection };
+			uicore::NetworkEvent *events[] = { connection.get() };
 			change_event.wait(lock, 1, events);
 		}
 

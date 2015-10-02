@@ -435,7 +435,7 @@ void ChatController::on_url_clicked(int object_id)
 		if (chat_urls[i].object_id == object_id)
 		{
 #ifdef WIN32
-			ShellExecute(NULL, L"open", uicore::StringHelp::utf8_to_ucs2(chat_urls[i].url).c_str(), NULL, NULL, SW_SHOWNORMAL);
+			ShellExecute(NULL, L"open", uicore::Text::to_utf16(chat_urls[i].url).c_str(), NULL, NULL, SW_SHOWNORMAL);
 #endif
 		}
 	}
@@ -507,7 +507,7 @@ std::string ChatController::get_view_caption(IRCSession *session, const IRCEntit
 	if (filter.empty())
 		return session->get_connection_name();// "Status";
 	else if (filter.is_channel())
-		return "#"+uicore::StringHelp::text_to_lower(filter.get_name());
+		return "#"+uicore::Text::to_lower(filter.get_name());
 	else
 		return filter.get_name();
 }
@@ -620,7 +620,7 @@ void ChatController::on_inputbox_tab_pressed()
 			for (size_t i = 0; i < status.users.size(); i++)
 			{
 				std::string user_name = status.users[i].get_name();
-				if(uicore::StringHelp::compare(user_name.substr(0, search_length), search_nick, true) == 0)
+				if(uicore::Text::equal_caseless(user_name.substr(0, search_length), search_nick, true))
 				{
 					std::stringRef prefix = line.substr(0, pos);
 					std::stringRef postfix = line.substr(cursor_pos);

@@ -347,7 +347,7 @@ int DomElement::get_child_int(const DomString &name, int default_value) const
 {
 	DomString value = get_child_string(name);
 	if (!value.empty())
-		return uicore::StringHelp::text_to_int(value);
+		return uicore::Text::parse_int32(value);
 	else
 		return default_value;
 }
@@ -356,7 +356,7 @@ int DomElement::get_child_int_ns(const DomString &namespace_uri, const DomString
 {
 	DomString value = get_child_string_ns(namespace_uri, local_name);
 	if (!value.empty())
-		return uicore::StringHelp::text_to_int(value);
+		return uicore::Text::parse_int32(value);
 	else
 		return default_value;
 }
@@ -428,12 +428,12 @@ void DomElement::set_child_string_ns(const DomString &namespace_uri, const DomSt
 
 void DomElement::set_child_int(const DomString &name, int value)
 {
-	set_child_string(name, uicore::StringHelp::int_to_text(value));
+	set_child_string(name, uicore::Text::to_string(value));
 }
 
 void DomElement::set_child_int_ns(const DomString &namespace_uri, const DomString &qualified_name, int value)
 {
-	set_child_string_ns(namespace_uri, qualified_name, uicore::StringHelp::int_to_text(value));
+	set_child_string_ns(namespace_uri, qualified_name, uicore::Text::to_string(value));
 }
 
 void DomElement::set_child_bool(const DomString &name, bool value)
@@ -466,7 +466,7 @@ int DomElement::get_attribute_int(const DomString &name, int default_value) cons
 {
 	DomString value = get_attribute(name);
 	if (!value.empty())
-		return uicore::StringHelp::text_to_int(value);
+		return uicore::Text::parse_int32(value);
 	else
 		return default_value;
 }
@@ -475,7 +475,7 @@ int DomElement::get_attribute_int_ns(const DomString &namespace_uri, const DomSt
 {
 	DomString value = get_attribute_ns(namespace_uri, local_name);
 	if (!value.empty())
-		return uicore::StringHelp::text_to_int(value);
+		return uicore::Text::parse_int32(value);
 	else
 		return default_value;
 }
@@ -502,7 +502,7 @@ float DomElement::get_attribute_float(const DomString &name, float default_value
 {
 	DomString value = get_attribute(name);
 	if (!value.empty())
-		return uicore::StringHelp::text_to_float(value);
+		return uicore::Text::parse_float(value);
 	else
 		return default_value;
 }
@@ -511,19 +511,19 @@ float DomElement::get_attribute_float_ns(const DomString &namespace_uri, const D
 {
 	DomString value = get_attribute_ns(namespace_uri, local_name);
 	if (!value.empty())
-		return uicore::StringHelp::text_to_float(value);
+		return uicore::Text::parse_float(value);
 	else
 		return default_value;
 }
 
 void DomElement::set_attribute_int(const DomString &name, int value)
 {
-	set_attribute(name, uicore::StringHelp::int_to_text(value));
+	set_attribute(name, uicore::Text::to_string(value));
 }
 
 void DomElement::set_attribute_int_ns(const DomString &namespace_uri, const DomString &qualified_name, int value)
 {
-	set_attribute_ns(namespace_uri, qualified_name, uicore::StringHelp::int_to_text(value));
+	set_attribute_ns(namespace_uri, qualified_name, uicore::Text::to_string(value));
 }
 
 void DomElement::set_attribute_bool(const DomString &name, bool value)
@@ -538,10 +538,10 @@ void DomElement::set_attribute_bool_ns(const DomString &namespace_uri, const Dom
 
 void DomElement::set_attribute_float(const DomString &name, float value, int num_decimal_places)
 {
-	set_attribute(name, uicore::StringHelp::float_to_text(value, num_decimal_places));
+	set_attribute(name, uicore::Text::to_string(value, num_decimal_places));
 }
 
 void DomElement::set_attribute_float_ns(const DomString &namespace_uri, const DomString &qualified_name, float value, int num_decimal_places)
 {
-	set_attribute_ns(namespace_uri, qualified_name, uicore::StringHelp::float_to_text(value, num_decimal_places));
+	set_attribute_ns(namespace_uri, qualified_name, uicore::Text::to_string(value, num_decimal_places));
 }

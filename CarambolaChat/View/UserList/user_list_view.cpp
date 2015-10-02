@@ -80,7 +80,7 @@ void UserListView::sort()
 		if (value1.sort_priority != value2.sort_priority)
 			return value1.sort_priority < value2.sort_priority;
 		else
-			return StringHelp::compare(value1.label->text(), value2.label->text(), true) < 0;
+			return Text::less_caseless(value1.label->text(), value2.label->text());
 	});
 
 	for (const auto &key : keys)

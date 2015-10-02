@@ -22,7 +22,7 @@ protected:
 	virtual void close_clicked() { }
 
 private:
-	static std::string generate_page_id() { int id = next_page_id++; return uicore::StringHelp::int_to_text(id); }
+	static std::string generate_page_id() { int id = next_page_id++; return uicore::Text::to_string(id); }
 	static int next_page_id;
 
 	std::shared_ptr<uicore::View> controller_view = std::make_shared<uicore::View>();

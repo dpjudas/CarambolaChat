@@ -48,7 +48,7 @@ public:
 	/// \brief Constructs a XMLTokenizer
 	///
 	/// \param input = IODevice
-	XMLTokenizer(uicore::IODevice &input);
+	XMLTokenizer(const uicore::IODevicePtr &input);
 
 	virtual ~XMLTokenizer();
 

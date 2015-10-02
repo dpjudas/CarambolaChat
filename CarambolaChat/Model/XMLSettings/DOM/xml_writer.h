@@ -48,7 +48,7 @@ public:
 	/// \brief Constructs a XMLWriter
 	///
 	/// \param output = IODevice
-	XMLWriter(uicore::IODevice &output);
+	XMLWriter(const uicore::IODevicePtr &output);
 
 	virtual ~XMLWriter();
 
