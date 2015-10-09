@@ -155,7 +155,7 @@ private:
 	ConnectStatus connect_status;
 	std::vector<std::string> perform_list;
 
-	uicore::Timer reconnect_timer;
+	uicore::TimerPtr reconnect_timer;
 	int reconnect_timeout;
 	bool user_requested_disconnect;
 

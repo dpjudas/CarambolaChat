@@ -384,7 +384,7 @@ void ChatView::copy_to_clipboard()
 	}
 	if (!text.empty())
 	{
-		view_tree()->get_display_window().set_clipboard_text(text);
+		view_tree()->get_display_window()->set_clipboard_text(text);
 	}
 }
 

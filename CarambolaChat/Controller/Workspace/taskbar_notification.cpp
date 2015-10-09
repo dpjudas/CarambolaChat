@@ -15,8 +15,8 @@ TaskbarNotification::TaskbarNotification(std::shared_ptr<View> init_view) : view
 		if (e.type() != ActivationChangeType::activated)
 			return;
 
-		DisplayWindow dispwindow = view->view_tree()->get_display_window();
-		HWND hwnd = dispwindow.get_handle().hwnd;
+		DisplayWindowPtr dispwindow = view->view_tree()->get_display_window();
+		HWND hwnd = dispwindow->handle().hwnd;
 
 		HRESULT result;
 		ComPtr<ITaskbarList3> taskbar_list;
@@ -32,10 +32,10 @@ TaskbarNotification::TaskbarNotification(std::shared_ptr<View> init_view) : view
 void TaskbarNotification::notify()
 {
 #ifdef WIN32
-	DisplayWindow dispwindow = view->view_tree()->get_display_window();
-	if (dispwindow.has_focus() == false)
+	DisplayWindowPtr dispwindow = view->view_tree()->get_display_window();
+	if (dispwindow->has_focus() == false)
 	{
-		HWND hwnd = dispwindow.get_handle().hwnd;
+		HWND hwnd = dispwindow->handle().hwnd;
 
 		FLASHWINFO flash_info = { 0 };
 		flash_info.cbSize = sizeof(FLASHWINFO);
@@ -50,7 +50,7 @@ void TaskbarNotification::notify()
 		result = CoCreateInstance(CLSID_TaskbarList, 0, CLSCTX_ALL, __uuidof(taskbar_list), reinterpret_cast<void**>(taskbar_list.output_variable()));
 		if (SUCCEEDED(result))
 		{
-			HICON icon = create_icon(PixelBuffer("Resources/Icons/taskbar_highlight_icon.png"), hwnd);
+			HICON icon = create_icon(ImageFile::load("Resources/Icons/taskbar_highlight_icon.png"), hwnd);
 			if (icon)
 			{
 				taskbar_list->SetOverlayIcon(hwnd, icon, L"Chat activity occurred");
@@ -62,26 +62,26 @@ void TaskbarNotification::notify()
 }
 
 #ifdef WIN32
-HBITMAP TaskbarNotification::create_bitmap(HDC hdc, const PixelBuffer &image)
+HBITMAP TaskbarNotification::create_bitmap(HDC hdc, const PixelBufferPtr &image)
 {
-	PixelBuffer bmp_image = image.to_format(tf_bgra8);
-	bmp_image.flip_vertical();
-	bmp_image.premultiply_alpha();
+	PixelBufferPtr bmp_image = image->to_format(tf_bgra8);
+	bmp_image->flip_vertical();
+	bmp_image->premultiply_alpha();
 
 	BITMAPV5HEADER bmp_header;
 	memset(&bmp_header, 0, sizeof(BITMAPV5HEADER));
 	bmp_header.bV5Size = sizeof(BITMAPV5HEADER);
-	bmp_header.bV5Width = bmp_image.get_width();
-	bmp_header.bV5Height = bmp_image.get_height();
+	bmp_header.bV5Width = bmp_image->width();
+	bmp_header.bV5Height = bmp_image->height();
 	bmp_header.bV5Planes = 1;
 	bmp_header.bV5BitCount = 32;
 	bmp_header.bV5Compression = BI_RGB;
 
-	HBITMAP bitmap = CreateDIBitmap(hdc, (BITMAPINFOHEADER*)&bmp_header, CBM_INIT, bmp_image.get_data(), (BITMAPINFO *)&bmp_header, DIB_RGB_COLORS);
+	HBITMAP bitmap = CreateDIBitmap(hdc, (BITMAPINFOHEADER*)&bmp_header, CBM_INIT, bmp_image->data(), (BITMAPINFO *)&bmp_header, DIB_RGB_COLORS);
 	return bitmap;
 }
 
-HICON TaskbarNotification::create_icon(const PixelBuffer &image, HWND hwnd)
+HICON TaskbarNotification::create_icon(const PixelBufferPtr &image, HWND hwnd)
 {
 	HDC hdc = GetDC(hwnd);
 	HBITMAP bitmap = create_bitmap(hdc, image);

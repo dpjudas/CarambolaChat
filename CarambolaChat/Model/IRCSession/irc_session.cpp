@@ -10,7 +10,7 @@ IRCSession::IRCSession()
 {
 	connection.func_message_received() = uicore::bind_member(this, &IRCSession::on_message_received);
 	connection.func_disconnected() = uicore::bind_member(this, &IRCSession::on_disconnected);
-	reconnect_timer.func_expired() = uicore::bind_member(this, &IRCSession::on_reconnect_timer_expired);
+	reconnect_timer->func_expired() = uicore::bind_member(this, &IRCSession::on_reconnect_timer_expired);
 	reconnect_timeout = 2000 + rand() * 500 / RAND_MAX;
 }
 
@@ -804,7 +804,7 @@ void IRCSession::on_disconnected(const std::string &reason)
 
 	if (!user_requested_disconnect)
 	{
-		reconnect_timer.start(reconnect_timeout, false);
+		reconnect_timer->start(reconnect_timeout, false);
 		reconnect_timeout = reconnect_timeout * 2 + rand() * 500 / RAND_MAX;
 	}
 }

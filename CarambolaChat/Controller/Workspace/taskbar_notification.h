@@ -9,11 +9,11 @@ public:
 
 private:
 #ifdef WIN32
-	HBITMAP create_bitmap(HDC hdc, const uicore::PixelBuffer &image);
-	HICON create_icon(const uicore::PixelBuffer &image, HWND hwnd);
+	HBITMAP create_bitmap(HDC hdc, const uicore::PixelBufferPtr &image);
+	HICON create_icon(const uicore::PixelBufferPtr &image, HWND hwnd);
 #endif
 
 	std::shared_ptr<uicore::View> view;
-	uicore::PixelBuffer icon;
+	uicore::PixelBufferPtr icon;
 	uicore::SlotContainer slots;
 };
