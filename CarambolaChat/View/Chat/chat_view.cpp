@@ -61,16 +61,16 @@ std::string ChatView::create_timestamp()
 	return hour+":"+minute;
 }
 
-void ChatView::layout_subviews(uicore::Canvas &canvas)
+void ChatView::layout_subviews(const uicore::CanvasPtr &canvas)
 {
 	scroll->set_page_step(geometry().content_box().get_height() / 15.0f);
 	View::layout_subviews(canvas);
 }
 
-void ChatView::render_text_content(ChatTextView *text_view, Canvas &canvas)
+void ChatView::render_text_content(ChatTextView *text_view, const CanvasPtr &canvas)
 {
-	Vec4f clip_offset = canvas.get_transform() * Vec4f(0.0f, 0.0f, 0.0f, 1.0f);
-	canvas.push_cliprect(Rectf(Pointf(clip_offset.x, clip_offset.y), geometry().content_box().get_size()));
+	Vec4f clip_offset = canvas->transform() * Vec4f(0.0f, 0.0f, 0.0f, 1.0f);
+	canvas->push_clip(Rectf(Pointf(clip_offset.x, clip_offset.y), geometry().content_box().get_size()));
 
 	if (font.is_null())
 	{
@@ -82,16 +82,16 @@ void ChatView::render_text_content(ChatTextView *text_view, Canvas &canvas)
 		font = cascade.get_font();
 		font_url = font;
 		font_fixed = font;
-		baseline_offset1 = (int)(font.get_font_metrics(canvas).get_ascent() - font_fixed.get_font_metrics(canvas).get_ascent());
+		baseline_offset1 = font.get_font_metrics(canvas).get_ascent() - font_fixed.get_font_metrics(canvas).get_ascent();
 	}
 
-	Rect content_box = text_view->geometry().content_box();
+	Rectf content_box = text_view->geometry().content_box();
 
-	Path::rect(0.0f, 0.0f, (float)get_prefix_width(), (float)content_box.get_height()).fill(canvas, Brush::solid(0.94901f, 0.94901f, 0.94901f));
+	Path::rect(0.0f, 0.0f, (float)get_prefix_width(), (float)content_box.get_height())->fill(canvas, Brush::solid(0.94901f, 0.94901f, 0.94901f));
 
 	content_box.shrink(5);
 
-	int y = content_box.bottom;
+	float y = content_box.bottom;
 
 	int skip_lines = (int)std::round(scroll->max_position() - (scroll->position() + 1));
 
@@ -111,29 +111,29 @@ void ChatView::render_text_content(ChatTextView *text_view, Canvas &canvas)
 		ChatLine &line = *it;
 		layout_line(canvas, line, content_box, line_index - 1);
 
-		y -= std::max(line.column2.get_size().height, line.column3.get_size().height);
+		y -= std::max(line.column2->size().height, line.column3->size().height);
 
-		line.column1.set_position(Point(content_box.left, y + baseline_offset1));
-		line.column1.draw_layout(canvas);
-		line.column2.set_position(Point(content_box.left, y));
-		line.column2.draw_layout(canvas);
-		line.column3.set_position(Point(content_box.left + get_prefix_width(), y));
-		line.column3.draw_layout(canvas);
+		line.column1->set_position(Pointf(content_box.left, y + baseline_offset1));
+		line.column1->draw_layout(canvas);
+		line.column2->set_position(Pointf(content_box.left, y));
+		line.column2->draw_layout(canvas);
+		line.column3->set_position(Pointf(content_box.left + get_prefix_width(), y));
+		line.column3->draw_layout(canvas);
 	}
 
-	canvas.pop_cliprect();
+	canvas->pop_clip();
 }
 
-ChatView::TextPosition ChatView::hit_test(const Point &pos)
+ChatView::TextPosition ChatView::hit_test(const Pointf &pos)
 {
-	Canvas canvas = get_canvas();
-	if (canvas.is_null())
+	CanvasPtr canvas = get_canvas();
+	if (!canvas)
 		return TextPosition();
 
-	Rect content_box = text_view->geometry().content_box();
+	Rectf content_box = text_view->geometry().content_box();
 	content_box.shrink(5);
 
-	int y = content_box.bottom;
+	float y = content_box.bottom;
 	int skip_lines = (int)std::round(scroll->max_position() - (scroll->position() + 1));
 
 	std::list<ChatLine>::reverse_iterator it;
@@ -152,16 +152,16 @@ ChatView::TextPosition ChatView::hit_test(const Point &pos)
 		ChatLine &line = *it;
 		layout_line(canvas, line, content_box, line_index - 1);
 
-		int line_height = std::max(line.column2.get_size().height, line.column3.get_size().height);
+		float line_height = std::max(line.column2->size().height, line.column3->size().height);
 		y -= line_height;
 
-		line.column1.set_position(Point(content_box.left, y + baseline_offset1));
-		line.column2.set_position(Point(content_box.left, y));
-		line.column3.set_position(Point(content_box.left + get_prefix_width(), y));
+		line.column1->set_position(Pointf(content_box.left, y + baseline_offset1));
+		line.column2->set_position(Pointf(content_box.left, y));
+		line.column3->set_position(Pointf(content_box.left + get_prefix_width(), y));
 
-		Rect column1_rect(content_box.left, y, content_box.left + column1_width, y + line_height);
-		Rect column2_rect(content_box.left + content_box.left, y, content_box.left + prefix_width, y + line_height);
-		Rect column3_rect(content_box.left + prefix_width, y, content_box.right, y + line_height);
+		Rectf column1_rect(content_box.left, y, content_box.left + column1_width, y + line_height);
+		Rectf column2_rect(content_box.left + content_box.left, y, content_box.left + prefix_width, y + line_height);
+		Rectf column3_rect(content_box.left + prefix_width, y, content_box.right, y + line_height);
 		if (column1_rect.contains(pos))
 			return hit_test_line_column(canvas, line_index-1, 0, line.column1, pos);
 		else if (column2_rect.contains(pos))
@@ -173,9 +173,9 @@ ChatView::TextPosition ChatView::hit_test(const Point &pos)
 	return TextPosition();
 }
 
-ChatView::TextPosition ChatView::hit_test_line_column(Canvas &canvas, int line, int column, SpanLayout &span_layout, const Point &pos)
+ChatView::TextPosition ChatView::hit_test_line_column(const CanvasPtr &canvas, int line, int column, const SpanLayoutPtr &span_layout, const Pointf &pos)
 {
-	SpanLayout::HitTestResult result = span_layout.hit_test(canvas, pos);
+	SpanLayout::HitTestResult result = span_layout->hit_test(canvas, pos);
 	TextPosition text_pos;
 	text_pos.line = line;
 	text_pos.column = column;
@@ -190,19 +190,19 @@ void ChatView::on_scroll()
 	set_needs_render();
 }
 
-void ChatView::layout_line(Canvas &canvas, ChatLine &line, Rect &client_area, int line_index)
+void ChatView::layout_line(const CanvasPtr &canvas, ChatLine &line, Rectf &client_area, int line_index)
 {
 	if (line.layout_width != client_area.get_width() || line.prefix_width != prefix_width)
 	{
-		line.column1.clear();
-		line.column2.clear();
+		line.column1->clear();
+		line.column2->clear();
 
 		if (!line.column3_rendered)
 		{
 			for (auto &i : line.inlines)
 			{
 				StyleCascade cascade({ i.style.get() });
-				line.column3.add_text(i.text, cascade.get_font(), cascade.computed_value("color").color(), i.id);
+				line.column3->add_text(i.text, cascade.get_font(), cascade.computed_value("color").color(), i.id);
 			}
 
 			line.column3_rendered = true;
@@ -213,39 +213,39 @@ void ChatView::layout_line(Canvas &canvas, ChatLine &line, Rect &client_area, in
 		std::pair<int,int> sel_col1 = get_selection_for_line(line_index, 0);
 		std::pair<int,int> sel_col2 = get_selection_for_line(line_index, 1);
 		std::pair<int,int> sel_col3 = get_selection_for_line(line_index, 2);
-		line.column1.set_selection_range(sel_col1.first, sel_col1.second);
-		line.column2.set_selection_range(sel_col2.first, sel_col2.second);
-		line.column3.set_selection_range(sel_col3.first, sel_col3.second);
+		line.column1->set_selection_range(sel_col1.first, sel_col1.second);
+		line.column2->set_selection_range(sel_col2.first, sel_col2.second);
+		line.column3->set_selection_range(sel_col3.first, sel_col3.second);
 
 		if (!line.timestamp.empty())
 		{
-			line.column1.add_text(line.timestamp, font_fixed, Colorf::darkgoldenrod);
+			line.column1->add_text(line.timestamp, font_fixed, Colorf::darkgoldenrod);
 		}
 		if (!line.nick.empty())
 		{
-			line.column2.add_text(line.nick, font, line.nick_color);
+			line.column2->add_text(line.nick, font, line.nick_color);
 		}
 
-		int t = line.column1.find_preferred_size(canvas).width;
+		float t = line.column1->find_preferred_size(canvas).width;
 		column1_width = std::max(column1_width, t);
-		int column2_width = line.column2.find_preferred_size(canvas).width;
-		int column12_width = column1_width + column2_width + 25;
+		float column2_width = line.column2->find_preferred_size(canvas).width;
+		float column12_width = column1_width + column2_width + 25;
 		if (column12_width > prefix_width)
 		{
 			prefix_width = column12_width;
 			set_needs_render();
 		}
 
-		line.column2.set_align(span_right);
-		line.column1.layout(canvas, get_prefix_width()-10);
-		line.column2.layout(canvas, get_prefix_width()-10);
-		line.column3.layout(canvas, client_area.get_width()-get_prefix_width());
+		line.column2->set_align(SpanAlign::right);
+		line.column1->layout(canvas, get_prefix_width()-10);
+		line.column2->layout(canvas, get_prefix_width()-10);
+		line.column3->layout(canvas, client_area.get_width()-get_prefix_width());
 		line.layout_width = client_area.get_width();
 		line.prefix_width = prefix_width;
 	}
 }
 
-int ChatView::get_prefix_width() const
+float ChatView::get_prefix_width() const
 {
 	return prefix_width;
 }
@@ -286,7 +286,7 @@ void ChatView::on_pointer_press(PointerEvent &e)
 	else if (e.button() == PointerButton::left)
 	{
 		mouse_down = true;
-		mouse_down_text_position = hit_test(Point(e.pos(text_view.get())));
+		mouse_down_text_position = hit_test(e.pos(text_view.get()));
 	}
 }
 
@@ -295,7 +295,7 @@ void ChatView::on_pointer_release(PointerEvent &e)
 	if (e.button() == PointerButton::left)
 	{
 		mouse_down = false;
-		TextPosition mouse_up_text_position = hit_test(Point(e.pos(text_view.get())));
+		TextPosition mouse_up_text_position = hit_test(e.pos(text_view.get()));
 
 		if (mouse_up_text_position == mouse_down_text_position)
 		{
@@ -315,7 +315,7 @@ void ChatView::on_pointer_release(PointerEvent &e)
 
 void ChatView::on_pointer_move(PointerEvent &e)
 {
-	TextPosition text_position = hit_test(Point(e.pos(text_view.get())));
+	TextPosition text_position = hit_test(e.pos(text_view.get()));
 
 	if (mouse_down)
 	{
@@ -396,11 +396,11 @@ void ChatView::append_column_text(int line, int column, ChatLine &chatline, std:
 	{
 		std::string column_text;
 		if (column == 0)
-			column_text = chatline.column1.get_combined_text();
+			column_text = chatline.column1->combined_text();
 		else if (column == 1)
-			column_text = chatline.column2.get_combined_text();
+			column_text = chatline.column2->combined_text();
 		else if (column == 2)
-			column_text = chatline.column3.get_combined_text();
+			column_text = chatline.column3->combined_text();
 
 		if (!column_text.empty())
 		{

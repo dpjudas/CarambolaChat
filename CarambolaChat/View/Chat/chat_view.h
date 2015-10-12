@@ -28,7 +28,7 @@ public:
 
 	void add_line(ChatLine text);
 
-	TextPosition hit_test(const uicore::Point &pos);
+	TextPosition hit_test(const uicore::Pointf &pos);
 	void set_selection(const TextPosition &start, const TextPosition &end);
 	void copy_to_clipboard();
 
@@ -47,25 +47,25 @@ public:
 
 	uicore::Signal<void(int/* object_id*/)> cb_url_clicked;
 
-	void layout_subviews(uicore::Canvas &canvas) override;
+	void layout_subviews(const uicore::CanvasPtr &canvas) override;
 
 private:
-	void render_text_content(ChatTextView *text_view, uicore::Canvas &canvas);
+	void render_text_content(ChatTextView *text_view, const uicore::CanvasPtr &canvas);
 
 	void on_scroll();
 	void on_pointer_press(uicore::PointerEvent &e);
 	void on_pointer_release(uicore::PointerEvent &e);
 	void on_pointer_move(uicore::PointerEvent &e);
 
-	TextPosition hit_test_line_column(uicore::Canvas &canvas, int line, int column, uicore::SpanLayout &span_layout, const uicore::Point &pos);
+	TextPosition hit_test_line_column(const uicore::CanvasPtr &canvas, int line, int column, const uicore::SpanLayoutPtr &span_layout, const uicore::Pointf &pos);
 	static int offset_for_line_column(int line_index, int column, const TextPosition &pos);
 
 	void append_column_text(int line, int column, ChatLine &chatline, std::string prefix, std::string postfix, std::string &out_text);
 
 	std::string create_timestamp();
-	void layout_line(uicore::Canvas &canvas, ChatLine &line, uicore::Rect &client_area, int line_index);
+	void layout_line(const uicore::CanvasPtr &canvas, ChatLine &line, uicore::Rectf &client_area, int line_index);
 	std::pair<int,int> get_selection_for_line(int line_index, int column);
-	int get_prefix_width() const;
+	float get_prefix_width() const;
 	void invalidate_lines(int start, int end);
 
 	std::shared_ptr<ChatTextView> text_view;
@@ -74,9 +74,9 @@ private:
 	uicore::SlotContainer slots;
 	Selection selection;
 
-	int prefix_width = 60;
-	int column1_width = 0;
-	int baseline_offset1 = 0;
+	float prefix_width = 60;
+	float column1_width = 0;
+	float baseline_offset1 = 0;
 
 	bool mouse_down = false;
 	TextPosition mouse_down_text_position;
@@ -88,7 +88,7 @@ class ChatTextView : public uicore::View
 {
 public:
 	ChatTextView(ChatView *chat_view) : chat_view(chat_view) { }
-	void render_content(uicore::Canvas &canvas) override { chat_view->render_text_content(this, canvas); }
+	void render_content(const uicore::CanvasPtr &canvas) override { chat_view->render_text_content(this, canvas); }
 
 private:
 	ChatView *chat_view;

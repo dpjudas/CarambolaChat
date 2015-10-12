@@ -25,12 +25,12 @@ private:
 	std::string timestamp;
 	std::string nick;
 	uicore::Colorf nick_color = uicore::Colorf::black;
-	uicore::SpanLayout column1;
-	uicore::SpanLayout column2;
-	uicore::SpanLayout column3;
+	uicore::SpanLayoutPtr column1 = uicore::SpanLayout::create();
+	uicore::SpanLayoutPtr column2 = uicore::SpanLayout::create();
+	uicore::SpanLayoutPtr column3 = uicore::SpanLayout::create();
 	bool column3_rendered = false;
-	int layout_width = 0;
-	int prefix_width = 0;
+	float layout_width = 0;
+	float prefix_width = 0;
 
 	friend class ChatView;
 };

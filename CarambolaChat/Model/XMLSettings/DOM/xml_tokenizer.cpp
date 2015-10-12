@@ -44,7 +44,7 @@ XMLTokenizer::XMLTokenizer(const XMLTokenizer &copy) : impl(copy.impl)
 XMLTokenizer::XMLTokenizer(const uicore::IODevicePtr &input) : impl(std::make_shared<XMLTokenizer_Impl>())
 {
 	impl->input = input;
-	impl->size = input->size();
+	impl->size = (size_t)input->size();
 	impl->pos = 0;
 
 	auto buffer = uicore::DataBuffer::create(impl->size);
