@@ -58,10 +58,10 @@ uicore::Rect Settings::get_window_geometry()
 void Settings::set_window_geometry(const uicore::Rect &rect)
 {
 	XMLSettings section = xml_settings.get_section("window-geometry");
-	section.set_int("x", rect.left);
-	section.set_int("y", rect.top);
-	section.set_int("width", rect.get_width());
-	section.set_int("height", rect.get_height());
+	section.set_int("x", rect.x());
+	section.set_int("y", rect.y());
+	section.set_int("width", rect.width());
+	section.set_int("height", rect.height());
 }
 
 bool Settings::get_minimize_to_tray()

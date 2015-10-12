@@ -63,14 +63,14 @@ std::string ChatView::create_timestamp()
 
 void ChatView::layout_subviews(const uicore::CanvasPtr &canvas)
 {
-	scroll->set_page_step(geometry().content_box().get_height() / 15.0f);
+	scroll->set_page_step(geometry().content_box().height() / 15.0f);
 	View::layout_subviews(canvas);
 }
 
 void ChatView::render_text_content(ChatTextView *text_view, const CanvasPtr &canvas)
 {
 	Vec4f clip_offset = canvas->transform() * Vec4f(0.0f, 0.0f, 0.0f, 1.0f);
-	canvas->push_clip(Rectf(Pointf(clip_offset.x, clip_offset.y), geometry().content_box().get_size()));
+	canvas->push_clip(Rectf(Pointf(clip_offset.x, clip_offset.y), geometry().content_box().size()));
 
 	if (font.is_null())
 	{
@@ -87,7 +87,7 @@ void ChatView::render_text_content(ChatTextView *text_view, const CanvasPtr &can
 
 	Rectf content_box = text_view->geometry().content_box();
 
-	Path::rect(0.0f, 0.0f, (float)get_prefix_width(), (float)content_box.get_height())->fill(canvas, Brush::solid(0.94901f, 0.94901f, 0.94901f));
+	Path::rect(0.0f, 0.0f, (float)get_prefix_width(), (float)content_box.height())->fill(canvas, Brush::solid(0.94901f, 0.94901f, 0.94901f));
 
 	content_box.shrink(5);
 
@@ -192,7 +192,7 @@ void ChatView::on_scroll()
 
 void ChatView::layout_line(const CanvasPtr &canvas, ChatLine &line, Rectf &client_area, int line_index)
 {
-	if (line.layout_width != client_area.get_width() || line.prefix_width != prefix_width)
+	if (line.layout_width != client_area.width() || line.prefix_width != prefix_width)
 	{
 		line.column1->clear();
 		line.column2->clear();
@@ -239,8 +239,8 @@ void ChatView::layout_line(const CanvasPtr &canvas, ChatLine &line, Rectf &clien
 		line.column2->set_align(SpanAlign::right);
 		line.column1->layout(canvas, get_prefix_width()-10);
 		line.column2->layout(canvas, get_prefix_width()-10);
-		line.column3->layout(canvas, client_area.get_width()-get_prefix_width());
-		line.layout_width = client_area.get_width();
+		line.column3->layout(canvas, client_area.width()-get_prefix_width());
+		line.layout_width = client_area.width();
 		line.prefix_width = prefix_width;
 	}
 }
