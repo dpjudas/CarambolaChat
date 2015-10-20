@@ -151,11 +151,11 @@ void ChatController::add_line_text(ChatLine &line, const std::string &text, cons
 	auto urls_end = std::sregex_iterator();
 
 	auto style = std::make_shared<Style>();
-	style->set("font: 14px/20px 'Source Sans Pro'");
+	style->set("font: 13px/20px 'Noto Sans'");
 	style->set("color: %1", Style::to_rgba(color));
 
 	auto url_style = std::make_shared<Style>();
-	url_style->set("font: bold 14px/20px 'Source Sans Pro'");
+	url_style->set("font: bold 13px/20px 'Noto Sans'");
 	url_style->set("color: %1", Style::to_rgba(color));
 
 	size_t pos = 0;

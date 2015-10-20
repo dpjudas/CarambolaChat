@@ -35,7 +35,7 @@ public:
 		input_text->style()->set("border-radius: 2px");
 		input_text->style()->set("background: white");
 		input_text->style()->set("padding: 2px 5px");
-		input_text->style()->set("font: 12px/20px 'Source Sans Pro'");
+		input_text->style()->set("font: 12px/20px 'Noto Sans'");
 		input_text->set_select_all_on_focus_gain(false);
 		input_bar->add_subview(input_text);
 

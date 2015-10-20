@@ -72,17 +72,17 @@ void ChatView::render_text_content(ChatTextView *text_view, const CanvasPtr &can
 	Vec4f clip_offset = canvas->transform() * Vec4f(0.0f, 0.0f, 0.0f, 1.0f);
 	canvas->push_clip(Rectf(Pointf(clip_offset.x, clip_offset.y), geometry().content_box().size()));
 
-	if (font.is_null())
+	if (!font)
 	{
 		uicore::Style style;
-		style.set("font: 14px/20px 'Source Sans Pro'");
+		style.set("font: 13px/20px 'Noto Sans'");
 
 		uicore::StyleCascade cascade({ &style });
 
 		font = cascade.get_font();
 		font_url = font;
 		font_fixed = font;
-		baseline_offset1 = font.get_font_metrics(canvas).get_ascent() - font_fixed.get_font_metrics(canvas).get_ascent();
+		baseline_offset1 = font->font_metrics(canvas).ascent() - font_fixed->font_metrics(canvas).ascent();
 	}
 
 	Rectf content_box = text_view->geometry().content_box();

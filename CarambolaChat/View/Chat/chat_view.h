@@ -43,7 +43,7 @@ public:
 	void scroll_page_up();
 	void scroll_page_down();
 
-	uicore::Font font, font_url, font_fixed;
+	uicore::FontPtr font, font_url, font_fixed;
 
 	uicore::Signal<void(int/* object_id*/)> cb_url_clicked;
 
