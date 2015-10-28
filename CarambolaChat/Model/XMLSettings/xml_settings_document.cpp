@@ -5,6 +5,7 @@
 
 XMLSettingsAppModel::XMLSettingsAppModel()
 {
+	document = uicore::XmlDocument::create();
 }
 
 void XMLSettingsAppModel::load(const std::string &filename)
@@ -15,7 +16,7 @@ void XMLSettingsAppModel::load(const std::string &filename)
 
 void XMLSettingsAppModel::load(uicore::IODevicePtr device)
 {
-	document.load(device, false);
+	document = uicore::XmlDocument::load(device, false);
 }
 
 void XMLSettingsAppModel::save(const std::string &filename)
@@ -26,16 +27,16 @@ void XMLSettingsAppModel::save(const std::string &filename)
 
 void XMLSettingsAppModel::save(uicore::IODevicePtr device)
 {
-	document.save(device, false);
+	document->save(device, false);
 }
 
 XMLSettings XMLSettingsAppModel::get_root()
 {
-	DomElement element = document.get_document_element();
-	if (element.is_null())
+	auto element = document->document_element();
+	if (!element)
 	{
-		element = document.create_element("settings");
-		document.append_child(element);
+		element = document->create_element("settings");
+		document->append_child(element);
 	}
 	return XMLSettings(*this, element);
 }

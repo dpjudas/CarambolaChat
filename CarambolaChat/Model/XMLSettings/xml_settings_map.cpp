@@ -7,7 +7,7 @@ XMLSettingsMap::XMLSettingsMap()
 {
 }
 
-XMLSettingsMap::XMLSettingsMap(const XMLSettingsAppModel &document, const DomElement &node)
+XMLSettingsMap::XMLSettingsMap(const XMLSettingsAppModel &document, const uicore::XmlNodePtr &node)
 : document(document), node(node)
 {
 }
@@ -19,32 +19,32 @@ XMLSettingsAppModel XMLSettingsMap::get_document()
 
 XMLSettings XMLSettingsMap::get(const std::string &key)
 {
-	DomElement cur = node.get_first_child_element();
-	while (!cur.is_null())
+	for (auto cur = node->first_child(); cur; cur = cur->next_sibling())
 	{
-		if (cur.get_attribute("key") == key)
+		if (!cur->is_element())
+			continue;
+		
+		if (cur->attribute("key") == key)
 			return XMLSettings(document, cur);
-
-		cur = cur.get_next_sibling_element();
 	}
 
-	cur = node.get_owner_document().create_element("item");
-	cur.set_attribute("key", key);
-	node.append_child(cur);
+	auto cur = node->owner_document()->create_element("item");
+	cur->set_attribute("key", key);
+	node->append_child(cur);
 	return XMLSettings(document, cur);
 }
 
 void XMLSettingsMap::remove(const std::string &key)
 {
-	DomElement cur = node.get_first_child_element();
-	while (!cur.is_null())
+	for (auto cur = node->first_child(); cur; cur = cur->next_sibling())
 	{
-		if (cur.get_attribute("key") == key)
+		if (!cur->is_element())
+			continue;
+
+		if (cur->attribute("key") == key)
 		{
-			node.remove_child(cur);
+			node->remove_child(cur);
 			break;
 		}
-
-		cur = cur.get_next_sibling_element();
 	}
 }

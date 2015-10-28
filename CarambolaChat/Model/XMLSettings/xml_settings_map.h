@@ -9,7 +9,7 @@ class XMLSettingsMap
 {
 public:
 	XMLSettingsMap();
-	XMLSettingsMap(const XMLSettingsAppModel &document, const DomElement &node);
+	XMLSettingsMap(const XMLSettingsAppModel &document, const uicore::XmlNodePtr &node);
 
 	XMLSettingsAppModel get_document();
 
@@ -18,5 +18,5 @@ public:
 
 private:
 	XMLSettingsAppModel document;
-	DomElement node;
+	uicore::XmlNodePtr node;
 };

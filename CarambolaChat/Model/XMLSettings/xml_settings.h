@@ -10,7 +10,7 @@ class XMLSettings
 {
 public:
 	XMLSettings();
-	XMLSettings(const XMLSettingsAppModel &document, const DomElement &node);
+	XMLSettings(const XMLSettingsAppModel &document, const uicore::XmlNodePtr &node);
 
 	XMLSettingsAppModel get_document();
 
@@ -28,5 +28,5 @@ public:
 
 private:
 	XMLSettingsAppModel document;
-	DomElement node;
+	uicore::XmlNodePtr node;
 };
