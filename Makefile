@@ -40,18 +40,14 @@ OBJF =  CarambolaChat/precomp.o \
 # CarambolaChat/Model/XMPPSession/xmpp_connection_queues.o \
 # CarambolaChat/Model/XMPPSession/xmpp_connection.o \
 
-LIBS=clanApp clanDisplay clanCore clanGL clanUI clanSound clanNetwork
+LIBS=-L/usr/local/lib -luicore
 
-CXXFLAGS += -I./ -I CarambolaChat
-
-PACKAGES = $(patsubst %,%-4.0,$(LIBS))
-CXXFLAGS += `pkg-config --cflags $(PACKAGES)` -pthread
-LDFLAGS += -ldl
+CXXFLAGS += -std=c++11 -I./ -I CarambolaChat -pthread
 
 all: $(EXAMPLE_BIN)
 
 $(EXAMPLE_BIN): $(OBJF)
-	$(CXX) $(CXXFLAGS) $(OBJF) -o $(EXAMPLE_BIN) `pkg-config --libs $(PACKAGES)` $(EXTRA_LIBS)
+	$(CXX) $(CXXFLAGS) $(OBJF) -o $(EXAMPLE_BIN) $(LIBS)
 
 clean:
 	rm -f $(OBJF) $(EXAMPLE_BIN)

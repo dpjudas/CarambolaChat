@@ -147,6 +147,7 @@ void ChatController::add_line(const IRCNick &sender, const IRCText &text, const 
 
 void ChatController::add_line_text(ChatLine &line, const std::string &text, const Colorf &color)
 {
+#ifdef WIN32
 	auto urls_begin = std::sregex_iterator(text.begin(), text.end(), regexp_url1);
 	auto urls_end = std::sregex_iterator();
 
@@ -179,6 +180,13 @@ void ChatController::add_line_text(ChatLine &line, const std::string &text, cons
 
 	if (pos != text.length())
 		line.add_text(style, text.substr(pos));
+#else
+	auto style = std::make_shared<Style>();
+	style->set("font: 13px/20px 'Noto Sans'");
+	style->set("color: %1", Style::to_rgba(color));
+	
+	line.add_text(style, text);
+#endif
 }
 
 void ChatController::add_topic_text()
