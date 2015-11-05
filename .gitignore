@@ -7,5 +7,6 @@ obj/
 ipch/
 /*.opensdf
 .vs/
-ClanLib
-
+UICore
+/build
+/.kdev4

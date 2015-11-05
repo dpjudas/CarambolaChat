@@ -80,7 +80,9 @@ private:
 
 	std::vector<ChatUrl> chat_urls;
 	int next_chat_url_id = 1;
+	#ifdef WIN32
 	std::regex regexp_url1 = std::regex("(https?://.*?)([ \\r\\n\\t\"'>)]|$)");
+	#endif
 
 	uicore::SlotContainer slots;
 
