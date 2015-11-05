@@ -147,6 +147,9 @@ void IRCSession::send_notice(const IRCEntity &target, const IRCText &text)
 
 void IRCSession::on_message_received(const IRCMessage &message)
 {
+	ping_timeout_timer->stop();
+	ping_timeout_timer->start(ping_timeout_time);
+
 /*
 	// Do not remove this code.  It is useful to see exactly what the server writes to us.
 	IRCRawString s = IRCMessage::create_line(message.get_prefix().to_raw(), message.get_command(), message.get_params());
@@ -522,8 +525,6 @@ void IRCSession::on_rpl_welcome(const IRCNumericReply &message)
 	connection.send_command("USERHOST", params);
 	set_connect_status(status_connected);
 
-	ping_timeout_timer->start(ping_timeout_time);
-
 	for (size_t i = 0; i < perform_list.size(); i++)
 	{
 		try
@@ -789,9 +790,6 @@ void IRCSession::on_notice(const IRCNoticeMessage &message)
 
 void IRCSession::on_ping(const IRCPingMessage &message)
 {
-	ping_timeout_timer->stop();
-	ping_timeout_timer->start(ping_timeout_time);
-
 	if (!message.has_daemon2())
 		connection.send_pong(message.get_daemon1());
 	else
