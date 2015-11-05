@@ -12,6 +12,8 @@ IRCSession::IRCSession()
 	connection.func_disconnected() = uicore::bind_member(this, &IRCSession::on_disconnected);
 	reconnect_timer->func_expired() = uicore::bind_member(this, &IRCSession::on_reconnect_timer_expired);
 	reconnect_timeout = 2000 + rand() * 500 / RAND_MAX;
+
+	ping_timeout_timer->func_expired() = [this]() { connection.disconnect(); };
 }
 
 IRCSession::~IRCSession()
@@ -520,6 +522,8 @@ void IRCSession::on_rpl_welcome(const IRCNumericReply &message)
 	connection.send_command("USERHOST", params);
 	set_connect_status(status_connected);
 
+	ping_timeout_timer->start(ping_timeout_time);
+
 	for (size_t i = 0; i < perform_list.size(); i++)
 	{
 		try
@@ -785,6 +789,9 @@ void IRCSession::on_notice(const IRCNoticeMessage &message)
 
 void IRCSession::on_ping(const IRCPingMessage &message)
 {
+	ping_timeout_timer->stop();
+	ping_timeout_timer->start(ping_timeout_time);
+
 	if (!message.has_daemon2())
 		connection.send_pong(message.get_daemon1());
 	else
@@ -801,6 +808,8 @@ void IRCSession::on_disconnected(const std::string &reason)
 {
 	set_connect_status(status_disconnected);
 	cb_error_text(IRCText::from_text(reason.empty() ? reason : uicore::string_format("Disconnected (%1)", reason)));
+
+	ping_timeout_timer->stop();
 
 	if (!user_requested_disconnect)
 	{

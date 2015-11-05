@@ -159,6 +159,9 @@ private:
 	int reconnect_timeout;
 	bool user_requested_disconnect;
 
+	uicore::TimerPtr ping_timeout_timer = uicore::Timer::create();
+	const int ping_timeout_time = 120 * 1000;
+
 	std::string connection_name;
 
 	std::string connect_nick, alt_connect_nick;
