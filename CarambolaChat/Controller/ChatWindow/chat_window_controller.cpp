@@ -36,7 +36,9 @@ void ChatWindowViewController::irc_session_created(IRCSession *session)
 
 void ChatWindowViewController::irc_channel_joined(IRCSession *session, const IRCChannel &channel)
 {
-	workspace->add_page("#" + channel.get_name(), std::make_shared<ChatController>(session, channel), false);
+	auto label = "#" + channel.get_name();
+	if (!workspace->find_page(label))
+		workspace->add_page(label, std::make_shared<ChatController>(session, channel), false);
 }
 
 void ChatWindowViewController::irc_connection_text(IRCSession *session, const IRCEntity &room, const IRCNick &nick, const IRCText &text)
