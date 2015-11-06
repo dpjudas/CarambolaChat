@@ -48,6 +48,8 @@ ChatController::ChatController(IRCSession *session, const IRCEntity &filter) : s
 
 	slots.connect(view->sig_focus_gained(), [this](FocusChangeEvent &) { view->input_text->set_focus(); });
 
+	slots.connect(view->user_list->sig_context_menu(), this, &ChatController::on_userlist_contextmenu);
+
 	/*
 	icon_action = CL_Image(gc, "Resources/Icons/chat_icon_action.png");
 	icon_notice = CL_Image(gc, "Resources/Icons/chat_icon_notice.png");
@@ -72,7 +74,6 @@ ChatController::ChatController(IRCSession *session, const IRCEntity &filter) : s
 	inputbox->func_filter_message().set(this, &ChatController::on_inputbox_filter_message);
 
 	userlist->func_key_pressed().set(this, &ChatController::on_userlist_key_pressed);
-	userlist->func_mouse_right_up().set(this, &ChatController::on_userlist_contextmenu);
 	*/
 }
 
@@ -509,6 +510,39 @@ std::vector<std::string> ChatController::split_input_text(const std::string &tex
 	return lines;
 }
 
+void ChatController::on_userlist_contextmenu(std::shared_ptr<UserListRowView> view, uicore::PointerEvent &e)
+{
+	e.stop_propagation();
+
+	//auto id = view->id;
+	//auto menu = std::make_shared<PopupMenuController>();
+	//menu->add("Slap!")->func_clicked() = [=]() { on_userlist_slap(id); };
+	//menu->add("Open Conversation")->func_clicked() = [=]() { on_userlist_open_conversation(id); };
+	//menu->add("Open DCC Conversation")->func_clicked() = [=]() { on_userlist_open_dcc_conversation(id); };
+	//menu->add("Whois")->func_clicked() = [=]() { on_userlist_whois(id); };
+	//WindowManager::present_popup(view->user_list, e.pos(view->user_list), menu);
+}
+
+void ChatController::on_userlist_slap(const std::string &id)
+{
+	Command::execute(session, filter, string_format("/me slaps %1 around a bit with a large carambola fruit!", id));
+}
+
+void ChatController::on_userlist_open_conversation(const std::string &id)
+{
+	//get_mainframe()->open_conversation(IRCNick::from_text(id), session);
+}
+
+void ChatController::on_userlist_open_dcc_conversation(const std::string &id)
+{
+	//get_mainframe()->open_dcc_conversation(IRCNick::from_text(id), session);
+}
+
+void ChatController::on_userlist_whois(const std::string &id)
+{
+	Command::execute(session, filter, string_format("/whois %1", id));
+}
+
 /*
 std::string ChatController::get_view_caption(IRCSession *session, const IRCEntity &filter)
 {
@@ -640,52 +674,6 @@ void ChatController::on_inputbox_tab_pressed()
 			}
 		}
 	}
-}
-
-void ChatController::on_userlist_key_pressed(CL_InputEvent event)
-{
-	if (event.id == CL_KEY_APPS)
-	{
-		on_userlist_contextmenu(CL_Point(-1, -1));
-	}
-}
-
-void ChatController::on_userlist_contextmenu(CL_Point pos)
-{
-	userlist_popup_menu = CL_PopupMenu();
-	userlist_popup_menu.insert_item("Slap!").func_clicked().set(this, &ChatController::on_userlist_slap);
-	userlist_popup_menu.insert_item("Open Conversation").func_clicked().set(this, &ChatController::on_userlist_open_conversation);
-	userlist_popup_menu.insert_item("Open DCC Conversation").func_clicked().set(this, &ChatController::on_userlist_open_dcc_conversation);
-    userlist_popup_menu.insert_item("Whois").func_clicked().set(this, &ChatController::on_userlist_whois);
-	userlist_popup_menu.start(userlist, userlist->component_to_screen_coords(pos));
-}
-
-void ChatController::on_userlist_slap()
-{
-	CL_ListViewItem selected_item = userlist->get_selected_item();
-	if (!selected_item.is_null())
-		Command::execute(session, filter, string_format("/me slaps %1 around a bit with a large carambola fruit!", selected_item.get_column("nick").get_text()));
-}
-
-void ChatController::on_userlist_open_conversation()
-{
-	CL_ListViewItem selected_item = userlist->get_selected_item();
-	if (!selected_item.is_null())
-		get_mainframe()->open_conversation(IRCNick::from_text(selected_item.get_column("nick").get_text()), session);
-}
-
-void ChatController::on_userlist_open_dcc_conversation()
-{
-	CL_ListViewItem selected_item = userlist->get_selected_item();
-	if (!selected_item.is_null())
-		get_mainframe()->open_dcc_conversation(IRCNick::from_text(selected_item.get_column("nick").get_text()), session);
-}
-
-void ChatController::on_userlist_whois()
-{
-    CL_ListViewItem selected_item = userlist->get_selected_item();
-    if (!selected_item.is_null())
-        Command::execute(session, filter, string_format("/whois %1", selected_item.get_column("nick").get_text()));
 }
 
 void ChatController::on_toolbar_item_clicked(CL_ToolBarItem item)

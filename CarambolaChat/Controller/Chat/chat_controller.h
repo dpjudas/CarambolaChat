@@ -66,6 +66,12 @@ private:
 	void on_url_clicked(int object_id);
 	void on_inputbox_return_pressed();
 
+	void on_userlist_contextmenu(std::shared_ptr<UserListRowView> view, uicore::PointerEvent &e);
+	void on_userlist_slap(const std::string &id);
+	void on_userlist_open_conversation(const std::string &id);
+	void on_userlist_open_dcc_conversation(const std::string &id);
+	void on_userlist_whois(const std::string &id);
+
 	std::shared_ptr<ChatPageView> view = std::make_shared<ChatPageView>();
 
 	IRCSession *session = 0;
@@ -93,13 +99,6 @@ private:
 	void on_inputbox_tab_pressed();
 	void on_inputbox_up_pressed();
 	void on_inputbox_down_pressed();
-
-	void on_userlist_key_pressed(CL_InputEvent event);
-	void on_userlist_contextmenu(CL_Point pos);
-	void on_userlist_slap();
-	void on_userlist_open_conversation();
-	void on_userlist_open_dcc_conversation();
-    void on_userlist_whois();
 
 	void on_toolbar_item_clicked(CL_ToolBarItem item);
 	void on_toolbar_disconnect_clicked();
