@@ -161,7 +161,7 @@ private:
 	bool user_requested_disconnect;
 
 	uicore::TimerPtr ping_timeout_timer = uicore::Timer::create();
-	int ping_timeout_time = 60 * 1000 * 60 * 24;	// 24 hours
+	int ping_timeout_time = 10 * 1000 * 60;	// 10 minutes
 
 	const int ping_timeout_max_samples = 4;		// We sample 4 times before be are certain about the interval time
 	const int ping_timeout_grace_period = 1000*30;

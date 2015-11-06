@@ -153,7 +153,7 @@ void IRCSession::calculate_ping_interval()
 		uint64_t time_now = uicore::System::get_time();
 		if (ping_timeout_last_sample_time != 0)	// When the initial time has been set
 		{
-			ping_timeout_samples_total += time_now - ping_timeout_last_sample_time;
+			ping_timeout_samples_total += (int)(time_now - ping_timeout_last_sample_time);
 			ping_timeout_num_samples++;	
 			if (ping_timeout_num_samples == ping_timeout_max_samples)	// We can now obtain the average
 			{
