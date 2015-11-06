@@ -96,6 +96,7 @@ public:
 	uicore::Signal<void(const IRCNick &, const uicore::SocketName &)> cb_dcc_chat_offer;
 
 private:
+	void calculate_ping_interval();
 	void set_connect_status(ConnectStatus new_status);
 
 	void set_channel_status(const IRCJoinedChannel &status);
@@ -160,7 +161,13 @@ private:
 	bool user_requested_disconnect;
 
 	uicore::TimerPtr ping_timeout_timer = uicore::Timer::create();
-	const int ping_timeout_time = 120 * 1000;
+	int ping_timeout_time = 60 * 1000 * 60 * 24;	// 24 hours
+
+	const int ping_timeout_max_samples = 4;		// We sample 4 times before be are certain about the interval time
+	const int ping_timeout_grace_period = 1000*30;
+	int ping_timeout_num_samples = 0;
+	int ping_timeout_samples_total = 0;
+	uint64_t ping_timeout_last_sample_time = 0;
 
 	std::string connection_name;
 
