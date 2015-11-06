@@ -12,8 +12,6 @@ IRCSession::IRCSession()
 	connection.func_disconnected() = uicore::bind_member(this, &IRCSession::on_disconnected);
 	reconnect_timer->func_expired() = uicore::bind_member(this, &IRCSession::on_reconnect_timer_expired);
 	reconnect_timeout = 2000 + rand() * 500 / RAND_MAX;
-
-	ping_timeout_timer->func_expired() = [this]() { connection.disconnect(); };
 }
 
 IRCSession::~IRCSession()
@@ -145,35 +143,8 @@ void IRCSession::send_notice(const IRCEntity &target, const IRCText &text)
 	connection.send_notice(target, text);
 }
 
-void IRCSession::calculate_ping_interval()
-{
-	// On freenode, ping interval is roughly every 2.5 minutes.
-	if (ping_timeout_num_samples < ping_timeout_max_samples)	// Creating samples
-	{
-		uint64_t time_now = uicore::System::get_time();
-		if (ping_timeout_last_sample_time != 0)	// When the initial time has been set
-		{
-			ping_timeout_samples_total += (int)(time_now - ping_timeout_last_sample_time);
-			ping_timeout_num_samples++;	
-			if (ping_timeout_num_samples == ping_timeout_max_samples)	// We can now obtain the average
-			{
-				ping_timeout_time = ping_timeout_grace_period + (ping_timeout_samples_total / ping_timeout_num_samples);
-			}
-		}
-		ping_timeout_last_sample_time = time_now;
-	}
-}
-
 void IRCSession::on_message_received(const IRCMessage &message)
 {
-	ping_timeout_timer->stop();
-
-	if (message.get_type() == IRCMessage::type_ping)
-		calculate_ping_interval();
-
-	ping_timeout_timer->start(ping_timeout_time);
-
-
 /*
 	// Do not remove this code.  It is useful to see exactly what the server writes to us.
 	IRCRawString s = IRCMessage::create_line(message.get_prefix().to_raw(), message.get_command(), message.get_params());
@@ -830,8 +801,6 @@ void IRCSession::on_disconnected(const std::string &reason)
 {
 	set_connect_status(status_disconnected);
 	cb_error_text(IRCText::from_text(reason.empty() ? reason : uicore::string_format("Disconnected (%1)", reason)));
-
-	ping_timeout_timer->stop();
 
 	if (!user_requested_disconnect)
 	{
