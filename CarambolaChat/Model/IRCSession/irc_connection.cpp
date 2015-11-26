@@ -258,8 +258,9 @@ void IRCConnection::process()
 
 		IRCMessage message = IRCMessage::parse_line(line);
 
-		if (message.get_type() == IRCMessage::type_ping)
-			calculate_ping_interval();
+		// * This is broken - We do not know if the IRC server resets the ping interval when it either recieves or sends any command successfully *
+		//if (message.get_type() == IRCMessage::type_ping)
+		//	calculate_ping_interval();
 
 		if (cb_message_received)
 			cb_message_received(message);
