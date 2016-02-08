@@ -25,9 +25,9 @@ private:
 	std::string timestamp;
 	std::string nick;
 	uicore::Colorf nick_color = uicore::Colorf::black;
-	uicore::SpanLayoutPtr column1 = uicore::SpanLayout::create();
-	uicore::SpanLayoutPtr column2 = uicore::SpanLayout::create();
-	uicore::SpanLayoutPtr column3 = uicore::SpanLayout::create();
+	uicore::TextBlockPtr column1 = uicore::TextBlock::create();
+	uicore::TextBlockPtr column2 = uicore::TextBlock::create();
+	uicore::TextBlockPtr column3 = uicore::TextBlock::create();
 	bool column3_rendered = false;
 	float layout_width = 0;
 	float prefix_width = 0;

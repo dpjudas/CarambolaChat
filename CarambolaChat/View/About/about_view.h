@@ -8,10 +8,10 @@ class AboutView : public uicore::ColumnView
 public:
 	AboutView()
 	{
-		auto h1 = add_subview<uicore::SpanLayoutView>();
-		auto p1 = add_subview<uicore::SpanLayoutView>();
+		auto h1 = add_subview<uicore::TextBlockView>();
+		auto p1 = add_subview<uicore::TextBlockView>();
 		auto image_view = add_subview<uicore::ImageView>();
-		auto p2 = add_subview<uicore::SpanLayoutView>();
+		auto p2 = add_subview<uicore::TextBlockView>();
 		add_subview<uicore::SpacerView>();
 
 		auto buttons = add_subview<uicore::RowView>();

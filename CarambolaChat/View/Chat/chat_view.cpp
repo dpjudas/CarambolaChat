@@ -173,14 +173,14 @@ ChatView::TextPosition ChatView::hit_test(const Pointf &pos)
 	return TextPosition();
 }
 
-ChatView::TextPosition ChatView::hit_test_line_column(const CanvasPtr &canvas, int line, int column, const SpanLayoutPtr &span_layout, const Pointf &pos)
+ChatView::TextPosition ChatView::hit_test_line_column(const CanvasPtr &canvas, int line, int column, const TextBlockPtr &span_layout, const Pointf &pos)
 {
-	SpanLayout::HitTestResult result = span_layout->hit_test(canvas, pos);
+	TextBlock::HitTestResult result = span_layout->hit_test(canvas, pos);
 	TextPosition text_pos;
 	text_pos.line = line;
 	text_pos.column = column;
 	text_pos.offset = result.offset;
-	if(result.type == SpanLayout::HitTestResult::inside)
+	if(result.type == TextBlock::HitTestResult::inside)
 		text_pos.id = result.object_id;
 	return text_pos;
 }

@@ -57,7 +57,7 @@ private:
 	void on_pointer_release(uicore::PointerEvent &e);
 	void on_pointer_move(uicore::PointerEvent &e);
 
-	TextPosition hit_test_line_column(const uicore::CanvasPtr &canvas, int line, int column, const uicore::SpanLayoutPtr &span_layout, const uicore::Pointf &pos);
+	TextPosition hit_test_line_column(const uicore::CanvasPtr &canvas, int line, int column, const uicore::TextBlockPtr &span_layout, const uicore::Pointf &pos);
 	static int offset_for_line_column(int line_index, int column, const TextPosition &pos);
 
 	void append_column_text(int line, int column, ChatLine &chatline, std::string prefix, std::string postfix, std::string &out_text);
