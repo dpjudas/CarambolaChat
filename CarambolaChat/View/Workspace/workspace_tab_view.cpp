@@ -6,7 +6,7 @@ using namespace uicore;
 
 WorkspaceTabView::WorkspaceTabView(const std::string &label_text, bool app_label)
 {
-	style()->set("flex: 0 1 main-size");
+	style()->set("flex: 0 1 auto");
 	style()->set("padding: 0 8px");
 	style()->set("flex-direction: row");
 	if (app_label)

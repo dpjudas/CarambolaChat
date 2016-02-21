@@ -72,7 +72,7 @@ ThemeRadioButtonView::ThemeRadioButtonView()
 
 ThemeScrollView::ThemeScrollView()
 {
-	scrollbar_x_view()->style()->set("flex: 0 0 main-size");
+	scrollbar_x_view()->style()->set("flex: 0 0 auto");
 	scrollbar_x_view()->style()->set("background: rgb(232, 232, 236)");
 	scrollbar_x_view()->track()->style()->set("border-image-slice: 4 0 3 0 fill;");
 	scrollbar_x_view()->track()->style()->set("border-image-width:4px 0px 3px 0px;");
@@ -116,7 +116,7 @@ ThemeScrollView::ThemeScrollView()
 	scrollbar_x_view()->button_increment()->style("pressed")->set("border-image-source:url('Theme/scrollbar_hori_button_right_pressed_withglyph.png');");
 	scrollbar_x_view()->button_increment()->style("disabled")->set("border-image-source:url('Theme/scrollbar_hori_button_right_disabled_withglyph.png');");
 
-	scrollbar_y_view()->style()->set("flex: 0 0 main-size");
+	scrollbar_y_view()->style()->set("flex: 0 0 auto");
 	scrollbar_y_view()->style()->set("background: rgb(232, 232, 236)");
 	scrollbar_y_view()->track()->style()->set("border-image-slice: 4 0 3 0 fill;");
 	scrollbar_y_view()->track()->style()->set("border-image-width:4px 0px 3px 0px;");
@@ -164,7 +164,7 @@ ThemeScrollView::ThemeScrollView()
 ThemeScrollBarView::ThemeScrollBarView()
 {
 	set_horizontal();
-	style()->set("flex: 0 0 main-size");
+	style()->set("flex: 0 0 auto");
 	style()->set("background: rgb(232, 232, 236)");
 	track()->style()->set("border-image-slice: 4 0 3 0 fill;");
 	track()->style()->set("border-image-width:4px 0px 3px 0px;");
@@ -214,7 +214,7 @@ ThemeSliderView::ThemeSliderView()
 	set_horizontal();
 
 	style()->set("flex-direction: row;");
-	track()->style()->set("flex: 1 1 main-size;");
+	track()->style()->set("flex: 1 1 auto;");
 	track()->style()->set("height: 4px;");
 	track()->style()->set("margin: 7px 0px");
 	track()->style()->set("border-image-slice: 1 2 1 1 fill;");
