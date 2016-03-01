@@ -21,8 +21,8 @@ ChatView::ChatView()
 	scroll->track()->style()->set("padding: 0 4px");
 	scroll->thumb()->style()->set("background: rgb(208,209,215)");
 
-	add_subview(text_view);
-	add_subview(scroll);
+	add_child(text_view);
+	add_child(scroll);
 
 	slots.connect(scroll->sig_scroll(), this, &ChatView::on_scroll);
 	slots.connect(text_view->sig_pointer_press(), this, &ChatView::on_pointer_press);
@@ -50,21 +50,21 @@ void ChatView::add_line(ChatLine line)
 
 std::string ChatView::create_timestamp()
 {
-	DateTime datetime = DateTime::get_current_local_time();
-	std::string hour = Text::to_string(datetime.get_hour());
+	DateTime datetime = DateTime::current_local_time();
+	std::string hour = Text::to_string(datetime.hour());
 	if (hour.length() < 2)
 		hour = "0"+hour;
-	std::string minute = Text::to_string(datetime.get_minutes());
+	std::string minute = Text::to_string(datetime.minutes());
 	if (minute.length() < 2)
 		minute = "0"+minute;
 
 	return hour+":"+minute;
 }
 
-void ChatView::layout_subviews(const uicore::CanvasPtr &canvas)
+void ChatView::layout_children(const uicore::CanvasPtr &canvas)
 {
 	scroll->set_page_step(geometry().content_box().height() / 15.0f);
-	View::layout_subviews(canvas);
+	View::layout_children(canvas);
 }
 
 void ChatView::render_text_content(ChatTextView *text_view, const CanvasPtr &canvas)
@@ -79,7 +79,7 @@ void ChatView::render_text_content(ChatTextView *text_view, const CanvasPtr &can
 
 		uicore::StyleCascade cascade({ &style });
 
-		font = cascade.get_font();
+		font = cascade.font();
 		font_url = font;
 		font_fixed = font;
 		baseline_offset1 = font->font_metrics(canvas).ascent() - font_fixed->font_metrics(canvas).ascent();
@@ -126,8 +126,8 @@ void ChatView::render_text_content(ChatTextView *text_view, const CanvasPtr &can
 
 ChatView::TextPosition ChatView::hit_test(const Pointf &pos)
 {
-	CanvasPtr canvas = get_canvas();
-	if (!canvas)
+	CanvasPtr c = canvas();
+	if (!c)
 		return TextPosition();
 
 	Rectf content_box = text_view->geometry().content_box();
@@ -150,7 +150,7 @@ ChatView::TextPosition ChatView::hit_test(const Pointf &pos)
 		}
 
 		ChatLine &line = *it;
-		layout_line(canvas, line, content_box, line_index - 1);
+		layout_line(c, line, content_box, line_index - 1);
 
 		float line_height = std::max(line.column2->size().height, line.column3->size().height);
 		y -= line_height;
@@ -163,11 +163,11 @@ ChatView::TextPosition ChatView::hit_test(const Pointf &pos)
 		Rectf column2_rect(content_box.left + content_box.left, y, content_box.left + prefix_width, y + line_height);
 		Rectf column3_rect(content_box.left + prefix_width, y, content_box.right, y + line_height);
 		if (column1_rect.contains(pos))
-			return hit_test_line_column(canvas, line_index-1, 0, line.column1, pos);
+			return hit_test_line_column(c, line_index-1, 0, line.column1, pos);
 		else if (column2_rect.contains(pos))
-			return hit_test_line_column(canvas, line_index-1, 1, line.column2, pos);
+			return hit_test_line_column(c, line_index-1, 1, line.column2, pos);
 		else if (column3_rect.contains(pos))
-			return hit_test_line_column(canvas, line_index-1, 2, line.column3, pos);
+			return hit_test_line_column(c, line_index-1, 2, line.column3, pos);
 	}
 
 	return TextPosition();
@@ -202,7 +202,7 @@ void ChatView::layout_line(const CanvasPtr &canvas, ChatLine &line, Rectf &clien
 			for (auto &i : line.inlines)
 			{
 				StyleCascade cascade({ i.style.get() });
-				line.column3->add_text(i.text, cascade.get_font(), cascade.computed_value("color").color(), i.id);
+				line.column3->add_text(i.text, cascade.font(), cascade.computed_value("color").color(), i.id);
 			}
 
 			line.column3_rendered = true;
@@ -384,7 +384,7 @@ void ChatView::copy_to_clipboard()
 	}
 	if (!text.empty())
 	{
-		view_tree()->get_display_window()->set_clipboard_text(text);
+		view_tree()->display_window()->set_clipboard_text(text);
 	}
 }
 

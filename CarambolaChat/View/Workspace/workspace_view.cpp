@@ -29,9 +29,9 @@ WorkspaceView::WorkspaceView()
 	pages_group->style()->set("background: white");
 	pages_group->style()->set("flex-direction: column");
 
-	//add_subview(toolbar);
-	add_subview(labels_group);
-	add_subview(pages_group);
+	//add_child(toolbar);
+	add_child(labels_group);
+	add_child(pages_group);
 }
 
 void WorkspaceView::add_page(const std::string &id, const std::string &label_text, std::shared_ptr<View> page_view, bool app_page, std::function<void()> close_clicked)
@@ -61,9 +61,9 @@ void WorkspaceView::add_page(const std::string &id, const std::string &label_tex
 	slots.connect(page.tab->sig_pointer_press(), on_click);
 	slots.connect(page.tab->close->sig_pointer_press(), on_close);
 
-	labels_group->add_subview(page.tab);
+	labels_group->add_child(page.tab);
 
-	pages_group->add_subview(page_view);
+	pages_group->add_child(page_view);
 	page_view->set_hidden(true);
 
 	set_selected(page, first_tab);
@@ -72,13 +72,13 @@ void WorkspaceView::add_page(const std::string &id, const std::string &label_tex
 void WorkspaceView::remove_page(std::shared_ptr<View> page_view)
 {
 	bool was_selected = !page_view->hidden();
-	page_view->remove_from_super();
+	page_view->remove_from_parent();
 
 	for (auto it = tabs.begin(); it != tabs.end(); ++it)
 	{
 		if (it->second.page == page_view)
 		{
-			it->second.tab->remove_from_super();
+			it->second.tab->remove_from_parent();
 			tabs.erase(it);
 			break;
 		}

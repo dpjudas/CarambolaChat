@@ -42,13 +42,13 @@ inline UserListRowView::UserListRowView(UserListView *init_user_list, const std:
 
 	icon = std::make_shared<uicore::ImageView>();
 	icon->style()->set("flex: none");
-	add_subview(icon);
+	add_child(icon);
 
 	label = std::make_shared<uicore::LabelView>();
 	label->style()->set("color: black");
 	label->style()->set("font: 12px/15px 'Source Sans Pro'");
 	label->style()->set("margin: 0 0 0 5px");
-	add_subview(label);
+	add_child(label);
 
 	slots.connect(sig_pointer_release(), [this](uicore::PointerEvent &e)
 	{

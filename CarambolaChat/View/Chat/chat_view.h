@@ -47,7 +47,7 @@ public:
 
 	uicore::Signal<void(int/* object_id*/)> cb_url_clicked;
 
-	void layout_subviews(const uicore::CanvasPtr &canvas) override;
+	void layout_children(const uicore::CanvasPtr &canvas) override;
 
 private:
 	void render_text_content(ChatTextView *text_view, const uicore::CanvasPtr &canvas);

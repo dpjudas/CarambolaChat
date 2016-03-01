@@ -8,8 +8,8 @@ class EditConnectionCheckView : public uicore::RowView
 public:
 	EditConnectionCheckView(const std::string &label_text = std::string())
 	{
-		value = add_subview<ThemeCheckBoxView>();
-		label = add_subview<ThemeLabelView>();
+		value = add_child<ThemeCheckBoxView>();
+		label = add_child<ThemeLabelView>();
 
 		label->set_text(label_text);
 
@@ -26,8 +26,8 @@ class EditConnectionTextView : public uicore::RowView
 public:
 	EditConnectionTextView(const std::string &label_text = std::string(), const std::string &placeholder = std::string(), int size = 0)
 	{
-		label = add_subview<ThemeLabelView>();
-		value = add_subview<ThemeTextFieldView>();
+		label = add_child<ThemeLabelView>();
+		value = add_child<ThemeTextFieldView>();
 
 		label->set_text(label_text);
 
@@ -62,9 +62,9 @@ class EditConnectionButtonBarView : public uicore::RowView
 public:
 	EditConnectionButtonBarView()
 	{
-		add_subview<uicore::SpacerView>();
-		ok_button = add_subview<EditConnectionButtonView>("OK");
-		cancel_button = add_subview<EditConnectionButtonView>("Cancel");
+		add_child<uicore::SpacerView>();
+		ok_button = add_child<EditConnectionButtonView>("OK");
+		cancel_button = add_child<EditConnectionButtonView>("Cancel");
 
 		style()->set("margin-top: 30px");
 	}
@@ -78,17 +78,17 @@ class EditConnectionView : public uicore::ColumnView
 public:
 	EditConnectionView()
 	{
-		connection_name = add_subview<EditConnectionTextView>("Connection name", "Some IRC Network");
-		server = add_subview<EditConnectionTextView>("Server", "irc.server.net", 30);
-		nick = add_subview<EditConnectionTextView>("Nick", "name", 20);
-		alt_nick = add_subview<EditConnectionTextView>("Alternative nick", "alternative name", 20);
-		auto_connect = add_subview<EditConnectionCheckView>("Auto connect on startup");
-		auto label = add_subview<ThemeLabelView>();
+		connection_name = add_child<EditConnectionTextView>("Connection name", "Some IRC Network");
+		server = add_child<EditConnectionTextView>("Server", "irc.server.net", 30);
+		nick = add_child<EditConnectionTextView>("Nick", "name", 20);
+		alt_nick = add_child<EditConnectionTextView>("Alternative nick", "alternative name", 20);
+		auto_connect = add_child<EditConnectionCheckView>("Auto connect on startup");
+		auto label = add_child<ThemeLabelView>();
 		label->set_text("Commands to execute on connect:");
-		perform_list = add_subview<ThemeTextView>();
+		perform_list = add_child<ThemeTextView>();
 		perform_list->set_preferred_size({ 40, 5 });
 		perform_list->style()->set("flex: auto");
-		button_bar = add_subview<EditConnectionButtonBarView>();
+		button_bar = add_child<EditConnectionButtonBarView>();
 
 		style()->set("padding: 11px; flex: auto");
 		style()->set("background: rgb(240,240,240)");

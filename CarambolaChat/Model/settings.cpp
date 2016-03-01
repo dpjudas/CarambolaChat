@@ -90,7 +90,7 @@ void Settings::set_dcc_port(const std::string &port)
 
 XMLSettings Settings::load_settings(const std::string &settings_file)
 {
-	std::string appdata_dir = uicore::Directory::get_appdata("ClanLib", "Carambola", "1.0");
+	std::string appdata_dir = uicore::Directory::appdata("ClanLib", "Carambola", "1.0");
 	XMLSettingsAppModel document;
 	document.load(appdata_dir + settings_file);
 	return document.get_root();
@@ -98,6 +98,6 @@ XMLSettings Settings::load_settings(const std::string &settings_file)
 
 void Settings::save_settings(const std::string &settings_file, XMLSettings settings)
 {
-	std::string appdata_dir = uicore::Directory::get_appdata("ClanLib", "Carambola", "1.0");
+	std::string appdata_dir = uicore::Directory::appdata("ClanLib", "Carambola", "1.0");
 	settings.get_document().save(appdata_dir + settings_file);
 }

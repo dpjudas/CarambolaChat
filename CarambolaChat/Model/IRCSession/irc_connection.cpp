@@ -369,7 +369,7 @@ void IRCConnection::calculate_ping_interval()
 	// On freenode, ping interval is roughly every 2.5 minutes.
 	if (ping_timeout_num_samples < ping_timeout_max_samples)	// Creating samples
 	{
-		uint64_t time_now = uicore::System::get_time();
+		uint64_t time_now = uicore::System::time();
 		if (ping_timeout_last_sample_time != 0)	// When the initial time has been set
 		{
 			ping_timeout_samples_total += (int)(time_now - ping_timeout_last_sample_time);

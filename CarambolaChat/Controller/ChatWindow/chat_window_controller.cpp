@@ -17,7 +17,7 @@ ChatWindowViewController::ChatWindowViewController()
 	set_root_view(view);
 
 	workspace = std::make_shared<WorkspaceController>();
-	view->add_subview(workspace->view);
+	view->add_child(workspace->view);
 
 	slots.connect(AppModel::instance()->cb_irc_session_created, this, &ChatWindowViewController::irc_session_created);
 

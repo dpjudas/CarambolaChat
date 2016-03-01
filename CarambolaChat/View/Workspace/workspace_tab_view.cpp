@@ -27,7 +27,7 @@ WorkspaceTabView::WorkspaceTabView(const std::string &label_text, bool app_label
 	{
 		label->style()->set("color: white");
 	}
-	add_subview(label);
+	add_child(label);
 
 	message_count = std::make_shared<LabelView>();
 	close = std::make_shared<ImageView>();
@@ -44,10 +44,10 @@ WorkspaceTabView::WorkspaceTabView(const std::string &label_text, bool app_label
 		message_count->style("highlight")->set("background: rgb(230,230,230)");
 		message_count->style("highlight")->set("border-color: rgb(230,230,230)");
 		message_count->set_text_alignment(TextAlignment::center);
-		add_subview(message_count);
+		add_child(message_count);
 
 		close->set_image(ImageSource::from_resource("Icons/cross-small.png"));
 		close->style()->set("margin: auto 0 auto 8px");
-		add_subview(close);
+		add_child(close);
 	}
 }

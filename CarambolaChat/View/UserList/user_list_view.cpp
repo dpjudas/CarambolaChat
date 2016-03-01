@@ -22,7 +22,7 @@ void UserListView::update_user(const std::string &id, const std::string &name, c
 	if (!user)
 	{
 		user = std::make_shared<UserListRowView>(this, id);
-		content_view()->add_subview(user);
+		content_view()->add_child(user);
 	}
 
 	user->sort_priority = sort_priority;
@@ -35,7 +35,7 @@ void UserListView::remove_user(const std::string &id)
 	auto it = users.find(id);
 	if (it != users.end())
 	{
-		it->second->remove_from_super();
+		it->second->remove_from_parent();
 		users.erase(it);
 	}
 }
@@ -74,8 +74,8 @@ void UserListView::sort()
 	for (const auto &key : keys)
 	{
 		auto &value = users[key];
-		value->remove_from_super();
-		content_view()->add_subview(value);
+		value->remove_from_parent();
+		content_view()->add_child(value);
 	}
 }
 
@@ -83,7 +83,7 @@ void UserListView::clear()
 {
 	for (auto &it : users)
 	{
-		it.second->remove_from_super();
+		it.second->remove_from_parent();
 	}
 	users.clear();
 }

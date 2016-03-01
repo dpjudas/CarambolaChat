@@ -15,7 +15,7 @@ TaskbarNotification::TaskbarNotification(std::shared_ptr<View> init_view) : view
 		if (e.type() != ActivationChangeType::activated)
 			return;
 
-		DisplayWindowPtr dispwindow = view->view_tree()->get_display_window();
+		DisplayWindowPtr dispwindow = view->view_tree()->display_window();
 		HWND hwnd = dispwindow->handle().hwnd;
 
 		HRESULT result;
@@ -32,7 +32,7 @@ TaskbarNotification::TaskbarNotification(std::shared_ptr<View> init_view) : view
 void TaskbarNotification::notify()
 {
 #ifdef WIN32
-	DisplayWindowPtr dispwindow = view->view_tree()->get_display_window();
+	DisplayWindowPtr dispwindow = view->view_tree()->display_window();
 	if (dispwindow->has_focus() == false)
 	{
 		HWND hwnd = dispwindow->handle().hwnd;
