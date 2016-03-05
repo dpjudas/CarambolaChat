@@ -14,7 +14,7 @@ ChatView::ChatView()
 	text_view->style()->set("flex: auto");
 	text_view->set_focus_policy(FocusPolicy::accept);
 
-	scroll = std::make_shared<ScrollBarView>();
+	scroll = std::make_shared<ScrollBarBaseView>();
 	scroll->set_vertical();
 	scroll->style()->set("flex: none");
 	scroll->style()->set("background: rgb(232,232,236)");

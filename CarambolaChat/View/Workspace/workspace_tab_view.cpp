@@ -20,7 +20,7 @@ WorkspaceTabView::WorkspaceTabView(const std::string &label_text, bool app_label
 	}
 	
 
-	label = std::make_shared<LabelView>();
+	label = std::make_shared<LabelBaseView>();
 	label->style()->set("font: 12px/26px 'Source Sans Pro'");
 	label->set_text(label_text);
 	if (app_label)
@@ -29,8 +29,8 @@ WorkspaceTabView::WorkspaceTabView(const std::string &label_text, bool app_label
 	}
 	add_child(label);
 
-	message_count = std::make_shared<LabelView>();
-	close = std::make_shared<ImageView>();
+	message_count = std::make_shared<LabelBaseView>();
+	close = std::make_shared<ImageBaseView>();
 
 	if (!app_label)
 	{

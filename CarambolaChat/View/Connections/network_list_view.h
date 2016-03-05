@@ -11,7 +11,7 @@ public:
 	std::shared_ptr<NetworkListItemView> add_item(const std::string &name);
 	std::shared_ptr<NetworkListItemView> get_item(const std::string &name);
 
-	std::shared_ptr<uicore::ButtonView> add_button;
+	std::shared_ptr<uicore::ButtonBaseView> add_button;
 
 private:
 	std::shared_ptr<uicore::View> items_view;

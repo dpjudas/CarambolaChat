@@ -69,7 +69,7 @@ private:
 	void invalidate_lines(int start, int end);
 
 	std::shared_ptr<ChatTextView> text_view;
-	std::shared_ptr<uicore::ScrollBarView> scroll;
+	std::shared_ptr<uicore::ScrollBarBaseView> scroll;
 	std::list<ChatLine> lines;
 	uicore::SlotContainer slots;
 	Selection selection;

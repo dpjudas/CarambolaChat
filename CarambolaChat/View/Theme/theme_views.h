@@ -1,80 +1,80 @@
 
 #pragma once
 
-class ThemeButtonView : public uicore::ButtonView
+class ButtonView : public uicore::ButtonBaseView
 {
 public:
-	ThemeButtonView();
+	ButtonView();
 };
 
-class ThemeCheckBoxView : public uicore::CheckBoxView
+class CheckBoxView : public uicore::CheckBoxBaseView
 {
 public:
-	ThemeCheckBoxView();
+	CheckBoxView();
 };
 
-class ThemeImageView : public uicore::ImageView
+class ImageView : public uicore::ImageBaseView
 {
 public:
-	ThemeImageView();
+	ImageView();
 };
 
-class ThemeLabelView : public uicore::LabelView
+class LabelView : public uicore::LabelBaseView
 {
 public:
-	ThemeLabelView();
+	LabelView();
 };
 
-class ThemeListBoxView : public uicore::ListBoxView
+class ListBoxView : public uicore::ListBoxBaseView
 {
 public:
-	ThemeListBoxView();
+	ListBoxView();
 };
 
-class ThemeListBoxLabelView : public uicore::LabelView
+class ListBoxLabelView : public uicore::LabelBaseView
 {
 public:
-	ThemeListBoxLabelView(const std::string &text = std::string());
+	ListBoxLabelView(const std::string &text = std::string());
 };
 
-class ThemeRadioButtonView : public uicore::RadioButtonView
+class RadioButtonView : public uicore::RadioButtonBaseView
 {
 public:
-	ThemeRadioButtonView();
+	RadioButtonView();
 };
 
-class ThemeScrollView : public uicore::ScrollView
+class ScrollView : public uicore::ScrollBaseView
 {
 public:
-	ThemeScrollView();
+	ScrollView();
 };
 
-class ThemeScrollBarView : public uicore::ScrollBarView
+class ScrollBarView : public uicore::ScrollBarBaseView
 {
 public:
-	ThemeScrollBarView();
+	ScrollBarView();
 };
 
-class ThemeSliderView : public uicore::SliderView
+class SliderView : public uicore::SliderBaseView
 {
 public:
-	ThemeSliderView();
+	SliderView();
 };
 
-class ThemeSpinView : public uicore::SpinView
+class SpinView : public uicore::SpinBaseView
 {
 public:
-	ThemeSpinView();
+	SpinView();
 };
 
-class ThemeTextFieldView : public uicore::TextFieldView
+class TextFieldView : public uicore::TextFieldBaseView
 {
 public:
-	ThemeTextFieldView();
+	TextFieldView();
 };
 
-class ThemeTextView : public uicore::TextView
+class TextAreaView : public uicore::TextAreaBaseView
 {
 public:
-	ThemeTextView();
+	TextAreaView();
 };

@@ -11,7 +11,7 @@ NetworkListItemView::NetworkListItemView()
 	style()->set("background: white"); // Bug: required to make the border work
 	style()->set("border-top: 1px solid rgb(204,204,204)");
 
-	status_icon = std::make_shared<ImageView>();
+	status_icon = std::make_shared<ImageBaseView>();
 	status_icon->style()->set("flex: none");
 	status_icon->style()->set("width: 32px");
 	status_icon->style()->set("margin: 0 7px");
@@ -22,24 +22,24 @@ NetworkListItemView::NetworkListItemView()
 	name_status_block->style()->set("width: 220px");
 	name_status_block->style()->set("flex-direction: column");
 
-	name = std::make_shared<LabelView>();
+	name = std::make_shared<LabelBaseView>();
 	name->style()->set("font: bold 13px/16px 'Source Sans Pro'");
 	name_status_block->add_child(name);
 
-	status_text = std::make_shared<LabelView>();
+	status_text = std::make_shared<LabelBaseView>();
 	status_text->style()->set("font: 13px/16px 'Source Sans Pro'");
 	name_status_block->add_child(status_text);
 
 	add_child(name_status_block);
 
-	connect_button = std::make_shared<ButtonView>();
+	connect_button = std::make_shared<ButtonBaseView>();
 	connect_button->label()->style()->set("font: 13px/16px 'Source Sans Pro'");
 	connect_button->label()->style()->set("color: rgb(0,0,128)");
 	connect_button->style()->set("flex: none");
 	connect_button->style()->set("margin: auto 15px auto 0");
 	add_child(connect_button);
 
-	edit_button = std::make_shared<ButtonView>();
+	edit_button = std::make_shared<ButtonBaseView>();
 	edit_button->label()->set_text("Edit");
 	edit_button->label()->style()->set("font: 13px/16px 'Source Sans Pro'");
 	edit_button->label()->style()->set("color: rgb(0,0,128)");
@@ -47,7 +47,7 @@ NetworkListItemView::NetworkListItemView()
 	edit_button->style()->set("margin: auto 15px auto 0");
 	add_child(edit_button);
 
-	remove_button = std::make_shared<ButtonView>();
+	remove_button = std::make_shared<ButtonBaseView>();
 	remove_button->label()->set_text("Remove");
 	remove_button->label()->style()->set("font: 13px/16px 'Source Sans Pro'");
 	remove_button->label()->style()->set("color: rgb(0,0,128)");

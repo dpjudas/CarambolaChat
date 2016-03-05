@@ -2,7 +2,7 @@
 #include "precomp.h"
 #include "theme_views.h"
 
-ThemeButtonView::ThemeButtonView()
+ButtonView::ButtonView()
 {
 	style()->set("border-image-slice: 6 6 5 5 fill;");
 	style()->set("border-image-width:6px 6px 5px 5px;");
@@ -16,7 +16,7 @@ ThemeButtonView::ThemeButtonView()
 	label()->set_text_alignment(uicore::TextAlignment::center);
 }
 
-ThemeCheckBoxView::ThemeCheckBoxView()
+CheckBoxView::CheckBoxView()
 {
 	style()->set("background-position:center center;");
 	style()->set("background-repeat:no-repeat;");
@@ -32,21 +32,21 @@ ThemeCheckBoxView::ThemeCheckBoxView()
 	style("checked_disabled")->set("background-image:url('Theme/checkbox_checked_disabled.png');");
 }
 
-ThemeImageView::ThemeImageView()
+ImageView::ImageView()
 {
 }
 
-ThemeLabelView::ThemeLabelView()
+LabelView::LabelView()
 {
 	style()->set("font: 13px/22px 'Source Sans Pro'");
 }
 
-ThemeListBoxView::ThemeListBoxView()
+ListBoxView::ListBoxView()
 {
 	style()->set("margin: 7px 0; border: 1px solid black; padding: 5px; background: #f0f0f0");
 }
 
-ThemeListBoxLabelView::ThemeListBoxLabelView(const std::string &text)
+ListBoxLabelView::ListBoxLabelView(const std::string &text)
 {
 	style()->set("font: 13px/17px 'Source Sans Pro'; color: black; margin: 1px 0; padding: 0 2px");
 	style("selected")->set("background: #7777f0; color: white;");
@@ -54,7 +54,7 @@ ThemeListBoxLabelView::ThemeListBoxLabelView(const std::string &text)
 	set_text(text);
 }
 
-ThemeRadioButtonView::ThemeRadioButtonView()
+RadioButtonView::RadioButtonView()
 {
 	style()->set("background-position:center center;");
 	style()->set("background-repeat:no-repeat;");
@@ -70,7 +70,7 @@ ThemeRadioButtonView::ThemeRadioButtonView()
 	style("checked_disabled")->set("background-image:url('Theme/radio_checked_disabled.png');");
 }
 
-ThemeScrollView::ThemeScrollView()
+ScrollView::ScrollView()
 {
 	scrollbar_x_view()->style()->set("flex: 0 0 auto");
 	scrollbar_x_view()->style()->set("background: rgb(232, 232, 236)");
@@ -161,7 +161,7 @@ ThemeScrollView::ThemeScrollView()
 	scrollbar_y_view()->button_increment()->style("disabled")->set("border-image-source:url('Theme/scrollbar_vert_button_right_disabled_withglyph.png');");
 }
 
-ThemeScrollBarView::ThemeScrollBarView()
+ScrollBarView::ScrollBarView()
 {
 	set_horizontal();
 	style()->set("flex: 0 0 auto");
@@ -209,7 +209,7 @@ ThemeScrollBarView::ThemeScrollBarView()
 	button_increment()->style("disabled")->set("border-image-source:url('Theme/scrollbar_hori_button_right_disabled_withglyph.png');");
 }
 
-ThemeSliderView::ThemeSliderView()
+SliderView::SliderView()
 {
 	set_horizontal();
 
@@ -234,11 +234,11 @@ ThemeSliderView::ThemeSliderView()
 	thumb()->style("disabled")->set("border-image-source:url('Theme/slider_horizontal_thumb_disabled.png');");
 }
 
-ThemeSpinView::ThemeSpinView()
+SpinView::SpinView()
 {
 }
 
-ThemeTextFieldView::ThemeTextFieldView()
+TextFieldView::TextFieldView()
 {
 	style()->set("font: 13px/16px 'Source Sans Pro'");
 	style()->set("background: white");
@@ -246,7 +246,7 @@ ThemeTextFieldView::ThemeTextFieldView()
 	style()->set("border: 1px solid #ccc");
 }
 
-ThemeTextView::ThemeTextView()
+TextAreaView::TextAreaView()
 {
 	style()->set("font: 13px/16px 'Source Sans Pro'");
 	style()->set("background: white");

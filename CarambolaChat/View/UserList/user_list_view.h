@@ -11,11 +11,11 @@ public:
 	UserListView *user_list = nullptr;
 	std::string id;
 	int sort_priority = 0;
-	std::shared_ptr<uicore::ImageView> icon;
-	std::shared_ptr<uicore::LabelView> label;
+	std::shared_ptr<uicore::ImageBaseView> icon;
+	std::shared_ptr<uicore::LabelBaseView> label;
 };
 
-class UserListView : public uicore::ScrollView
+class UserListView : public uicore::ScrollBaseView
 {
 public:
 	UserListView();
@@ -40,11 +40,11 @@ inline UserListRowView::UserListRowView(UserListView *init_user_list, const std:
 	style()->set("padding: 5px");
 	style()->set("flex-direction: row");
 
-	icon = std::make_shared<uicore::ImageView>();
+	icon = std::make_shared<uicore::ImageBaseView>();
 	icon->style()->set("flex: none");
 	add_child(icon);
 
-	label = std::make_shared<uicore::LabelView>();
+	label = std::make_shared<uicore::LabelBaseView>();
 	label->style()->set("color: black");
 	label->style()->set("font: 12px/15px 'Source Sans Pro'");
 	label->style()->set("margin: 0 0 0 5px");

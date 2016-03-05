@@ -8,8 +8,8 @@ class EditConnectionCheckView : public uicore::RowView
 public:
 	EditConnectionCheckView(const std::string &label_text = std::string())
 	{
-		value = add_child<ThemeCheckBoxView>();
-		label = add_child<ThemeLabelView>();
+		value = add_child<CheckBoxView>();
+		label = add_child<LabelView>();
 
 		label->set_text(label_text);
 
@@ -17,8 +17,8 @@ public:
 		value->style()->set("margin: auto 3px auto 0");
 	}
 
-	std::shared_ptr<ThemeLabelView> label;
-	std::shared_ptr<ThemeCheckBoxView> value;
+	std::shared_ptr<LabelView> label;
+	std::shared_ptr<CheckBoxView> value;
 };
 
 class EditConnectionTextView : public uicore::RowView
@@ -26,8 +26,8 @@ class EditConnectionTextView : public uicore::RowView
 public:
 	EditConnectionTextView(const std::string &label_text = std::string(), const std::string &placeholder = std::string(), int size = 0)
 	{
-		label = add_child<ThemeLabelView>();
-		value = add_child<ThemeTextFieldView>();
+		label = add_child<LabelView>();
+		value = add_child<TextFieldView>();
 
 		label->set_text(label_text);
 
@@ -42,11 +42,11 @@ public:
 			value->style()->set("flex: auto");
 	}
 
-	std::shared_ptr<ThemeLabelView> label;
-	std::shared_ptr<ThemeTextFieldView> value;
+	std::shared_ptr<LabelView> label;
+	std::shared_ptr<TextFieldView> value;
 };
 
-class EditConnectionButtonView : public ThemeButtonView
+class EditConnectionButtonView : public ButtonView
 {
 public:
 	EditConnectionButtonView(const std::string &text)
@@ -83,9 +83,9 @@ public:
 		nick = add_child<EditConnectionTextView>("Nick", "name", 20);
 		alt_nick = add_child<EditConnectionTextView>("Alternative nick", "alternative name", 20);
 		auto_connect = add_child<EditConnectionCheckView>("Auto connect on startup");
-		auto label = add_child<ThemeLabelView>();
+		auto label = add_child<LabelView>();
 		label->set_text("Commands to execute on connect:");
-		perform_list = add_child<ThemeTextView>();
+		perform_list = add_child<TextAreaView>();
 		perform_list->set_preferred_size({ 40, 5 });
 		perform_list->style()->set("flex: auto");
 		button_bar = add_child<EditConnectionButtonBarView>();
@@ -100,5 +100,5 @@ public:
 	std::shared_ptr<EditConnectionTextView> alt_nick;
 	std::shared_ptr<EditConnectionCheckView> auto_connect;
 	std::shared_ptr<EditConnectionButtonBarView> button_bar;
-	std::shared_ptr<uicore::TextView> perform_list;
+	std::shared_ptr<uicore::TextAreaBaseView> perform_list;
 };

@@ -29,7 +29,7 @@ public:
 		input_bar->style()->set("padding: 5px");
 		input_bar->style()->set("flex-direction: row");
 
-		input_text = std::make_shared<uicore::TextFieldView>();
+		input_text = std::make_shared<uicore::TextFieldBaseView>();
 		input_text->style()->set("flex: auto");
 		input_text->style()->set("border: 1px solid rgb(153,153,153)");
 		input_text->style()->set("border-radius: 2px");
@@ -45,5 +45,5 @@ public:
 
 	std::shared_ptr<ChatView> chat_log;
 	std::shared_ptr<UserListView> user_list;
-	std::shared_ptr<uicore::TextFieldView> input_text;
+	std::shared_ptr<uicore::TextFieldBaseView> input_text;
 };

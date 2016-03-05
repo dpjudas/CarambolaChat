@@ -8,20 +8,21 @@ class AboutView : public uicore::ColumnView
 public:
 	AboutView()
 	{
-		auto h1 = add_child<uicore::TextBlockView>();
-		auto p1 = add_child<uicore::TextBlockView>();
-		auto image_view = add_child<uicore::ImageView>();
-		auto p2 = add_child<uicore::TextBlockView>();
+		auto h1 = add_child<uicore::TextBlockBaseView>();
+		auto p1 = add_child<uicore::TextBlockBaseView>();
+		auto image_view = add_child<uicore::ImageBaseView>();
+		auto p2 = add_child<uicore::TextBlockBaseView>();
 		add_child<uicore::SpacerView>();
 
 		auto buttons = add_child<uicore::RowView>();
+		buttons->style()->set("flex: none");
 		buttons->add_child<uicore::SpacerView>();
-		ok_button = buttons->add_child<ThemeButtonView>();
+		ok_button = buttons->add_child<ButtonView>();
 
 		style()->set("background: rgb(240,240,240); padding: 11px");
-		h1->style()->set("font: bold 22px/26px 'Source Sans Pro'");
-		p1->style()->set("font: 13px/17px 'Source Sans Pro'; margin: 0 auto 20px auto; max-width: 370px;");
-		p2->style()->set("font: 13px/17px 'Source Sans Pro'; margin: 11px auto; max-width: 370px;");
+		h1->style()->set("font: bold 22px/26px 'Source Sans Pro'; flex: none");
+		p1->style()->set("font: 13px/17px 'Source Sans Pro'; margin: 0 auto 20px auto; max-width: 370px; flex: none");
+		p2->style()->set("font: 13px/17px 'Source Sans Pro'; margin: 11px auto; max-width: 370px; flex: none");
 		image_view->style()->set("margin: 0 auto");
 		ok_button->style()->set("width: 75px");
 
@@ -37,5 +38,5 @@ public:
 		ok_button->label()->set_text("OK");
 	}
 
-	std::shared_ptr<ThemeButtonView> ok_button;
+	std::shared_ptr<ButtonView> ok_button;
 };
