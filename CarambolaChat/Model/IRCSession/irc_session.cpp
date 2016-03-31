@@ -3,6 +3,7 @@
 #include "irc_session.h"
 #include "irc_numerics.h"
 #include "command.h"
+#include <stdlib.h>
 #include <algorithm>
 
 IRCSession::IRCSession()

@@ -7,17 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18132B0A1CAD1458001AC1A6 /* libUICore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18132B091CAD1458001AC1A6 /* libUICore.a */; };
+		18132B0B1CAD185A001AC1A6 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 18F740F21BA19D4200321FF1 /* Resources */; };
 		181D07C21BA11A0C002267C2 /* precomp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 181D07BE1BA11A0C002267C2 /* precomp.cpp */; };
 		181D07C31BA11A0C002267C2 /* program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 181D07C01BA11A0C002267C2 /* program.cpp */; };
 		18AA94E71BA1172D00F35B03 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18AA94E61BA1172D00F35B03 /* Images.xcassets */; };
 		18AA94EA1BA1172D00F35B03 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AA94E81BA1172D00F35B03 /* MainMenu.xib */; };
-		18E0BE421BA1204E0071B89C /* libclanApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E0BE3B1BA1204E0071B89C /* libclanApp.a */; };
-		18E0BE431BA1204E0071B89C /* libclanCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E0BE3C1BA1204E0071B89C /* libclanCore.a */; };
-		18E0BE441BA1204E0071B89C /* libclanDisplay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E0BE3D1BA1204E0071B89C /* libclanDisplay.a */; };
-		18E0BE451BA1204E0071B89C /* libclanGL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E0BE3E1BA1204E0071B89C /* libclanGL.a */; };
-		18E0BE461BA1204E0071B89C /* libclanNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E0BE3F1BA1204E0071B89C /* libclanNetwork.a */; };
-		18E0BE471BA1204E0071B89C /* libclanSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E0BE401BA1204E0071B89C /* libclanSound.a */; };
-		18E0BE481BA1204E0071B89C /* libclanUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E0BE411BA1204E0071B89C /* libclanUI.a */; };
 		18E0BE721BA1241A0071B89C /* about_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E0BE5C1BA1241A0071B89C /* about_controller.cpp */; };
 		18E0BE731BA1241A0071B89C /* chat_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E0BE5F1BA1241A0071B89C /* chat_controller.cpp */; };
 		18E0BE741BA1241A0071B89C /* chat_window_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E0BE631BA1241A0071B89C /* chat_window_controller.cpp */; };
@@ -53,10 +48,10 @@
 		18E0BEE91BA1243E0071B89C /* workspace_view.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E0BECB1BA1243E0071B89C /* workspace_view.cpp */; };
 		18E0BEEB1BA126170071B89C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E0BEEA1BA126170071B89C /* Cocoa.framework */; };
 		18E0BEED1BA126310071B89C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E0BEEC1BA126310071B89C /* OpenGL.framework */; };
-		18F740F31BA19D4200321FF1 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 18F740F21BA19D4200321FF1 /* Resources */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18132B091CAD1458001AC1A6 /* libUICore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUICore.a; path = ../UICore/Build/lib/osx/libUICore.a; sourceTree = "<group>"; };
 		181D07BE1BA11A0C002267C2 /* precomp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = precomp.cpp; sourceTree = "<group>"; };
 		181D07BF1BA11A0C002267C2 /* precomp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = precomp.h; sourceTree = "<group>"; };
 		181D07C01BA11A0C002267C2 /* program.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = program.cpp; sourceTree = "<group>"; };
@@ -65,13 +60,6 @@
 		18AA94E01BA1172D00F35B03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18AA94E61BA1172D00F35B03 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		18AA94E91BA1172D00F35B03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		18E0BE3B1BA1204E0071B89C /* libclanApp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libclanApp.a; path = ClanLib/lib/osx/libclanApp.a; sourceTree = "<group>"; };
-		18E0BE3C1BA1204E0071B89C /* libclanCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libclanCore.a; path = ClanLib/lib/osx/libclanCore.a; sourceTree = "<group>"; };
-		18E0BE3D1BA1204E0071B89C /* libclanDisplay.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libclanDisplay.a; path = ClanLib/lib/osx/libclanDisplay.a; sourceTree = "<group>"; };
-		18E0BE3E1BA1204E0071B89C /* libclanGL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libclanGL.a; path = ClanLib/lib/osx/libclanGL.a; sourceTree = "<group>"; };
-		18E0BE3F1BA1204E0071B89C /* libclanNetwork.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libclanNetwork.a; path = ClanLib/lib/osx/libclanNetwork.a; sourceTree = "<group>"; };
-		18E0BE401BA1204E0071B89C /* libclanSound.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libclanSound.a; path = ClanLib/lib/osx/libclanSound.a; sourceTree = "<group>"; };
-		18E0BE411BA1204E0071B89C /* libclanUI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libclanUI.a; path = ClanLib/lib/osx/libclanUI.a; sourceTree = "<group>"; };
 		18E0BE5C1BA1241A0071B89C /* about_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = about_controller.cpp; sourceTree = "<group>"; };
 		18E0BE5D1BA1241A0071B89C /* about_controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = about_controller.h; sourceTree = "<group>"; };
 		18E0BE5F1BA1241A0071B89C /* chat_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chat_controller.cpp; sourceTree = "<group>"; };
@@ -167,15 +155,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18132B0A1CAD1458001AC1A6 /* libUICore.a in Frameworks */,
 				18E0BEED1BA126310071B89C /* OpenGL.framework in Frameworks */,
 				18E0BEEB1BA126170071B89C /* Cocoa.framework in Frameworks */,
-				18E0BE441BA1204E0071B89C /* libclanDisplay.a in Frameworks */,
-				18E0BE481BA1204E0071B89C /* libclanUI.a in Frameworks */,
-				18E0BE471BA1204E0071B89C /* libclanSound.a in Frameworks */,
-				18E0BE431BA1204E0071B89C /* libclanCore.a in Frameworks */,
-				18E0BE461BA1204E0071B89C /* libclanNetwork.a in Frameworks */,
-				18E0BE451BA1204E0071B89C /* libclanGL.a in Frameworks */,
-				18E0BE421BA1204E0071B89C /* libclanApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,15 +203,9 @@
 		18E0BE491BA120550071B89C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18132B091CAD1458001AC1A6 /* libUICore.a */,
 				18E0BEEC1BA126310071B89C /* OpenGL.framework */,
 				18E0BEEA1BA126170071B89C /* Cocoa.framework */,
-				18E0BE3B1BA1204E0071B89C /* libclanApp.a */,
-				18E0BE3C1BA1204E0071B89C /* libclanCore.a */,
-				18E0BE3D1BA1204E0071B89C /* libclanDisplay.a */,
-				18E0BE3E1BA1204E0071B89C /* libclanGL.a */,
-				18E0BE3F1BA1204E0071B89C /* libclanNetwork.a */,
-				18E0BE401BA1204E0071B89C /* libclanSound.a */,
-				18E0BE411BA1204E0071B89C /* libclanUI.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -518,7 +494,7 @@
 		18AA94D41BA1172D00F35B03 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = ClanLib;
 				TargetAttributes = {
 					18AA94DB1BA1172D00F35B03 = {
@@ -549,9 +525,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18132B0B1CAD185A001AC1A6 /* Resources in Resources */,
 				18AA94E71BA1172D00F35B03 /* Images.xcassets in Resources */,
 				18AA94EA1BA1172D00F35B03 /* MainMenu.xib in Resources */,
-				18F740F31BA19D4200321FF1 /* Resources in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -635,6 +611,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -652,14 +629,13 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					CarambolaChat,
-					ClanLib/include,
+					UICore/include,
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -695,13 +671,12 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					CarambolaChat,
-					ClanLib/include,
+					UICore/include,
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -714,9 +689,11 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/ClanLib/lib/osx",
+					"$(PROJECT_DIR)/UICore/lib/osx",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.clanlib.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -729,9 +706,11 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/ClanLib/lib/osx",
+					"$(PROJECT_DIR)/UICore/lib/osx",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.clanlib.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
