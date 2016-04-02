@@ -30,9 +30,9 @@ ConnectionsController::ConnectionsController()
 		std::string name = connection.get_string("connectionname");
 		auto item = view->networks->add_item(name);
 
-		slots.connect(item->connect_button->sig_pointer_release(), [=](PointerEvent &) { connect_clicked(connection); });
-		slots.connect(item->edit_button->sig_pointer_release(), [=](PointerEvent &) { edit_clicked(connection); });
-		slots.connect(item->remove_button->sig_pointer_release(), [=](PointerEvent &) { remove_clicked(connection); });
+		slots.connect(item->connect_button->sig_pointer_release(), [=](PointerEvent *) { connect_clicked(connection); });
+		slots.connect(item->edit_button->sig_pointer_release(), [=](PointerEvent *) { edit_clicked(connection); });
+		slots.connect(item->remove_button->sig_pointer_release(), [=](PointerEvent *) { remove_clicked(connection); });
 	}
 
 	slots.connect(AppModel::instance()->sig_connection_added, [this](XMLSettings connection)
@@ -40,9 +40,9 @@ ConnectionsController::ConnectionsController()
 		std::string name = connection.get_string("connectionname");
 		auto item = view->networks->add_item(name);
 
-		slots.connect(item->connect_button->sig_pointer_release(), [=](PointerEvent &) { connect_clicked(connection); });
-		slots.connect(item->edit_button->sig_pointer_release(), [=](PointerEvent &) { edit_clicked(connection); });
-		slots.connect(item->remove_button->sig_pointer_release(), [=](PointerEvent &) { remove_clicked(connection); });
+		slots.connect(item->connect_button->sig_pointer_release(), [=](PointerEvent *) { connect_clicked(connection); });
+		slots.connect(item->edit_button->sig_pointer_release(), [=](PointerEvent *) { edit_clicked(connection); });
+		slots.connect(item->remove_button->sig_pointer_release(), [=](PointerEvent *) { remove_clicked(connection); });
 	});
 
 	slots.connect(AppModel::instance()->sig_connection_edited, [this](XMLSettings connection)
@@ -53,8 +53,8 @@ ConnectionsController::ConnectionsController()
 	{
 	});
 
-	view->networks->add_button->func_clicked() = [this]() { add_clicked(); };
-	view->about_button->func_clicked() = [this]() { WindowManager::present_modal<AboutController>(view.get()); };
+	slots.connect(view->networks->add_button->sig_clicked(), [this]() { add_clicked(); });
+	slots.connect(view->about_button->sig_clicked(), [this]() { WindowManager::present_modal<AboutController>(view.get()); });
 }
 
 void ConnectionsController::add_clicked()

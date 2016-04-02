@@ -271,31 +271,31 @@ int ChatView::offset_for_line_column(int line_index, int column, const TextPosit
 		return pos.offset;
 }
 
-void ChatView::on_pointer_press(PointerEvent &e)
+void ChatView::on_pointer_press(PointerEvent *e)
 {
-	if (e.button() == PointerButton::wheel_up)
+	if (e->button() == PointerButton::wheel_up)
 	{
 		scroll->set_position(scroll->position() - 3);
 		on_scroll();
 	}
-	else if (e.button() == PointerButton::wheel_down)
+	else if (e->button() == PointerButton::wheel_down)
 	{
 		scroll->set_position(scroll->position() + 3);
 		on_scroll();
 	}
-	else if (e.button() == PointerButton::left)
+	else if (e->button() == PointerButton::left)
 	{
 		mouse_down = true;
-		mouse_down_text_position = hit_test(e.pos(text_view.get()));
+		mouse_down_text_position = hit_test(e->pos(text_view.get()));
 	}
 }
 
-void ChatView::on_pointer_release(PointerEvent &e)
+void ChatView::on_pointer_release(PointerEvent *e)
 {
-	if (e.button() == PointerButton::left)
+	if (e->button() == PointerButton::left)
 	{
 		mouse_down = false;
-		TextPosition mouse_up_text_position = hit_test(e.pos(text_view.get()));
+		TextPosition mouse_up_text_position = hit_test(e->pos(text_view.get()));
 
 		if (mouse_up_text_position == mouse_down_text_position)
 		{
@@ -313,9 +313,9 @@ void ChatView::on_pointer_release(PointerEvent &e)
 	}
 }
 
-void ChatView::on_pointer_move(PointerEvent &e)
+void ChatView::on_pointer_move(PointerEvent *e)
 {
-	TextPosition text_position = hit_test(e.pos(text_view.get()));
+	TextPosition text_position = hit_test(e->pos(text_view.get()));
 
 	if (mouse_down)
 	{

@@ -44,7 +44,7 @@ void WorkspaceView::add_page(const std::string &id, const std::string &label_tex
 	page.page = page_view;
 	page.close_clicked = close_clicked;
 
-	auto on_click = [=](PointerEvent &e)
+	auto on_click = [=](PointerEvent *e)
 	{
 		for (auto &it : tabs)
 		{
@@ -52,9 +52,9 @@ void WorkspaceView::add_page(const std::string &id, const std::string &label_tex
 		}
 	};
 
-	auto on_close = [=](PointerEvent &e)
+	auto on_close = [=](PointerEvent *e)
 	{
-		e.stop_propagation();
+		e->stop_propagation();
 		tabs[id].close_clicked();
 	};
 

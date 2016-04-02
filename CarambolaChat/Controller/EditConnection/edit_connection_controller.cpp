@@ -12,8 +12,8 @@ EditConnectionController::EditConnectionController() : add_dialog(true)
 	set_title("Add Connection");
 	set_root_view(edit_view);
 
-	edit_view->button_bar->ok_button->func_clicked() = bind_member(this, &EditConnectionController::ok_clicked);
-	edit_view->button_bar->cancel_button->func_clicked() = bind_member(this, &EditConnectionController::cancel_clicked);
+	slots.connect(edit_view->button_bar->ok_button->sig_clicked(), bind_member(this, &EditConnectionController::ok_clicked));
+	slots.connect(edit_view->button_bar->cancel_button->sig_clicked(), bind_member(this, &EditConnectionController::cancel_clicked));
 }
 
 EditConnectionController::EditConnectionController(XMLSettings connection) : connection(connection)
@@ -21,8 +21,8 @@ EditConnectionController::EditConnectionController(XMLSettings connection) : con
 	set_title("Edit Connection");
 	set_root_view(edit_view);
 
-	edit_view->button_bar->ok_button->func_clicked() = bind_member(this, &EditConnectionController::ok_clicked);
-	edit_view->button_bar->cancel_button->func_clicked() = bind_member(this, &EditConnectionController::cancel_clicked);
+	slots.connect(edit_view->button_bar->ok_button->sig_clicked(), bind_member(this, &EditConnectionController::ok_clicked));
+	slots.connect(edit_view->button_bar->cancel_button->sig_clicked(), bind_member(this, &EditConnectionController::cancel_clicked));
 
 	edit_view->connection_name->value->set_text(connection.get_string("connectionname"));
 	edit_view->server->value->set_text(connection.get_string("server"));

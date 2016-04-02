@@ -46,7 +46,7 @@ ChatController::ChatController(IRCSession *session, const IRCEntity &filter) : s
 	slots.connect(view->chat_log->cb_url_clicked, this, &ChatController::on_url_clicked);
 	slots.connect(view->input_text->sig_enter_pressed(), this, &ChatController::on_inputbox_return_pressed);
 
-	slots.connect(view->sig_focus_gained(), [this](FocusChangeEvent &) { view->input_text->set_focus(); });
+	slots.connect(view->sig_focus_gained(), [this](FocusChangeEvent *) { view->input_text->set_focus(); });
 
 	slots.connect(view->user_list->sig_context_menu(), this, &ChatController::on_userlist_contextmenu);
 
@@ -450,7 +450,7 @@ void ChatController::on_url_clicked(int object_id)
 	}
 }
 
-void ChatController::on_inputbox_return_pressed()
+void ChatController::on_inputbox_return_pressed(KeyEvent *)
 {
 	std::string chat_line = view->input_text->text();
 	if (!chat_line.empty())
@@ -510,9 +510,9 @@ std::vector<std::string> ChatController::split_input_text(const std::string &tex
 	return lines;
 }
 
-void ChatController::on_userlist_contextmenu(std::shared_ptr<UserListRowView> view, uicore::PointerEvent &e)
+void ChatController::on_userlist_contextmenu(std::shared_ptr<UserListRowView> view, uicore::PointerEvent *e)
 {
-	e.stop_propagation();
+	e->stop_propagation();
 
 	//auto id = view->id;
 	//auto menu = std::make_shared<PopupMenuController>();

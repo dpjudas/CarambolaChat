@@ -27,11 +27,11 @@ public:
 	void sort();
 	void clear();
 
-	uicore::Signal<void(std::shared_ptr<UserListRowView> view, uicore::PointerEvent &e)> &sig_context_menu() { return context_menu; }
+	uicore::Signal<void(std::shared_ptr<UserListRowView> view, uicore::PointerEvent *e)> &sig_context_menu() { return context_menu; }
 
 private:
 	std::map<std::string, std::shared_ptr<UserListRowView>> users;
-	uicore::Signal<void(std::shared_ptr<UserListRowView> view, uicore::PointerEvent &e)> context_menu;
+	uicore::Signal<void(std::shared_ptr<UserListRowView> view, uicore::PointerEvent *e)> context_menu;
 };
 
 inline UserListRowView::UserListRowView(UserListView *init_user_list, const std::string &id) : user_list(init_user_list), id(id)
@@ -50,9 +50,9 @@ inline UserListRowView::UserListRowView(UserListView *init_user_list, const std:
 	label->style()->set("margin: 0 0 0 5px");
 	add_child(label);
 
-	slots.connect(sig_pointer_release(), [this](uicore::PointerEvent &e)
+	slots.connect(sig_pointer_release(), [this](uicore::PointerEvent *e)
 	{
-		if (e.button() == uicore::PointerButton::right)
+		if (e->button() == uicore::PointerButton::right)
 			user_list->sig_context_menu()(std::dynamic_pointer_cast<UserListRowView>(shared_from_this()), e);
 	});
 }

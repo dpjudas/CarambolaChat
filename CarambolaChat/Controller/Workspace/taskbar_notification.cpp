@@ -10,9 +10,9 @@ using namespace uicore;
 TaskbarNotification::TaskbarNotification(std::shared_ptr<View> init_view) : view(init_view)
 {
 #ifdef WIN32
-	slots.connect(view->sig_activated(), [this](ActivationChangeEvent &e)
+	slots.connect(view->sig_activated(), [this](ActivationChangeEvent *e)
 	{
-		if (e.type() != ActivationChangeType::activated)
+		if (e->type() != ActivationChangeType::activated)
 			return;
 
 		DisplayWindowPtr dispwindow = view->view_tree()->display_window();

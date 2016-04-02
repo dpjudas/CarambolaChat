@@ -64,9 +64,9 @@ private:
 	void irc_channel_parted(const IRCChannel &channel);
 
 	void on_url_clicked(int object_id);
-	void on_inputbox_return_pressed();
+	void on_inputbox_return_pressed(uicore::KeyEvent *);
 
-	void on_userlist_contextmenu(std::shared_ptr<UserListRowView> view, uicore::PointerEvent &e);
+	void on_userlist_contextmenu(std::shared_ptr<UserListRowView> view, uicore::PointerEvent *e);
 	void on_userlist_slap(const std::string &id);
 	void on_userlist_open_conversation(const std::string &id);
 	void on_userlist_open_dcc_conversation(const std::string &id);
