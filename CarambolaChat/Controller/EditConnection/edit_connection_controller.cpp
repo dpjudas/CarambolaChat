@@ -54,7 +54,7 @@ void EditConnectionController::ok_clicked()
 		connection.set_string("comment", "");
 	}
 
-	connection.set_string("connectioname", edit_view->connection_name->value->text());
+	connection.set_string("connectionname", edit_view->connection_name->value->text());
 	connection.set_string("server", edit_view->server->value->text());
 	connection.set_string("nick", edit_view->nick->value->text());
 	connection.set_string("altnick", edit_view->alt_nick->value->text());
