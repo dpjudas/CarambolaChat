@@ -903,7 +903,7 @@ void IRCSession::on_ctcp_privmsg_dcc(const IRCText &data, const IRCPrivateMessag
 			offer.size_provided = true;
 		}
 
-		offer.filename = uicore::PathHelp::filename(tokens[1]);
+		offer.filename = uicore::FilePath::filename_without_extension(tokens[1]);
 		cb_dcc_file_offer(offer);
 	}
 	else if (tokens.size() == 4 && tokens[0] == "CHAT" && tokens[1] == "chat")

@@ -85,7 +85,7 @@ void DCCFileTransferConnection::worker_main()
 			}
 
 			//int wakeup_reason = uicore::Event::wait(abort_event, connection.get_read_event(), 60*1000);
-			int received = connection->read(buffer->data(), buffer->size());
+			int received = connection->read(buffer->data(), (int)buffer->size());
 			if (received == 0)
 			{
 				status = status_finished_transfer;
