@@ -131,5 +131,5 @@ IRCRawString IRCEscape::get_ctcp_data() const
 
 uicore::Colorf IRCEscape::get_color() const
 {
-	return uicore::Colorf::black;
+	return uicore::StandardColorf::black();
 }

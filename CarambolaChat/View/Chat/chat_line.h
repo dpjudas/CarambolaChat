@@ -24,7 +24,7 @@ private:
 	bool bold = false;
 	std::string timestamp;
 	std::string nick;
-	uicore::Colorf nick_color = uicore::Colorf::black;
+	uicore::Colorf nick_color = uicore::StandardColorf::black();
 	uicore::TextBlockPtr column1 = uicore::TextBlock::create();
 	uicore::TextBlockPtr column2 = uicore::TextBlock::create();
 	uicore::TextBlockPtr column3 = uicore::TextBlock::create();

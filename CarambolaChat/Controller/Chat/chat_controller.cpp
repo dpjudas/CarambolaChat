@@ -197,7 +197,7 @@ void ChatController::add_topic_text()
 	ChatLine line;
 	// layout.add_image(icon_topic);
 	add_line_text(line, status.topic.get_text(), view->chat_log->get_color_channel());
-	add_line_text(line, " set by ", Colorf::gray);
+	add_line_text(line, " set by ", StandardColorf::gray());
 	add_line_text(line, status.topic_author.get_name(), view->chat_log->get_color_channel());
 	view->chat_log->add_line(line);
 

@@ -219,7 +219,7 @@ void ChatView::layout_line(const CanvasPtr &canvas, ChatLine &line, Rectf &clien
 
 		if (!line.timestamp.empty())
 		{
-			line.column1->add_text(line.timestamp, font_fixed, Colorf::darkgoldenrod);
+			line.column1->add_text(line.timestamp, font_fixed, StandardColorf::darkgoldenrod());
 		}
 		if (!line.nick.empty())
 		{
